@@ -1,0 +1,2316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Christopher Horne's Life Timeline</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Christopher Horne's Decade-Based Timeline">
+    <style>
+        /* CSS Styles */
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f4f4;
+            color: #000; /* Changed text color to black */
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        header {
+            padding: 20px;
+            background: #888;
+            color: #fff;
+            text-align: center;
+            width: 100%;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        header h1 {
+            margin: 0;
+            font-size: 2em;
+        }
+        header p {
+            margin: 5px 0;
+        }
+        .tab {
+            display: flex;
+            justify-content: center;
+            margin: 20px 0;
+            flex-wrap: wrap;
+        }
+        .tab button {
+            background: #888;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            margin: 5px;
+            transition: background 0.3s;
+        }
+        .tab button:hover {
+            background: #666;
+        }
+        .tab button.active {
+            background: #4CAF50;
+        }
+        .tab-content {
+            display: none;
+            width: 100%;
+            max-width: 1200px;
+            padding: 20px;
+            background: #fff;
+            color: #000; /* Ensure text inside tab-content is black */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+        .tab-content.active {
+            display: block;
+        }
+        .year-tab, .month-section {
+            margin-bottom: 20px;
+        }
+        .year-tab {
+            display: flex;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+        }
+        .year-tab .year-link {
+            background: #888;
+            color: #fff;
+            border: none;
+            padding: 8px 16px;
+            cursor: pointer;
+            margin: 5px;
+            transition: background 0.3s;
+        }
+        .year-tab .year-link:hover {
+            background: #666;
+        }
+        .year-tab .year-link.active {
+            background: #4CAF50;
+        }
+        .event {
+            margin-bottom: 20px;
+        }
+        .media img, .media video {
+            max-width: 100%;
+            height: auto;
+            margin: 10px 0;
+        }
+        #map {
+            width: 100%;
+            height: 500px;
+            max-width: 1200px;
+            margin: 20px 0;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Christopher Horne's Life Timeline by Decade</h1>
+    <p>Explore each decade of my life from birth to the present.</p>
+</header>
+
+<!-- Decade Tabs -->
+<div class="tab">
+    <button class="tablinks" onclick="openDecade(event, 'Decade0-10')">0-10</button>
+    <button class="tablinks" onclick="openDecade(event, 'Decade10-20')">10-20</button>
+    <button class="tablinks" onclick="openDecade(event, 'Decade20-30')">20-30</button>
+    <button class="tablinks" onclick="openDecade(event, 'Decade30-40')">30-40</button>
+    <button class="tablinks" onclick="openDecade(event, 'Decade40-50')">40-50</button>
+    <button class="tablinks" onclick="openDecade(event, 'Decade50-60')">50-60</button>
+    <button class="tablinks" onclick="openDecade(event, 'Decade60-70')">60-70</button>
+    <button class="tablinks" onclick="openDecade(event, 'Decade70-80')">70-80</button>
+    <button class="tablinks" onclick="openDecade(event, 'Decade80-90')">80-90</button>
+    <button class="tablinks" onclick="openDecade(event, 'Decade90-127')">90-127</button>
+</div>
+
+<!-- Decade 0-10 Content -->
+<div id="Decade0-10" class="tab-content">
+    <!-- Year Navigation within the Decade -->
+    <div class="year-tab">
+        <!-- Years 1962 to 1972 -->
+        <button class="year-link" onclick="openYear(event, 'Year1962')">1962</button>
+        <button class="year-link" onclick="openYear(event, 'Year1963')">1963</button>
+        <button class="year-link" onclick="openYear(event, 'Year1964')">1964</button>
+        <button class="year-link" onclick="openYear(event, 'Year1965')">1965</button>
+        <button class="year-link" onclick="openYear(event, 'Year1966')">1966</button>
+        <button class="year-link" onclick="openYear(event, 'Year1967')">1967</button>
+        <button class="year-link" onclick="openYear(event, 'Year1968')">1968</button>
+        <button class="year-link" onclick="openYear(event, 'Year1969')">1969</button>
+        <button class="year-link" onclick="openYear(event, 'Year1970')">1970</button>
+        <button class="year-link" onclick="openYear(event, 'Year1971')">1971</button>
+        <button class="year-link" onclick="openYear(event, 'Year1972')">1972</button>
+    </div>
+
+    <!-- Content for Each Year -->
+    <!-- Year 1962 -->
+    <div id="Year1962" class="year-content" style="display: none;">
+        <h2>1962</h2>
+        <p><strong>Age:</strong> 0</p>
+        <p><strong>Birthdate:</strong> December 24, 1962</p>
+        <p><strong>Place of Birth:</strong> Williston, ND</p>
+        <p><strong>Parents:</strong></p>
+        <ul>
+            <li><strong>Father:</strong> Kent James Horne (DOB: December 24, 1939)</li>
+            <li><strong>Mother:</strong> Janice Josephine (Zarr) Horne (DOB: August 30, 1939)</li>
+        </ul>
+        <div class="media">
+            <h3>Images from 1962:</h3>
+            <!-- Image slots -->
+            <div class="image-gallery">
+                <div class="image-slot">
+                    <img src="path/to/image1.jpg" alt="Image description" />
+                    <p>Description of the image goes here.</p>
+                </div>
+                <div class="image-slot">
+                    <img src="path/to/image2.jpg" alt="Image description" />
+                    <p>Description of the image goes here.</p>
+                </div>
+                <!-- Repeat for up to 20 images -->
+            </div>
+        </div>
+        <h3>Place of Birth: Williston, ND</h3>
+        <div id="map"></div>
+    </div>
+
+    <!-- Year 1963 -->
+    <div id="Year1963" class="year-content" style="display: none;">
+        <h2>1963</h2>
+        <p><strong>Age:</strong> 1</p>
+        <div class="month-section">
+            <h3>December</h3>
+            <div class="event">
+                <p><strong>Event:</strong> First Christmas.</p>
+                <p><strong>Description:</strong> Celebrated my first Christmas with family.</p>
+            </div>
+            <div class="media">
+                <h3>Images from December 1963:</h3>
+                <div class="image-gallery">
+                    <div class="image-slot">
+                        <img src="path/to/image1.jpg" alt="Image description" />
+                        <p>Description of the image goes here.</p>
+                    </div>
+                    <!-- Repeat for up to 20 images -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Year 1964 -->
+    <div id="Year1964" class="year-content" style="display: none;">
+        <h2>1964</h2>
+        <p><strong>Age:</strong> 2</p>
+        <div class="month-section">
+            <h3>December</h3>
+            <div class="event">
+                <p><strong>Event:</strong> Family gathering.</p>
+                <p><strong>Description:</strong> Another family Christmas gathering.</p>
+            </div>
+            <div class="media">
+                <h3>Images from December 1964:</h3>
+                <div class="image-gallery">
+                    <div class="image-slot">
+                        <img src="path/to/image1.jpg" alt="Image description" />
+                        <p>Description of the image goes here.</p>
+                    </div>
+                    <!-- Repeat for up to 20 images -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Year 1965 -->
+    <div id="Year1965" class="year-content" style="display: none;">
+        <h2>1965</h2>
+        <p><strong>Age:</strong> 3</p>
+        <div class="month-section">
+            <h3>December</h3>
+            <div class="event">
+                <p><strong>Event:</strong> Family gathering.</p>
+                <p><strong>Description:</strong> Another family Christmas gathering.</p>
+            </div>
+            <div class="media">
+                <h3>Images from December 1965:</h3>
+                <div class="image-gallery">
+                    <div class="image-slot">
+                        <img src="path/to/image1.jpg" alt="Image description" />
+                        <p>Description of the image goes here.</p>
+                    </div>
+                    <!-- Repeat for up to 20 images -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Continue the same structure for years 1966-1972 -->
+    
+    <!-- Year 1966 -->
+    <div id="Year1966" class="year-content" style="display: none;">
+        <h2>1966</h2>
+        <p><strong>Age:</strong> 4</p>
+        <div class="month-section">
+            <h3>December</h3>
+            <div class="event">
+                <p><strong>Event:</strong> Family gathering.</p>
+                <p><strong>Description:</strong> Another family Christmas gathering.</p>
+            </div>
+            <div class="media">
+                <h3>Images from December 1966:</h3>
+                <div class="image-gallery">
+                    <div class="image-slot">
+                        <img src="path/to/image1.jpg" alt="Image description" />
+                        <p>Description of the image goes here.</p>
+                    </div>
+                    <!-- Repeat for up to 20 images -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Year 1967 -->
+    <div id="Year1967" class="year-content" style="display: none;">
+        <h2>1967</h2>
+        <p><strong>Age:</strong> 5</p>
+        <div class="month-section">
+            <h3>December</h3>
+            <div class="event">
+                <p><strong>Event:</strong> Family gathering.</p>
+                <p><strong>Description:</strong> Another family Christmas gathering.</p>
+            </div>
+            <div class="media">
+                <h3>Images from December 1967:</h3>
+                <div class="image-gallery">
+                    <div class="image-slot">
+                        <img src="path/to/image1.jpg" alt="Image description" />
+                        <p>Description of the image goes here.</p>
+                    </div>
+                    <!-- Repeat for up to 20 images -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Year 1968 -->
+    <div id="Year1968" class="year-content" style="display: none;">
+        <h2>1968</h2>
+        <p><strong>Age:</strong> 6</p>
+        <div class="month-section">
+            <h3>December</h3>
+            <div class="event">
+                <p><strong>Event:</strong> Family gathering.</p>
+                <p><strong>Description:</strong> Another family Christmas gathering.</p>
+            </div>
+            <div class="media">
+                <h3>Images from December 1968:</h3>
+                <div class="image-gallery">
+                    <div class="image-slot">
+                        <img src="path/to/image1.jpg" alt="Image description" />
+                        <p>Description of the image goes here.</p>
+                    </div>
+                    <!-- Repeat for up to 20 images -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Year 1969 -->
+    <div id="Year1969" class="year-content" style="display: none;">
+        <h2>1969</h2>
+        <p><strong>Age:</strong> 7</p>
+        <div class="month-section">
+            <h3>December</h3>
+            <div class="event">
+                <p><strong>Event:</strong> Family gathering.</p>
+                <p><strong>Description:</strong> Another family Christmas gathering.</p>
+            </div>
+            <div class="media">
+                <h3>Images from December 1969:</h3>
+                <div class="image-gallery">
+                    <div class="image-slot">
+                        <img src="path/to/image1.jpg" alt="Image description" />
+                        <p>Description of the image goes here.</p>
+                    </div>
+                    <!-- Repeat for up to 20 images -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Year 1970 -->
+    <div id="Year1970" class="year-content" style="display: none;">
+        <h2>1970</h2>
+        <p><strong>Age:</strong> 8</p>
+        <div class="month-section">
+            <h3>December</h3>
+            <div class="event">
+                <p><strong>Event:</strong> Family gathering.</p>
+                <p><strong>Description:</strong> Another family Christmas gathering.</p>
+            </div>
+            <div class="media">
+                <h3>Images from December 1970:</h3>
+                <div class="image-gallery">
+                    <div class="image-slot">
+                        <img src="path/to/image1.jpg" alt="Image description" />
+                        <p>Description of the image goes here.</p>
+                    </div>
+                    <!-- Repeat for up to 20 images -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Year 1971 -->
+    <div id="Year1971" class="year-content" style="display: none;">
+        <h2>1971</h2>
+        <p><strong>Age:</strong> 9</p>
+        <div class="month-section">
+            <h3>December</h3>
+            <div class="event">
+                <p><strong>Event:</strong> Family gathering.</p>
+                <p><strong>Description:</strong> Another family Christmas gathering.</p>
+            </div>
+            <div class="media">
+                <h3>Images from December 1971:</h3>
+                <div class="image-gallery">
+                    <div class="image-slot">
+                        <img src="path/to/image1.jpg" alt="Image description" />
+                        <p>Description of the image goes here.</p>
+                    </div>
+                    <!-- Repeat for up to 20 images -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Year 1972 -->
+    <div id="Year1972" class="year-content" style="display: none;">
+        <h2>1972</h2>
+        <p><strong>Age:</strong> 10</p>
+        <div class="month-section">
+            <h3>December</h3>
+            <div class="event">
+                <p><strong>Event:</strong> Family gathering.</p>
+                <p><strong>Description:</strong> Another family Christmas gathering.</p>
+            </div>
+            <div class="media">
+                <h3>Images from December 1972:</h3>
+                <div class="image-gallery">
+                    <div class="image-slot">
+                        <img src="path/to/image1.jpg" alt="Image description" />
+                        <p>Description of the image goes here.</p>
+                    </div>
+                    <!-- Repeat for up to 20 images -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Repeat similar structure for other decades -->
+
+<!-- Detailed Decade Content for 10-20 Years (1972-1982) -->
+<div id="Decade10-20" class="tab-content">
+    <!-- Year Navigation within the Decade -->
+    <div class="year-tab">
+        <button class="year-link" onclick="openYear(event, 'Year1972')">1972</button>
+        <button class="year-link" onclick="openYear(event, 'Year1973')">1973</button>
+        <button class="year-link" onclick="openYear(event, 'Year1974')">1974</button>
+        <button class="year-link" onclick="openYear(event, 'Year1975')">1975</button>
+        <button class="year-link" onclick="openYear(event, 'Year1976')">1976</button>
+        <button class="year-link" onclick="openYear(event, 'Year1977')">1977</button>
+        <button class="year-link" onclick="openYear(event, 'Year1978')">1978</button>
+        <button class="year-link" onclick="openYear(event, 'Year1979')">1979</button>
+        <button class="year-link" onclick="openYear(event, 'Year1980')">1980</button>
+        <button class="year-link" onclick="openYear(event, 'Year1981')">1981</button>
+        <button class="year-link" onclick="openYear(event, 'Year1982')">1982</button>
+    </div>
+
+    <!-- Content for Each Year -->
+    <!-- Year 1972 -->
+    <div id="Year1972" class="year-content" style="display: none;">
+        <h2>1972</h2>
+        <p><strong>Age:</strong> 10</p>
+        <div class="month-section">
+            <h3>December</h3>
+            <div class="event">
+                <p><strong>Event:</strong> Celebrated my 10th birthday.</p>
+                <p><strong>Description:</strong> Big party with friends and family.</p>
+            </div>
+            <div class="media">
+                <h3>Images from December 1972:</h3>
+                <div class="image-gallery">
+                    <div class="image-slot">
+                        <img src="path/to/image1.jpg" alt="Image description" />
+                        <p>Description of the image goes here.</p>
+                    </div>
+                    <!-- Repeat for up to 20 images -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Year 1973 -->
+    <div id="Year1973" class="year-content" style="display: none;">
+        <h2>1973</h2>
+        <p><strong>Age:</strong> 11</p>
+        <div class="month-section">
+            <h3>December</h3>
+            <div class="event">
+                <p><strong>Event:</strong> Family Christmas gathering.</p>
+                <p><strong>Description:</strong> Celebrated Christmas with family.</p>
+            </div>
+            <div class="media">
+                <h3>Images from December 1973:</h3>
+                <div class="image-gallery">
+                    <div class="image-slot">
+                        <img src="path/to/image1.jpg" alt="Image description" />
+                        <p>Description of the image goes here.</p>
+                    </div>
+                    <!-- Repeat for up to 20 images -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Year 1974 -->
+    <div id="Year1974" class="year-content" style="display: none;">
+        <h2>1974</h2>
+        <p><strong>Age:</strong> 12</p>
+        <div class="month-section">
+            <h3>December</h3>
+            <div class="event">
+                <p><strong>Event:</strong> Family Christmas gathering.</p>
+                <p><strong>Description:</strong> Another wonderful Christmas celebration.</p>
+            </div>
+            <div class="media">
+                <h3>Images from December 1974:</h3>
+                <div class="image-gallery">
+                    <div class="image-slot">
+                        <img src="path/to/image1.jpg" alt="Image description" />
+                        <p>Description of the image goes here.</p>
+                    </div>
+                    <!-- Repeat for up to 20 images -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Year 1975 -->
+    <div id="Year1975" class="year-content" style="display: none;">
+        <h2>1975</h2>
+        <p><strong>Age:</strong> 13</p>
+        <div class="month-section">
+            <h3>December</h3>
+            <div class="event">
+                <p><strong>Event:</strong> Family Christmas gathering.</p>
+                <p><strong>Description:</strong> Another festive celebration with family.</p>
+            </div>
+            <div class="media">
+                <h3>Images from December 1975:</h3>
+                <div class="image-gallery">
+                    <div class="image-slot">
+                        <img src="path/to/image1.jpg" alt="Image description" />
+                        <p>Description of the image goes here.</p>
+                    </div>
+                    <!-- Repeat for up to 20 images -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Year 1976 -->
+    <div id="Year1976" class="year-content" style="display: none;">
+        <h2>1976</h2>
+        <p><strong>Age:</strong> 14</p>
+        <div class="month-section">
+            <h3>December</h3>
+            <div class="event">
+                <p><strong>Event:</strong> Family Christmas gathering.</p>
+                <p><strong>Description:</strong> Yet another joyous holiday season.</p>
+            </div>
+            <div class="media">
+                <h3>Images from December 1976:</h3>
+                <div class="image-gallery">
+                    <div class="image-slot">
+                        <img src="path/to/image1.jpg" alt="Image description" />
+                        <p>Description of the image goes here.</p>
+                    </div>
+                    <!-- Repeat for up to 20 images -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Year 1977 -->
+    <div id="Year1977" class="year-content" style="display: none;">
+        <h2>1977</h2>
+        <p><strong>Age:</strong> 15</p>
+        <div class="month-section">
+            <h3>December</h3>
+            <div class="event">
+                <p><strong>Event:</strong> Family Christmas gathering.</p>
+                <p><strong>Description:</strong> Another memorable Christmas with loved ones.</p>
+            </div>
+            <div class="media">
+                <h3>Images from December 1977:</h3>
+                <div class="image-gallery">
+                    <div class="image-slot">
+                        <img src="path/to/image1.jpg" alt="Image description" />
+                        <p>Description of the image goes here.</p>
+                    </div>
+                    <!-- Repeat for up to 20 images -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Year 1978 -->
+    <div id="Year1978" class="year-content" style="display: none;">
+        <h2>1978</h2>
+        <p><strong>Age:</strong> 16</p>
+        <div class="month-section">
+            <h3>December</h3>
+            <div class="event">
+                <p><strong>Event:</strong> Family Christmas gathering.</p>
+                <p><strong>Description:</strong> Celebrated Christmas with family again.</p>
+            </div>
+            <div class="media">
+                <h3>Images from December 1978:</h3>
+                <div class="image-gallery">
+                    <div class="image-slot">
+                        <img src="path/to/image1.jpg" alt="Image description" />
+                        <p>Description of the image goes here.</p>
+                    </div>
+                    <!-- Repeat for up to 20 images -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Year 1979 -->
+    <div id="Year1979" class="year-content" style="display: none;">
+        <h2>1979</h2>
+        <p><strong>Age:</strong> 17</p>
+        <div class="month-section">
+            <h3>December</h3>
+            <div class="event">
+                <p><strong>Event:</strong> Family Christmas gathering.</p>
+                <p><strong>Description:</strong> Another holiday season with family.</p>
+            </div>
+            <div class="media">
+                <h3>Images from December 1979:</h3>
+                <div class="image-gallery">
+                    <div class="image-slot">
+                        <img src="path/to/image1.jpg" alt="Image description" />
+                        <p>Description of the image goes here.</p>
+                    </div>
+                    <!-- Repeat for up to 20 images -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Year 1980 -->
+    <div id="Year1980" class="year-content" style="display: none;">
+        <h2>1980</h2>
+        <p><strong>Age:</strong> 18</p>
+        <div class="month-section">
+            <h3>December</h3>
+            <div class="event">
+                <p><strong>Event:</strong> Family Christmas gathering.</p>
+                <p><strong>Description:</strong> Celebrated the holiday season with family.</p>
+            </div>
+            <div class="media">
+                <h3>Images from December 1980:</h3>
+                <div class="image-gallery">
+                    <div class="image-slot">
+                        <img src="path/to/image1.jpg" alt="Image description" />
+                        <p>Description of the image goes here.</p>
+                    </div>
+                    <!-- Repeat for up to 20 images -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Year 1981 -->
+    <div id="Year1981" class="year-content" style="display: none;">
+        <h2>1981</h2>
+        <p><strong>Age:</strong> 19</p>
+        <div class="month-section">
+            <h3>December</h3>
+            <div class="event">
+                <p><strong>Event:</strong> Family Christmas gathering.</p>
+                <p><strong>Description:</strong> Another joyous Christmas with family.</p>
+            </div>
+            <div class="media">
+                <h3>Images from December 1981:</h3>
+                <div class="image-gallery">
+                    <div class="image-slot">
+                        <img src="path/to/image1.jpg" alt="Image description" />
+                        <p>Description of the image goes here.</p>
+                    </div>
+                    <!-- Repeat for up to 20 images -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Year 1982 -->
+    <div id="Year1982" class="year-content" style="display: none;">
+        <h2>1982</h2>
+        <p><strong>Age:</strong> 20</p>
+        <div class="month-section">
+            <h3>December</h3>
+            <div class="event">
+                <p><strong>Event:</strong> Family Christmas gathering.</p>
+                <p><strong>Description:</strong> Celebrated Christmas with family once more.</p>
+            </div>
+            <div class="media">
+                <h3>Images from December 1982:</h3>
+                <div class="image-gallery">
+                    <div class="image-slot">
+                        <img src="path/to/image1.jpg" alt="Image description" />
+                        <p>Description of the image goes here.</p>
+                    </div>
+                    <!-- Repeat for up to 20 images -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Detailed Decade Content for 20-30 Years (1982-1992) -->
+<div id="Decade20-30" class="tab-content">
+    <!-- Year Navigation within the Decade -->
+    <div class="year-tab">
+        <button class="year-link" onclick="openYear(event, 'Year1982')">1982</button>
+        <button class="year-link" onclick="openYear(event, 'Year1983')">1983</button>
+        <button class="year-link" onclick="openYear(event, 'Year1984')">1984</button>
+        <button class="year-link" onclick="openYear(event, 'Year1985')">1985</button>
+        <button class="year-link" onclick="openYear(event, 'Year1986')">1986</button>
+        <button class="year-link" onclick="openYear(event, 'Year1987')">1987</button>
+        <button class="year-link" onclick="openYear(event, 'Year1988')">1988</button>
+        <button class="year-link" onclick="openYear(event, 'Year1989')">1989</button>
+        <button class="year-link" onclick="openYear(event, 'Year1990')">1990</button>
+        <button class="year-link" onclick="openYear(event, 'Year1991')">1991</button>
+        <button class="year-link" onclick="openYear(event, 'Year1992')">1992</button>
+    </div>
+
+    <!-- Content for Each Year -->
+    <!-- Year 1982 -->
+    <div id="Year1982" class="year-content" style="display: none;">
+        <h2>1982</h2>
+        <p><strong>Age:</strong> 20</p>
+        <div class="month-section">
+            <h3>December</h3>
+            <div class="event">
+                <p><strong>Event:</strong> Celebrated my 20th birthday.</p>
+                <p><strong>Description:</strong> Family celebration for my milestone birthday.</p>
+            </div>
+            <div class="media">
+                <h3>Images from December 1982:</h3>
+                <div class="image-gallery">
+                    <div class="image-slot">
+                        <img src="path/to/image1.jpg" alt="Image description" />
+                        <p>Description of the image goes here.</p>
+                    </div>
+                    <!-- Repeat for up to 20 images -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Year 1983 -->
+    <div id="Year1983" class="year-content" style="display: none;">
+        <h2>1983</h2>
+        <p><strong>Age:</strong> 21</p>
+        <div class="month-section">
+            <h3>December</h3>
+            <div class="event">
+                <p><strong>Event:</strong> Family Christmas gathering.</p>
+                <p><strong>Description:</strong> Celebrated the holidays with family.</p>
+            </div>
+            <div class="media">
+                <h3>Images from December 1983:</h3>
+                <div class="image-gallery">
+                    <div class="image-slot">
+                        <img src="path/to/image1.jpg" alt="Image description" />
+                        <p>Description of the image goes here.</p>
+                    </div>
+                    <!-- Repeat for up to 20 images -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Year 1984 -->
+    <div id="Year1984" class="year-content" style="display: none;">
+        <h2>1984</h2>
+        <p><strong>Age:</strong> 22</p>
+        <div class="month-section">
+            <h3>December</h3>
+            <div class="event">
+                <p><strong>Event:</strong> Family Christmas gathering.</p>
+                <p><strong>Description:</strong> Another joyous holiday season.</p>
+            </div>
+            <div class="media">
+                <h3>Images from December 1984:</h3>
+                <div class="image-gallery">
+                    <div class="image-slot">
+                        <img src="path/to/image1.jpg" alt="Image description" />
+                        <p>Description of the image goes here.</p>
+                    </div>
+                    <!-- Repeat for up to 20 images -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Year 1985 -->
+    <div id="Year1985" class="year-content" style="display: none;">
+        <h2>1985</h2>
+        <p><strong>Age:</strong> 23</p>
+        <div class="month-section">
+            <h3>December</h3>
+            <div class="event">
+                <p><strong>Event:</strong> Family Christmas gathering.</p>
+                <p><strong>Description:</strong> Celebrated another holiday with family.</p>
+            </div>
+            <div class="media">
+                <h3>Images from December 1985:</h3>
+                <div class="image-gallery">
+                    <div class="image-slot">
+                        <img src="path/to/image1.jpg" alt="Image description" />
+                        <p>Description of the image goes here.</p>
+                    </div>
+                    <!-- Repeat for up to 20 images -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Year 1986 -->
+    <div id="Year1986" class="year-content" style="display: none;">
+        <h2>1986</h2>
+        <p><strong>Age:</strong> 24</p>
+        <div class="month-section">
+            <h3>December</h3>
+            <div class="event">
+                <p><strong>Event:</strong> Family Christmas gathering.</p>
+                <p><strong>Description:</strong> Another festive celebration.</p>
+            </div>
+            <div class="media">
+                <h3>Images from December 1986:</h3>
+                <div class="image-gallery">
+                    <div class="image-slot">
+                        <img src="path/to/image1.jpg" alt="Image description" />
+                        <p>Description of the image goes here.</p>
+                    </div>
+                    <!-- Repeat for up to 20 images -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Year 1987 -->
+    <div id="Year1987" class="year-content" style="display: none;">
+        <h2>1987</h2>
+        <p><strong>Age:</strong> 25</p>
+        <div class="month-section">
+            <h3>December</h3>
+            <div class="event">
+                <p><strong>Event:</strong> Family Christmas gathering.</p>
+                <p><strong>Description:</strong> Another memorable holiday season.</p>
+            </div>
+            <div class="media">
+                <h3>Images from December 1987:</h3>
+                <div class="image-gallery">
+                    <div class="image-slot">
+                        <img src="path/to/image1.jpg" alt="Image description" />
+                        <p>Description of the image goes here.</p>
+                    </div>
+                    <!-- Repeat for up to 20 images -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Year 1988 -->
+    <div id="Year1988" class="year-content" style="display: none;">
+        <h2>1988</h2>
+        <p><strong>Age:</strong> 26</p>
+        <div class="month-section">
+            <h3>December</h3>
+            <div class="event">
+                <p><strong>Event:</strong> Family Christmas gathering.</p>
+                <p><strong>Description:</strong> Celebrated Christmas with family once more.</p>
+            </div>
+            <div class="media">
+                <h3>Images from December 1988:</h3>
+                <div class="image-gallery">
+                    <div class="image-slot">
+                        <img src="path/to/image1.jpg" alt="Image description" />
+                        <p>Description of the image goes here.</p>
+                    </div>
+                    <!-- Repeat for up to 20 images -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Year 1989 -->
+    <div id="Year1989" class="year-content" style="display: none;">
+        <h2>1989</h2>
+        <p><strong>Age:</strong> 27</p>
+        <div class="month-section">
+            <h3>December</h3>
+            <div class="event">
+                <p><strong>Event:</strong> Family Christmas gathering.</p>
+                <p><strong>Description:</strong> Another holiday celebration with loved ones.</p>
+            </div>
+            <div class="media">
+                <h3>Images from December 1989:</h3>
+                <div class="image-gallery">
+                    <div class="image-slot">
+                        <img src="path/to/image1.jpg" alt="Image description" />
+                        <p>Description of the image goes here.</p>
+                    </div>
+                    <!-- Repeat for up to 20 images -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Year 1990 -->
+    <div id="Year1990" class="year-content" style="display: none;">
+        <h2>1990</h2>
+        <p><strong>Age:</strong> 28</p>
+        <div class="month-section">
+            <h3>December</h3>
+            <div class="event">
+                <p><strong>Event:</strong> Family Christmas gathering.</p>
+                <p><strong>Description:</strong> Celebrated the holidays with family.</p>
+            </div>
+            <div class="media">
+                <h3>Images from December 1990:</h3>
+                <div class="image-gallery">
+                    <div class="image-slot">
+                        <img src="path/to/image1.jpg" alt="Image description" />
+                        <p>Description of the image goes here.</p>
+                    </div>
+                    <!-- Repeat for up to 20 images -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Year 1991 -->
+    <div id="Year1991" class="year-content" style="display: none;">
+        <h2>1991</h2>
+        <p><strong>Age:</strong> 29</p>
+        <div class="month-section">
+            <h3>December</h3>
+            <div class="event">
+                <p><strong>Event:</strong> Family Christmas gathering.</p>
+                <p><strong>Description:</strong> Another joyful holiday with family.</p>
+            </div>
+            <div class="media">
+                <h3>Images from December 1991:</h3>
+                <div class="image-gallery">
+                    <div class="image-slot">
+                        <img src="path/to/image1.jpg" alt="Image description" />
+                        <p>Description of the image goes here.</p>
+                    </div>
+                    <!-- Repeat for up to 20 images -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Year 1992 -->
+    <div id="Year1992" class="year-content" style="display: none;">
+        <h2>1992</h2>
+        <p><strong>Age:</strong> 30</p>
+        <div class="month-section">
+            <h3>December</h3>
+            <div class="event">
+                <p><strong>Event:</strong> Family Christmas gathering.</p>
+                <p><strong>Description:</strong> Celebrated another holiday with family.</p>
+            </div>
+            <div class="media">
+                <h3>Images from December 1992:</h3>
+                <div class="image-gallery">
+                    <div class="image-slot">
+                        <img src="path/to/image1.jpg" alt="Image description" />
+                        <p>Description of the image goes here.</p>
+                    </div>
+                    <!-- Repeat for up to 20 images -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<!-- Detailed Decade Content for 30-40 Years (1992-2002) -->
+<div id="Decade30-40" class="tab-content">
+    <!-- Year Navigation within the Decade -->
+    <div class="year-tab">
+        <button class="year-link" onclick="openYear(event, 'Year1992')">1992</button>
+        <button class="year-link" onclick="openYear(event, 'Year1993')">1993</button>
+        <button class="year-link" onclick="openYear(event, 'Year1994')">1994</button>
+        <button class="year-link" onclick="openYear(event, 'Year1995')">1995</button>
+        <button class="year-link" onclick="openYear(event, 'Year1996')">1996</button>
+        <button class="year-link" onclick="openYear(event, 'Year1997')">1997</button>
+        <button class="year-link" onclick="openYear(event, 'Year1998')">1998</button>
+        <button class="year-link" onclick="openYear(event, 'Year1999')">1999</button>
+        <button class="year-link" onclick="openYear(event, 'Year2000')">2000</button>
+        <button class="year-link" onclick="openYear(event, 'Year2001')">2001</button>
+        <button class="year-link" onclick="openYear(event, 'Year2002')">2002</button>
+    </div>
+
+    <!-- Content for Each Year -->
+    <!-- Year 1992 -->
+    <div id="Year1992" class="year-content" style="display: none;">
+        <h2>1992</h2>
+        <p><strong>Age:</strong> 30</p>
+        <div class="month-section">
+            <h3>December</h3>
+            <div class="event">
+                <p><strong>Event:</strong> Celebrated my 30th birthday.</p>
+                <p><strong>Description:</strong> A memorable birthday celebration with family.</p>
+            </div>
+            <div class="media">
+                <h3>Images from December 1992:</h3>
+                <div class="image-gallery">
+                    <div class="image-slot">
+                        <img src="path/to/image1.jpg" alt="Image description" />
+                        <p>Description of the image goes here.</p>
+                    </div>
+                    <!-- Repeat for up to 20 images -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Year 1993 -->
+    <div id="Year1993" class="year-content" style="display: none;">
+        <h2>1993</h2>
+        <p><strong>Age:</strong> 31</p>
+        <div class="month-section">
+            <h3>December</h3>
+            <div class="event">
+                <p><strong>Event:</strong> Family Christmas gathering.</p>
+                <p><strong>Description:</strong> Spent the holidays with family.</p>
+            </div>
+            <div class="media">
+                <h3>Images from December 1993:</h3>
+                <div class="image-gallery">
+                    <div class="image-slot">
+                        <img src="path/to/image1.jpg" alt="Image description" />
+                        <p>Description of the image goes here.</p>
+                    </div>
+                    <!-- Repeat for up to 20 images -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Year 1994 -->
+    <div id="Year1994" class="year-content" style="display: none;">
+        <h2>1994</h2>
+        <p><strong>Age:</strong> 32</p>
+        <div class="month-section">
+            <h3>December</h3>
+            <div class="event">
+                <p><strong>Event:</strong> Family Christmas gathering.</p>
+                <p><strong>Description:</strong> Another joyful holiday season.</p>
+            </div>
+            <div class="media">
+                <h3>Images from December 1994:</h3>
+                <div class="image-gallery">
+                    <div class="image-slot">
+                        <img src="path/to/image1.jpg" alt="Image description" />
+                        <p>Description of the image goes here.</p>
+                    </div>
+                    <!-- Repeat for up to 20 images -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Year 1995 -->
+    <div id="Year1995" class="year-content" style="display: none;">
+        <h2>1995</h2>
+        <p><strong>Age:</strong> 33</p>
+        <div class="month-section">
+            <h3>December</h3>
+            <div class="event">
+                <p><strong>Event:</strong> Family Christmas gathering.</p>
+                <p><strong>Description:</strong> Celebrated with family again.</p>
+            </div>
+            <div class="media">
+                <h3>Images from December 1995:</h3>
+                <div class="image-gallery">
+                    <div class="image-slot">
+                        <img src="path/to/image1.jpg" alt="Image description" />
+                        <p>Description of the image goes here.</p>
+                    </div>
+                    <!-- Repeat for up to 20 images -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Year 1996 -->
+    <div id="Year1996" class="year-content" style="display: none;">
+        <h2>1996</h2>
+        <p><strong>Age:</strong> 34</p>
+        <div class="month-section">
+            <h3>December</h3>
+            <div class="event">
+                <p><strong>Event:</strong> Family Christmas gathering.</p>
+                <p><strong>Description:</strong> Another holiday with family.</p>
+            </div>
+            <div class="media">
+                <h3>Images from December 1996:</h3>
+                <div class="image-gallery">
+                    <div class="image-slot">
+                        <img src="path/to/image1.jpg" alt="Image description" />
+                        <p>Description of the image goes here.</p>
+                    </div>
+                    <!-- Repeat for up to 20 images -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Year 1997 -->
+    <div id="Year1997" class="year-content" style="display: none;">
+        <h2>1997</h2>
+        <p><strong>Age:</strong> 35</p>
+        <div class="month-section">
+            <h3>December</h3>
+            <div class="event">
+                <p><strong>Event:</strong> Family Christmas gathering.</p>
+                <p><strong>Description:</strong> Celebrated the holidays with family.</p>
+            </div>
+            <div class="media">
+                <h3>Images from December 1997:</h3>
+                <div class="image-gallery">
+                    <div class="image-slot">
+                        <img src="path/to/image1.jpg" alt="Image description" />
+                        <p>Description of the image goes here.</p>
+                    </div>
+                    <!-- Repeat for up to 20 images -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Year 1998 -->
+    <div id="Year1998" class="year-content" style="display: none;">
+        <h2>1998</h2>
+        <p><strong>Age:</strong> 36</p>
+        <div class="month-section">
+            <h3>December</h3>
+            <div class="event">
+                <p><strong>Event:</strong> Family Christmas gathering.</p>
+                <p><strong>Description:</strong> Another holiday celebration with loved ones.</p>
+            </div>
+            <div class="media">
+                <h3>Images from December 1998:</h3>
+                <div class="image-gallery">
+                    <div class="image-slot">
+                        <img src="path/to/image1.jpg" alt="Image description" />
+                        <p>Description of the image goes here.</p>
+                    </div>
+                    <!-- Repeat for up to 20 images -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Year 1999 -->
+    <div id="Year1999" class="year-content" style="display: none;">
+        <h2>1999</h2>
+        <p><strong>Age:</strong> 37</p>
+        <div class="month-section">
+            <h3>December</h3>
+            <div class="event">
+                <p><strong>Event:</strong> Family Christmas gathering.</p>
+                <p><strong>Description:</strong> Another joyful holiday with family.</p>
+            </div>
+            <div class="media">
+                <h3>Images from December 1999:</h3>
+                <div class="image-gallery">
+                    <div class="image-slot">
+                        <img src="path/to/image1.jpg" alt="Image description" />
+                        <p>Description of the image goes here.</p>
+                    </div>
+                    <!-- Repeat for up to 20 images -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Year 2000 -->
+    <div id="Year2000" class="year-content" style="display: none;">
+        <h2>2000</h2>
+        <p><strong>Age:</strong> 38</p>
+        <div class="month-section">
+            <h3>December</h3>
+            <div class="event">
+                <p><strong>Event:</strong> Family Christmas gathering.</p>
+                <p><strong>Description:</strong> Celebrated the holidays with family.</p>
+            </div>
+            <div class="media">
+                <h3>Images from December 2000:</h3>
+                <div class="image-gallery">
+                    <div class="image-slot">
+                        <img src="path/to/image1.jpg" alt="Image description" />
+                        <p>Description of the image goes here.</p>
+                    </div>
+                    <!-- Repeat for up to 20 images -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Year 2001 -->
+    <div id="Year2001" class="year-content" style="display: none;">
+        <h2>2001</h2>
+        <p><strong>Age:</strong> 39</p>
+        <div class="month-section">
+            <h3>December</h3>
+            <div class="event">
+                <p><strong>Event:</strong> Family Christmas gathering.</p>
+                <p><strong>Description:</strong> Another holiday celebration with family.</p>
+            </div>
+            <div class="media">
+                <h3>Images from December 2001:</h3>
+                <div class="image-gallery">
+                    <div class="image-slot">
+                        <img src="path/to/image1.jpg" alt="Image description" />
+                        <p>Description of the image goes here.</p>
+                    </div>
+                    <!-- Repeat for up to 20 images -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Year 2002 -->
+    <div id="Year2002" class="year-content" style="display: none;">
+        <h2>2002</h2>
+        <p><strong>Age:</strong> 40</p>
+        <div class="month-section">
+            <h3>December</h3>
+            <div class="event">
+                <p><strong>Event:</strong> Family Christmas gathering.</p>
+                <p><strong>Description:</strong> Celebrated my 40th birthday with family.</p>
+            </div>
+            <div class="media">
+                <h3>Images from December 2002:</h3>
+                <div class="image-gallery">
+                    <div class="image-slot">
+                        <img src="path/to/image1.jpg" alt="Image description" />
+                        <p>Description of the image goes here.</p>
+                    </div>
+                    <!-- Repeat for up to 20 images -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Detailed Decade Content for 40-50 Years (2002-2012) -->
+<div id="Decade40-50" class="tab-content">
+    <!-- Year Navigation within the Decade -->
+    <div class="year-tab">
+        <button class="year-link" onclick="openYear(event, 'Year2002')">2002</button>
+        <button class="year-link" onclick="openYear(event, 'Year2003')">2003</button>
+        <button class="year-link" onclick="openYear(event, 'Year2004')">2004</button>
+        <button class="year-link" onclick="openYear(event, 'Year2005')">2005</button>
+        <button class="year-link" onclick="openYear(event, 'Year2006')">2006</button>
+        <button class="year-link" onclick="openYear(event, 'Year2007')">2007</button>
+        <button class="year-link" onclick="openYear(event, 'Year2008')">2008</button>
+        <button class="year-link" onclick="openYear(event, 'Year2009')">2009</button>
+        <button class="year-link" onclick="openYear(event, 'Year2010')">2010</button>
+        <button class="year-link" onclick="openYear(event, 'Year2011')">2011</button>
+        <button class="year-link" onclick="openYear(event, 'Year2012')">2012</button>
+    </div>
+
+    <!-- Content for Each Year -->
+    <!-- Year 2002 -->
+    <div id="Year2002" class="year-content" style="display: none;">
+        <h2>2002</h2>
+        <p><strong>Age:</strong> 40</p>
+        <div class="month-section">
+            <h3>January</h3>
+            <div class="event">
+                <p><strong>Event:</strong> Started a new job.</p>
+                <p><strong>Description:</strong> Joined a new company in January 2002.</p>
+            </div>
+            <div class="media">
+                <h3>Images from January 2002:</h3>
+                <div class="image-gallery">
+                    <div class="image-slot">
+                        <img src="path/to/image1.jpg" alt="Image description" />
+                        <p>Description of the image goes here.</p>
+                    </div>
+                    <!-- Repeat for up to 20 images -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Year 2003 -->
+    <div id="Year2003" class="year-content" style="display: none;">
+        <h2>2003</h2>
+        <p><strong>Age:</strong> 41</p>
+        <div class="month-section">
+            <h3>March</h3>
+            <div class="event">
+                <p><strong>Event:</strong> Attended a family reunion.</p>
+                <p><strong>Description:</strong> Family gathered at the lake.</p>
+            </div>
+            <div class="media">
+                <h3>Images from March 2003:</h3>
+                <div class="image-gallery">
+                    <div class="image-slot">
+                        <img src="path/to/image1.jpg" alt="Image description" />
+                        <p>Description of the image goes here.</p>
+                    </div>
+                    <!-- Repeat for up to 20 images -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Year 2004 -->
+    <div id="Year2004" class="year-content" style="display: none;">
+        <h2>2004</h2>
+        <p><strong>Age:</strong> 42</p>
+        <div class="month-section">
+            <h3>April</h3>
+            <div class="event">
+                <p><strong>Event:</strong> Graduated with a degree.</p>
+                <p><strong>Description:</strong> Earned my degree in Occupational Therapy.</p>
+            </div>
+            <div class="media">
+                <h3>Images from April 2004:</h3>
+                <div class="image-gallery">
+                    <div class="image-slot">
+                        <img src="path/to/image1.jpg" alt="Image description" />
+                        <p>Description of the image goes here.</p>
+                    </div>
+                    <!-- Repeat for up to 20 images -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Year 2005 -->
+    <div id="Year2005" class="year-content" style="display: none;">
+        <h2>2005</h2>
+        <p><strong>Age:</strong> 43</p>
+        <div class="month-section">
+            <h3>May</h3>
+            <div class="event">
+                <p><strong>Event:</strong> Got married.</p>
+                <p><strong>Description:</strong> Married my best friend.</p>
+            </div>
+            <div class="media">
+                <h3>Images from May 2005:</h3>
+                <div class="image-gallery">
+                    <div class="image-slot">
+                        <img src="path/to/image1.jpg" alt="Image description" />
+                        <p>Description of the image goes here.</p>
+                    </div>
+                    <!-- Repeat for up to 20 images -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Year 2006 -->
+    <div id="Year2006" class="year-content" style="display: none;">
+        <h2>2006</h2>
+        <p><strong>Age:</strong> 44</p>
+        <div class="month-section">
+            <h3>June</h3>
+            <div class="event">
+                <p><strong>Event:</strong> Moved to a new city.</p>
+                <p><strong>Description:</strong> Relocated for work.</p>
+            </div>
+            <div class="media">
+                <h3>Images from June 2006:</h3>
+                <div class="image-gallery">
+                    <div class="image-slot">
+                        <img src="path/to/image1.jpg" alt="Image description" />
+                        <p>Description of the image goes here.</p>
+                    </div>
+                    <!-- Repeat for up to 20 images -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Year 2007 -->
+    <div id="Year2007" class="year-content" style="display: none;">
+        <h2>2007</h2>
+        <p><strong>Age:</strong> 45</p>
+        <div class="month-section">
+            <h3>July</h3>
+            <div class="event">
+                <p><strong>Event:</strong> Started a new project.</p>
+                <p><strong>Description:</strong> Led a major project at work.</p>
+            </div>
+            <div class="media">
+                <h3>Images from July 2007:</h3>
+                <div class="image-gallery">
+                    <div class="image-slot">
+                        <img src="path/to/image1.jpg" alt="Image description" />
+                        <p>Description of the image goes here.</p>
+                    </div>
+                    <!-- Repeat for up to 20 images -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Year 2008 -->
+    <div id="Year2008" class="year-content" style="display: none;">
+        <h2>2008</h2>
+        <p><strong>Age:</strong> 46</p>
+        <div class="month-section">
+            <h3>August</h3>
+            <div class="event">
+                <p><strong>Event:</strong> Traveled abroad.</p>
+                <p><strong>Description:</strong> Visited Europe for the first time.</p>
+            </div>
+            <div class="media">
+                <h3>Images from August 2008:</h3>
+                <div class="image-gallery">
+                    <div class="image-slot">
+                        <img src="path/to/image1.jpg" alt="Image description" />
+                        <p>Description of the image goes here.</p>
+                    </div>
+                    <!-- Repeat for up to 20 images -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Year 2009 -->
+    <div id="Year2009" class="year-content" style="display: none;">
+        <h2>2009</h2>
+        <p><strong>Age:</strong> 47</p>
+        <div class="month-section">
+            <h3>September</h3>
+            <div class="event">
+                <p><strong>Event:</strong> Opened a new clinic.</p>
+                <p><strong>Description:</strong> Started my own Occupational Therapy clinic.</p>
+            </div>
+            <div class="media">
+                <h3>Images from September 2009:</h3>
+                <div class="image-gallery">
+                    <div class="image-slot">
+                        <img src="path/to/image1.jpg" alt="Image description" />
+                        <p>Description of the image goes here.</p>
+                    </div>
+                    <!-- Repeat for up to 20 images -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Year 2010 -->
+    <div id="Year2010" class="year-content" style="display: none;">
+        <h2>2010</h2>
+        <p><strong>Age:</strong> 48</p>
+        <div class="month-section">
+            <h3>October</h3>
+            <div class="event">
+                <p><strong>Event:</strong> Celebrated my 48th birthday.</p>
+                <p><strong>Description:</strong> Had a wonderful celebration with family and friends.</p>
+            </div>
+            <div class="media">
+                <h3>Images from October 2010:</h3>
+                <div class="image-gallery">
+                    <div class="image-slot">
+                        <img src="path/to/image1.jpg" alt="Image description" />
+                        <p>Description of the image goes here.</p>
+                    </div>
+                    <!-- Repeat for up to 20 images -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Year 2011 -->
+    <div id="Year2011" class="year-content" style="display: none;">
+        <h2>2011</h2>
+        <p><strong>Age:</strong> 49</p>
+        <div class="month-section">
+            <h3>November</h3>
+            <div class="event">
+                <p><strong>Event:</strong> Attended a major conference.</p>
+                <p><strong>Description:</strong> Learned new techniques in Occupational Therapy.</p>
+            </div>
+            <div class="media">
+                <h3>Images from November 2011:</h3>
+                <div class="image-gallery">
+                    <div class="image-slot">
+                        <img src="path/to/image1.jpg" alt="Image description" />
+                        <p>Description of the image goes here.</p>
+                    </div>
+                    <!-- Repeat for up to 20 images -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Year 2012 -->
+    <div id="Year2012" class="year-content" style="display: none;">
+        <h2>2012</h2>
+        <p><strong>Age:</strong> 50</p>
+        <div class="month-section">
+            <h3>December</h3>
+            <div class="event">
+                <p><strong>Event:</strong> Celebrated my 50th birthday.</p>
+                <p><strong>Description:</strong> Marked half a century with a big family reunion.</p>
+            </div>
+            <div class="media">
+                <h3>Images from December 2012:</h3>
+                <div class="image-gallery">
+                    <div class="image-slot">
+                        <img src="path/to/image1.jpg" alt="Image description" />
+                        <p>Description of the image goes here.</p>
+                    </div>
+                    <!-- Repeat for up to 20 images -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Detailed Decade Content for 50-60 Years (2012-2022) --> 
+<div id="Decade50-60" class="tab-content">
+    <!-- Year Navigation within the Decade -->
+    <div class="year-tab">
+        <button class="year-link" onclick="openYear(event, 'Year2012')">2012</button>
+        <button class="year-link" onclick="openYear(event, 'Year2013')">2013</button>
+        <button class="year-link" onclick="openYear(event, 'Year2014')">2014</button>
+        <button class="year-link" onclick="openYear(event, 'Year2015')">2015</button>
+        <button class="year-link" onclick="openYear(event, 'Year2016')">2016</button>
+        <button class="year-link" onclick="openYear(event, 'Year2017')">2017</button>
+        <button class="year-link" onclick="openYear(event, 'Year2018')">2018</button>
+        <button class="year-link" onclick="openYear(event, 'Year2019')">2019</button>
+        <button class="year-link" onclick="openYear(event, 'Year2020')">2020</button>
+        <button class="year-link" onclick="openYear(event, 'Year2021')">2021</button>
+        <button class="year-link" onclick="openYear(event, 'Year2022')">2022</button>
+    </div>
+
+    <!-- Content for Each Year -->
+    <!-- Year 2012 -->
+    <div id="Year2012" class="year-content" style="display: none;">
+        <h2>2012</h2>
+        <p><strong>Age:</strong> 50</p>
+        <div class="month-section">
+            <h3>December</h3>
+            <div class="event">
+                <p><strong>Event:</strong> Celebrated my 50th birthday.</p>
+                <p><strong>Description:</strong> Marked half a century with a big family reunion.</p>
+            </div>
+            <!-- Image slots -->
+            <div class="image-gallery">
+                <p>Add images for December 2012:</p>
+                <!-- Repeat this block for up to 20 images -->
+                <div class="image-slot">
+                    <img src="path/to/image1.jpg" alt="Image description" />
+                    <p>Description of the image goes here.</p>
+                </div>
+                <div class="image-slot">
+                    <img src="path/to/image2.jpg" alt="Image description" />
+                    <p>Description of the image goes here.</p>
+                </div>
+                <!-- Continue adding image slots up to 20 -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Year 2013 -->
+    <div id="Year2013" class="year-content" style="display: none;">
+        <h2>2013</h2>
+        <p><strong>Age:</strong> 51</p>
+        <div class="month-section">
+            <h3>December</h3>
+            <div class="event">
+                <p><strong>Event:</strong> Family Gathering.</p>
+                <p><strong>Description:</strong> A wonderful family gathering during the holidays.</p>
+            </div>
+            <div class="image-gallery">
+                <p>Add images for December 2013:</p>
+                <div class="image-slot">
+                    <img src="path/to/image1.jpg" alt="Image description" />
+                    <p>Description of the image goes here.</p>
+                </div>
+                <!-- Continue adding image slots up to 20 -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Year 2014 -->
+    <div id="Year2014" class="year-content" style="display: none;">
+        <h2>2014</h2>
+        <p><strong>Age:</strong> 52</p>
+        <div class="month-section">
+            <h3>December</h3>
+            <div class="event">
+                <p><strong>Event:</strong> Family Gathering.</p>
+                <p><strong>Description:</strong> A wonderful family gathering during the holidays.</p>
+            </div>
+            <div class="image-gallery">
+                <p>Add images for December 2014:</p>
+                <div class="image-slot">
+                    <img src="path/to/image1.jpg" alt="Image description" />
+                    <p>Description of the image goes here.</p>
+                </div>
+                <!-- Continue adding image slots up to 20 -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Year 2015 -->
+    <div id="Year2015" class="year-content" style="display: none;">
+        <h2>2015</h2>
+        <p><strong>Age:</strong> 53</p>
+        <!-- Add events for 2015 -->
+    </div>
+
+    <!-- Year 2016 -->
+    <div id="Year2016" class="year-content" style="display: none;">
+        <h2>2016</h2>
+        <p><strong>Age:</strong> 54</p>
+        <div class="month-section">
+            <h3>June</h3>
+            <div class="event">
+                <p><strong>Event:</strong> Trip to Italy.</p>
+                <p><strong>Description:</strong> Traveled through Italy from June 4 to June 30.</p>
+                <div class="image-gallery">
+                    <p>Add images for June 2016:</p>
+                    <div class="image-slot">
+                        <img src="path/to/image1.jpg" alt="Image description" />
+                        <p>Description of the image goes here.</p>
+                    </div>
+                    <!-- Continue adding image slots up to 20 -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Year 2017 -->
+    <div id="Year2017" class="year-content" style="display: none;">
+        <h2>2017</h2>
+        <p><strong>Age:</strong> 55</p>
+        <!-- Add events for 2017 -->
+    </div>
+
+    <!-- Year 2018 -->
+    <div id="Year2018" class="year-content" style="display: none;">
+        <h2>2018</h2>
+        <p><strong>Age:</strong> 56</p>
+        <div class="month-section">
+            <h3>March</h3>
+            <div class="event">
+                <p><strong>Event:</strong> Trip to Mexico City.</p>
+                <p><strong>Description:</strong> Visited Mexico City from March 13 to March 18.</p>
+                <div class="image-gallery">
+                    <p>Add images for March 2018:</p>
+                    <div class="image-slot">
+                        <img src="path/to/image1.jpg" alt="Image description" />
+                        <p>Description of the image goes here.</p>
+                    </div>
+                    <!-- Continue adding image slots up to 20 -->
+                </div>
+            </div>
+            <h3>June</h3>
+            <div class="event">
+                <p><strong>Event:</strong> Trip to Lima and Cusco.</p>
+                <p><strong>Description:</strong> Traveled from June 4 to June 20.</p>
+                <div class="image-gallery">
+                    <p>Add images for June 2018:</p>
+                    <div class="image-slot">
+                        <img src="path/to/image1.jpg" alt="Image description" />
+                        <p>Description of the image goes here.</p>
+                    </div>
+                    <!-- Continue adding image slots up to 20 -->
+                </div>
+            </div>
+            <h3>August</h3>
+            <div class="event">
+                <p><strong>Event:</strong> Trip to Hilo.</p>
+                <p><strong>Description:</strong> Visited Hilo from August 1 to August 13.</p>
+                <div class="image-gallery">
+                    <p>Add images for August 2018:</p>
+                    <div class="image-slot">
+                        <img src="path/to/image1.jpg" alt="Image description" />
+                        <p>Description of the image goes here.</p>
+                    </div>
+                    <!-- Continue adding image slots up to 20 -->
+                </div>
+            </div>
+            <h3>December</h3>
+            <div class="event">
+                <p><strong>Event:</strong> Trip to Rapid City, SD.</p>
+                <p><strong>Description:</strong> Traveled from December 6 to December 9.</p>
+                <div class="image-gallery">
+                    <p>Add images for December 2018:</p>
+                    <div class="image-slot">
+                        <img src="path/to/image1.jpg" alt="Image description" />
+                        <p>Description of the image goes here.</p>
+                    </div>
+                    <!-- Continue adding image slots up to 20 -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Year 2019 -->
+    <div id="Year2019" class="year-content" style="display: none;">
+        <h2>2019</h2>
+        <p><strong>Age:</strong> 57</p>
+        <div class="month-section">
+            <h3>May</h3>
+            <div class="event">
+                <p><strong>Event:</strong> Trip to Italy.</p>
+                <p><strong>Description:</strong> Visited Italy from May 27 to July 2.</p>
+                <div class="image-gallery">
+                    <p>Add images for May 2019:</p>
+                    <div class="image-slot">
+                        <img src="path/to/image1.jpg" alt="Image description" />
+                        <p>Description of the image goes here.</p>
+                    </div>
+                    <!-- Continue adding image slots up to 20 -->
+                </div>
+            </div>
+            <h3>December</h3>
+            <div class="event">
+                <p><strong>Event:</strong> Trip to Austin.</p>
+                <p><strong>Description:</strong> Visited Austin from December 15 to December 19.</p>
+                <div class="image-gallery">
+                    <p>Add images for December 2019:</p>
+                    <div class="image-slot">
+                        <img src="path/to/image1.jpg" alt="Image description" />
+                        <p>Description of the image goes here.</p>
+                    </div>
+                    <!-- Continue adding image slots up to 20 -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Year 2020 -->
+    <div id="Year2020" class="year-content" style="display: none;">
+        <h2>2020</h2>
+        <p><strong>Age:</strong> 58</p>
+        <div class="month-section">
+            <h3>January</h3>
+            <div class="event">
+                <p><strong>Event:</strong> Trip to Hilo.</p>
+                <p><strong>Description:</strong> Visited Hilo from January 2 to January 12.</p>
+                <div class="image-gallery">
+                    <p>Add images for January 2020:</p>
+                    <div class="image-slot">
+                        <img src="path/to/image1.jpg" alt="Image description" />
+                        <p>Description of the image goes here.</p>
+                    </div>
+                    <!-- Continue adding image slots up to 20 -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Year 2021 -->
+    <div id="Year2021" class="year-content" style="display: none;">
+        <h2>2021</h2>
+        <p><strong>Age:</strong> 59</p>
+        <!-- Add events for 2021 -->
+    </div>
+
+    <!-- Year 2022 -->
+    <div id="Year2022" class="year-content" style="display: none;">
+        <h2>2022</h2>
+        <p><strong>Age:</strong> 60</p>
+        <div class="month-section">
+            <h3>October</h3>
+            <div class="event">
+                <p><strong>Event:</strong> Trip to Austin.</p>
+                <p><strong>Description:</strong> Visited Austin from October 7 to October 10.</p>
+                <div class="image-gallery">
+                    <p>Add images for October 2022:</p>
+                    <div class="image-slot">
+                        <img src="path/to/image1.jpg" alt="Image description" />
+                        <p>Description of the image goes here.</p>
+                    </div>
+                    <!-- Continue adding image slots up to 20 -->
+                </div>
+            </div>
+            <h3>December</h3>
+            <div class="event">
+                <p><strong>Event:</strong> Trip to Austin.</p>
+                <p><strong>Description:</strong> Visited Austin from December 26 to December 29.</p>
+                <div class="image-gallery">
+                    <p>Add images for December 2022:</p>
+                    <div class="image-slot">
+                        <img src="path/to/image1.jpg" alt="Image description" />
+                        <p>Description of the image goes here.</p>
+                    </div>
+                    <!-- Continue adding image slots up to 20 -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Detailed Decade Content for 60-70 Years (2022-2032) -->
+<div id="Decade60-70" class="tab-content">
+    <!-- Year Navigation within the Decade -->
+    <div class="year-tab">
+        <button class="year-link" onclick="openYear(event, 'Year2022')">2022</button>
+        <button class="year-link" onclick="openYear(event, 'Year2023')">2023</button>
+        <button class="year-link" onclick="openYear(event, 'Year2024')">2024</button>
+        <button class="year-link" onclick="openYear(event, 'Year2025')">2025</button>
+        <button class="year-link" onclick="openYear(event, 'Year2026')">2026</button>
+        <button class="year-link" onclick="openYear(event, 'Year2027')">2027</button>
+        <button class="year-link" onclick="openYear(event, 'Year2028')">2028</button>
+        <button class="year-link" onclick="openYear(event, 'Year2029')">2029</button>
+        <button class="year-link" onclick="openYear(event, 'Year2030')">2030</button>
+        <button class="year-link" onclick="openYear(event, 'Year2031')">2031</button>
+        <button class="year-link" onclick="openYear(event, 'Year2032')">2032</button>
+    </div>
+
+    <!-- Content for Each Year -->
+    <!-- Year 2022 -->
+    <div id="Year2022" class="year-content" style="display: none;">
+        <h2>2022</h2>
+        <p><strong>Age:</strong> 60</p>
+        <!-- Monthly Sections -->
+        <div class="month-section">
+            <h3>January</h3>
+            <div class="event">
+                <p><strong>Event:</strong> New Year's Celebration</p>
+                <p><strong>Description:</strong> Celebrated the new year with family and friends.</p>
+                <div class="media">
+                    <img src="images/2022/january/new_year.jpg" alt="New Year's Celebration" style="width:200px; margin:5px;">
+                </div>
+            </div>
+        </div>
+        <div class="month-section">
+            <h3>February</h3>
+            <!-- Events -->
+            <div class="event">
+                <p><strong>Event:</strong> Family Gathering</p>
+                <p><strong>Description:</strong> Enjoyed a family gathering at home.</p>
+                <div class="media">
+                    <img src="images/2022/february/family_gathering.jpg" alt="Family Gathering" style="width:200px; margin:5px;">
+                </div>
+            </div>
+        </div>
+        <!-- Continue for other months -->
+    </div>
+
+    <!-- Year 2023 -->
+    <div id="Year2023" class="year-content" style="display: none;">
+        <h2>2023</h2>
+        <p><strong>Age:</strong> 61</p>
+        <div class="month-section">
+            <h3>January</h3>
+            <div class="event">
+                <p><strong>Event:</strong> New Year Brunch</p>
+                <p><strong>Description:</strong> Hosted a brunch for close friends.</p>
+                <div class="media">
+                    <img src="images/2023/january/brunch.jpg" alt="New Year Brunch" style="width:200px; margin:5px;">
+                </div>
+            </div>
+        </div>
+        <div class="month-section">
+            <h3>February</h3>
+            <div class="event">
+                <p><strong>Event:</strong> Trip to Paris</p>
+                <p><strong>Description:</strong> Visited Paris to explore art museums and historical sites.</p>
+                <div class="media">
+                    <img src="images/2023/february/paris_trip.jpg" alt="Trip to Paris" style="width:200px; margin:5px;">
+                    <video width="320" height="240" controls>
+                        <source src="videos/2023/february/eiffel_tower.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+            </div>
+        </div>
+        <!-- Continue for other months -->
+    </div>
+
+    <!-- Year 2024 -->
+    <div id="Year2024" class="year-content" style="display: none;">
+        <h2>2024</h2>
+        <p><strong>Age:</strong> 62</p>
+        <div class="month-section">
+            <h3>March</h3>
+            <div class="event">
+                <p><strong>Event:</strong> Attended an Occupational Therapy Conference.</p>
+                <p><strong>Description:</strong> Learned new techniques and met other professionals.</p>
+                <div class="media">
+                    <img src="images/2024/march/conference.jpg" alt="Conference" style="width:200px; margin:5px;">
+                </div>
+            </div>
+        </div>
+        <!-- Continue for other months -->
+    </div>
+
+    <!-- Year 2025 -->
+    <div id="Year2025" class="year-content" style="display: none;">
+        <h2>2025</h2>
+        <p><strong>Age:</strong> 63</p>
+        <div class="month-section">
+            <h3>April</h3>
+            <div class="event">
+                <p><strong>Event:</strong> Family Vacation.</p>
+                <p><strong>Description:</strong> Took a family vacation to the mountains.</p>
+                <div class="media">
+                    <img src="images/2025/april/vacation.jpg" alt="Family Vacation" style="width:200px; margin:5px;">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Year 2026 -->
+    <div id="Year2026" class="year-content" style="display: none;">
+        <h2>2026</h2>
+        <p><strong>Age:</strong> 64</p>
+        <div class="month-section">
+            <h3>May</h3>
+            <div class="event">
+                <p><strong>Event:</strong> Participated in a Community Event.</p>
+                <p><strong>Description:</strong> Volunteered at a local charity event.</p>
+                <div class="media">
+                    <img src="images/2026/may/community_event.jpg" alt="Community Event" style="width:200px; margin:5px;">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Year 2027 -->
+    <div id="Year2027" class="year-content" style="display: none;">
+        <h2>2027</h2>
+        <p><strong>Age:</strong> 65</p>
+        <div class="month-section">
+            <h3>June</h3>
+            <div class="event">
+                <p><strong>Event:</strong> Celebrated Graduation.</p>
+                <p><strong>Description:</strong> Attended my grandchild's graduation.</p>
+                <div class="media">
+                    <img src="images/2027/june/graduation.jpg" alt="Graduation" style="width:200px; margin:5px;">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Year 2028 -->
+    <div id="Year2028" class="year-content" style="display: none;">
+        <h2>2028</h2>
+        <p><strong>Age:</strong> 66</p>
+        <div class="month-section">
+            <h3>July</h3>
+            <div class="event">
+                <p><strong>Event:</strong> Attended a Music Festival.</p>
+                <p><strong>Description:</strong> Enjoyed live music and performances with friends.</p>
+                <div class="media">
+                    <img src="images/2028/july/music_festival.jpg" alt="Music Festival" style="width:200px; margin:5px;">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Year 2029 -->
+    <div id="Year2029" class="year-content" style="display: none;">
+        <h2>2029</h2>
+        <p><strong>Age:</strong> 67</p>
+        <div class="month-section">
+            <h3>August</h3>
+            <div class="event">
+                <p><strong>Event:</strong> Took a Road Trip.</p>
+                <p><strong>Description:</strong> Road trip across the country to visit friends.</p>
+                <div class="media">
+                    <img src="images/2029/august/road_trip.jpg" alt="Road Trip" style="width:200px; margin:5px;">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Year 2030 -->
+    <div id="Year2030" class="year-content" style="display: none;">
+        <h2>2030</h2>
+        <p><strong>Age:</strong> 68</p>
+        <div class="month-section">
+            <h3>September</h3>
+            <div class="event">
+                <p><strong>Event:</strong> Attended a Workshop.</p>
+                <p><strong>Description:</strong> Participated in a workshop about new therapies.</p>
+                <div class="media">
+                    <img src="images/2030/september/workshop.jpg" alt="Workshop" style="width:200px; margin:5px;">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Year 2031 -->
+    <div id="Year2031" class="year-content" style="display: none;">
+        <h2>2031</h2>
+        <p><strong>Age:</strong> 69</p>
+        <div class="month-section">
+            <h3>October</h3>
+            <div class="event">
+                <p><strong>Event:</strong> Hosted a Family Reunion.</p>
+                <p><strong>Description:</strong> Brought together family from all over.</p>
+                <div class="media">
+                    <img src="images/2031/october/reunion.jpg" alt="Family Reunion" style="width:200px; margin:5px;">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Year 2032 -->
+    <div id="Year2032" class="year-content" style="display: none;">
+        <h2>2032</h2>
+        <p><strong>Age:</strong> 70</p>
+        <div class="month-section">
+            <h3>November</h3>
+            <div class="event">
+                <p><strong>Event:</strong> Attended a Milestone Celebration.</p>
+                <p><strong>Description:</strong> Celebrated a special family milestone.</p>
+                <div class="media">
+                    <img src="images/2032/november/milestone_celebration.jpg" alt="Milestone Celebration" style="width:200px; margin:5px;">
+                </div>
+            </div>
+        </div>
+        <div class="month-section">
+            <h3>December</h3>
+            <div class="event">
+                <p><strong>Event:</strong> Holiday Celebrations.</p>
+                <p><strong>Description:</strong> Enjoyed the holiday season with family traditions.</p>
+                <div class="media">
+                    <img src="images/2032/december/holiday_celebration.jpg" alt="Holiday Celebrations" style="width:200px; margin:5px;">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Detailed Decade Content for 70-80 Years (2032-2042) -->
+<div id="Decade70-80" class="tab-content">
+    <!-- Year Navigation within the Decade -->
+    <div class="year-tab">
+        <button class="year-link" onclick="openYear(event, 'Year2032')">2032</button>
+        <button class="year-link" onclick="openYear(event, 'Year2033')">2033</button>
+        <button class="year-link" onclick="openYear(event, 'Year2034')">2034</button>
+        <button class="year-link" onclick="openYear(event, 'Year2035')">2035</button>
+        <button class="year-link" onclick="openYear(event, 'Year2036')">2036</button>
+        <button class="year-link" onclick="openYear(event, 'Year2037')">2037</button>
+        <button class="year-link" onclick="openYear(event, 'Year2038')">2038</button>
+        <button class="year-link" onclick="openYear(event, 'Year2039')">2039</button>
+        <button class="year-link" onclick="openYear(event, 'Year2040')">2040</button>
+        <button class="year-link" onclick="openYear(event, 'Year2041')">2041</button>
+        <button class="year-link" onclick="openYear(event, 'Year2042')">2042</button>
+    </div>
+
+    <!-- Content for Each Year -->
+    <!-- Year 2032 -->
+    <div id="Year2032" class="year-content" style="display: none;">
+        <h2>2032</h2>
+        <p><strong>Age:</strong> 70</p>
+        <div class="month-section">
+            <h3>January</h3>
+            <div class="event">
+                <p><strong>Event:</strong> New Year Celebration.</p>
+                <p><strong>Description:</strong> Welcomed the new year with family and friends.</p>
+                <div class="media">
+                    <img src="images/2032/january/new_year.jpg" alt="New Year Celebration" style="width:200px; margin:5px;">
+                </div>
+            </div>
+        </div>
+        <!-- Continue adding monthly sections for February to December -->
+    </div>
+
+    <!-- Year 2033 -->
+    <div id="Year2033" class="year-content" style="display: none;">
+        <h2>2033</h2>
+        <p><strong>Age:</strong> 71</p>
+        <div class="month-section">
+            <h3>February</h3>
+            <div class="event">
+                <p><strong>Event:</strong> Family Reunion.</p>
+                <p><strong>Description:</strong> Gathered with extended family for a reunion.</p>
+                <div class="media">
+                    <img src="images/2033/february/reunion.jpg" alt="Family Reunion" style="width:200px; margin:5px;">
+                </div>
+            </div>
+        </div>
+        <!-- Continue adding monthly sections for March to December -->
+    </div>
+
+    <!-- Year 2034 -->
+    <div id="Year2034" class="year-content" style="display: none;">
+        <h2>2034</h2>
+        <p><strong>Age:</strong> 72</p>
+        <div class="month-section">
+            <h3>March</h3>
+            <div class="event">
+                <p><strong>Event:</strong> Travel to Australia.</p>
+                <p><strong>Description:</strong> Explored Australia and its beautiful landscapes.</p>
+                <div class="media">
+                    <img src="images/2034/march/australia_trip.jpg" alt="Trip to Australia" style="width:200px; margin:5px;">
+                </div>
+            </div>
+        </div>
+        <!-- Continue adding monthly sections for April to December -->
+    </div>
+
+    <!-- Year 2035 -->
+    <div id="Year2035" class="year-content" style="display: none;">
+        <h2>2035</h2>
+        <p><strong>Age:</strong> 73</p>
+        <div class="month-section">
+            <h3>April</h3>
+            <div class="event">
+                <p><strong>Event:</strong> Major Birthday Celebration.</p>
+                <p><strong>Description:</strong> Celebrated my 73rd birthday with a big party.</p>
+                <div class="media">
+                    <img src="images/2035/april/birthday.jpg" alt="Birthday Celebration" style="width:200px; margin:5px;">
+                </div>
+            </div>
+        </div>
+        <!-- Continue adding monthly sections for May to December -->
+    </div>
+
+    <!-- Year 2036 -->
+    <div id="Year2036" class="year-content" style="display: none;">
+        <h2>2036</h2>
+        <p><strong>Age:</strong> 74</p>
+        <div class="month-section">
+            <h3>May</h3>
+            <div class="event">
+                <p><strong>Event:</strong> Volunteering Abroad.</p>
+                <p><strong>Description:</strong> Participated in a volunteer project in Africa.</p>
+                <div class="media">
+                    <img src="images/2036/may/volunteering.jpg" alt="Volunteering in Africa" style="width:200px; margin:5px;">
+                </div>
+            </div>
+        </div>
+        <!-- Continue adding monthly sections for June to December -->
+    </div>
+
+    <!-- Year 2037 -->
+    <div id="Year2037" class="year-content" style="display: none;">
+        <h2>2037</h2>
+        <p><strong>Age:</strong> 75</p>
+        <div class="month-section">
+            <h3>June</h3>
+            <div class="event">
+                <p><strong>Event:</strong> Graduation of a Grandchild.</p>
+                <p><strong>Description:</strong> Attended my grandchild's graduation ceremony.</p>
+                <div class="media">
+                    <img src="images/2037/june/graduation.jpg" alt="Graduation Ceremony" style="width:200px; margin:5px;">
+                </div>
+            </div>
+        </div>
+        <!-- Continue adding monthly sections for July to December -->
+    </div>
+
+    <!-- Year 2038 -->
+    <div id="Year2038" class="year-content" style="display: none;">
+        <h2>2038</h2>
+        <p><strong>Age:</strong> 76</p>
+        <div class="month-section">
+            <h3>July</h3>
+            <div class="event">
+                <p><strong>Event:</strong> Summer Vacation.</p>
+                <p><strong>Description:</strong> Took a summer vacation to the beach.</p>
+                <div class="media">
+                    <img src="images/2038/july/vacation.jpg" alt="Summer Vacation" style="width:200px; margin:5px;">
+                </div>
+            </div>
+        </div>
+        <!-- Continue adding monthly sections for August to December -->
+    </div>
+
+    <!-- Year 2039 -->
+    <div id="Year2039" class="year-content" style="display: none;">
+        <h2>2039</h2>
+        <p><strong>Age:</strong> 77</p>
+        <div class="month-section">
+            <h3>August</h3>
+            <div class="event">
+                <p><strong>Event:</strong> Attended a Music Festival.</p>
+                <p><strong>Description:</strong> Enjoyed live music and performances.</p>
+                <div class="media">
+                    <img src="images/2039/august/festival.jpg" alt="Music Festival" style="width:200px; margin:5px;">
+                </div>
+            </div>
+        </div>
+        <!-- Continue adding monthly sections for September to December -->
+    </div>
+
+    <!-- Year 2040 -->
+    <div id="Year2040" class="year-content" style="display: none;">
+        <h2>2040</h2>
+        <p><strong>Age:</strong> 78</p>
+        <div class="month-section">
+            <h3>September</h3>
+            <div class="event">
+                <p><strong>Event:</strong> Attended a Cooking Class.</p>
+                <p><strong>Description:</strong> Learned new recipes and cooking techniques.</p>
+                <div class="media">
+                    <img src="images/2040/september/cooking_class.jpg" alt="Cooking Class" style="width:200px; margin:5px;">
+                </div>
+            </div>
+        </div>
+        <!-- Continue adding monthly sections for October to December -->
+    </div>
+
+    <!-- Year 2041 -->
+    <div id="Year2041" class="year-content" style="display: none;">
+        <h2>2041</h2>
+        <p><strong>Age:</strong> 79</p>
+        <div class="month-section">
+            <h3>October</h3>
+            <div class="event">
+                <p><strong>Event:</strong> Family Halloween Gathering.</p>
+                <p><strong>Description:</strong> Celebrated Halloween with costume parties.</p>
+                <div class="media">
+                    <img src="images/2041/october/halloween.jpg" alt="Halloween Gathering" style="width:200px; margin:5px;">
+                </div>
+            </div>
+        </div>
+        <!-- Continue adding monthly sections for November to December -->
+    </div>
+
+    <!-- Year 2042 -->
+    <div id="Year2042" class="year-content" style="display: none;">
+        <h2>2042</h2>
+        <p><strong>Age:</strong> 80</p>
+        <div class="month-section">
+            <h3>November</h3>
+            <div class="event">
+                <p><strong>Event:</strong> 80th Birthday Celebration.</p>
+                <p><strong>Description:</strong> Celebrated my milestone birthday with friends and family.</p>
+                <div class="media">
+                    <img src="images/2042/november/80th_birthday.jpg" alt="80th Birthday Celebration" style="width:200px; margin:5px;">
+                </div>
+            </div>
+        </div>
+        <div class="month-section">
+            <h3>December</h3>
+            <div class="event">
+                <p><strong>Event:</strong> Holiday Celebrations.</p>
+                <p><strong>Description:</strong> Enjoyed the holiday season with family traditions.</p>
+                <div class="media">
+                    <img src="images/2042/december/holiday_celebration.jpg" alt="Holiday Celebrations" style="width:200px; margin:5px;">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- JavaScript Functions -->
+<script>
+    function openDecade(evt, decadeId) {
+        // Hide all decade contents
+        const tabcontent = document.getElementsByClassName("tab-content");
+        for (let i = 0; i < tabcontent.length; i++) {
+            tabcontent[i].style.display = "none";
+        }
+        // Remove active class from all decade tabs
+        const tablinks = document.getElementsByClassName("tablinks");
+        for (let i = 0; i < tablinks.length; i++) {
+            tablinks[i].classList.remove("active");
+        }
+        // Show selected decade content
+        document.getElementById(decadeId).style.display = "block";
+        evt.currentTarget.classList.add("active");
+        // Automatically open the first year in the decade
+        const firstYearButton = document.querySelector(`#${decadeId} .year-tab .year-link`);
+        if (firstYearButton) {
+            firstYearButton.click();
+        }
+    }
+
+    function openYear(evt, yearId) {
+        // Hide all year contents within the current decade
+        const tabContent = evt.currentTarget.closest('.tab-content');
+        const yearContents = tabContent.getElementsByClassName("year-content");
+        for (let i = 0; i < yearContents.length; i++) {
+            yearContents[i].style.display = "none";
+        }
+        // Remove active class from all year links
+        const yearLinks = tabContent.getElementsByClassName("year-link");
+        for (let i = 0; i < yearLinks.length; i++) {
+            yearLinks[i].classList.remove("active");
+        }
+        // Show selected year content
+        document.getElementById(yearId).style.display = "block";
+        evt.currentTarget.classList.add("active");
+
+        // Initialize map when Year1962 is opened
+        if (yearId === 'Year1962' && !window.mapInitialized) {
+            initMap();
+            window.mapInitialized = true; // Prevent re-initializing the map
+        }
+    }
+
+    // Automatically open the current decade and year
+    function getCurrentDecade() {
+        const birthYear = 1962;
+        const now = new Date();
+        const age = now.getFullYear() - birthYear - (now < new Date(now.getFullYear(), 11, 24) ? 1 : 0);
+        const startDecade = Math.floor(age / 10) * 10;
+        const endDecade = startDecade + 10;
+        return `Decade${startDecade}-${endDecade}`;
+    }
+
+    document.addEventListener("DOMContentLoaded", function() {
+        // Open the current decade
+        const currentDecadeId = getCurrentDecade();
+        const currentDecadeButton = document.querySelector(`.tab button[onclick="openDecade(event, '${currentDecadeId}')"]`);
+        if (currentDecadeButton) {
+            currentDecadeButton.click();
+        } else {
+            // If current decade not found, open the first decade
+            document.querySelector('.tab button').click();
+        }
+    });
+
+    function initMap() {
+        const map = new google.maps.Map(document.getElementById("map"), {
+            zoom: 6,
+            center: { lat: 48.1469, lng: -103.6170 },
+        });
+        new google.maps.Marker({
+            position: { lat: 48.1469, lng: -103.6170 },
+            map: map,
+            title: "Place of Birth: Williston, ND",
+        });
+    }
+</script>
+
+<!-- Load Google Maps API -->
+<script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY" async defer></script>
+
+</body>
+</html>
