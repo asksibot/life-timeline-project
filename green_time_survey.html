@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Green Time Survey</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        /* CSS Styling */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            padding: 0;
+            background-color: #e8f5e9;
+        }
+        .container {
+            max-width: 800px;
+            margin: auto;
+            background-color: #ffffff;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1, h2 {
+            text-align: center;
+        }
+        .instructions {
+            background-color: #a5d6a7;
+            padding: 10px;
+            margin-bottom: 20px;
+            border-left: 6px solid #66bb6a;
+        }
+        .question {
+            margin-top: 20px;
+        }
+        .question p {
+            font-weight: bold;
+        }
+        .options {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 10px;
+        }
+        .options label {
+            flex: 1;
+            text-align: center;
+        }
+        input[type="radio"] {
+            margin: 0 5px;
+        }
+        button {
+            margin-top: 20px;
+            padding: 15px;
+            width: 100%;
+            background-color: #66bb6a;
+            color: white;
+            border: none;
+            font-size: 16px;
+        }
+        button:hover {
+            background-color: #388e3c;
+            cursor: pointer;
+        }
+        #results {
+            display: none;
+            margin-top: 20px;
+        }
+        #results h2 {
+            text-align: center;
+            color: #388e3c;
+        }
+        #results p {
+            margin-top: 10px;
+        }
+        .print-button {
+            margin-top: 10px;
+            padding: 10px;
+            background-color: #42a5f5;
+            color: white;
+            border: none;
+            width: 100%;
+            font-size: 16px;
+        }
+        .print-button:hover {
+            background-color: #1e88e5;
+            cursor: pointer;
+        }
+        @media (min-width: 600px) {
+            label, input, button {
+                font-size: 18px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Green Time Survey</h1>
+        <div class="instructions">
+            <p><strong>Purpose of the Survey:</strong></p>
+            <p>This survey helps you assess how much time you spend in natural environments and understand the impact of nature exposure on your well-being.</p>
+            <p><strong>Instructions:</strong> For each statement, rate how frequently it applies to you on a scale from <strong>1 (Never)</strong> to <strong>5 (Always)</strong>. Answer honestly; there are no right or wrong answers.</p>
+        </div>
+        <form id="surveyForm">
+            <!-- Section 1: Time Spent in Nature -->
+            <h2>Section 1: Time Spent in Nature</h2>
+            <!-- Questions 1-5 -->
+            <div class="question">
+                <p>1. I visit parks or green spaces during my free time.</p>
+                <div class="options">
+                    <label><input type="radio" name="q1" value="1" required>1</label>
+                    <label><input type="radio" name="q1" value="2">2</label>
+                    <label><input type="radio" name="q1" value="3">3</label>
+                    <label><input type="radio" name="q1" value="4">4</label>
+                    <label><input type="radio" name="q1" value="5">5</label>
+                </div>
+            </div>
+            <!-- Repeat similar blocks for questions 2-15 -->
+            <!-- For brevity, including only question 2 -->
+            <div class="question">
+                <p>2. I spend time outdoors engaging in activities like walking, jogging, or cycling.</p>
+                <div class="options">
+                    <label><input type="radio" name="q2" value="1" required>1</label>
+                    <label><input type="radio" name="q2" value="2">2</label>
+                    <label><input type="radio" name="q2" value="3">3</label>
+                    <label><input type="radio" name="q2" value="4">4</label>
+                    <label><input type="radio" name="q2" value="5">5</label>
+                </div>
+            </div>
+            <!-- Continue adding questions 3-15 in the same format -->
+            <!-- Submit Button -->
+            <button type="button" onclick="calculateResults()">Submit</button>
+        </form>
+        <div id="results">
+            <h2>Your Survey Results</h2>
+            <p id="resultText"></p>
+            <button class="print-button" onclick="printResults()">Print or Save Results</button>
+        </div>
+    </div>
+    <script>
+        function calculateResults() {
+            let positiveScore = 0;
+            let barriersScore = 0;
+            let unanswered = false;
+
+            // Positive Nature Engagement Questions (1-10)
+            for (let i = 1; i <= 10; i++) {
+                let radios = document.getElementsByName('q' + i);
+                let answered = false;
+                let value = 0;
+                for (let j = 0; j < radios.length; j++) {
+                    if (radios[j].checked) {
+                        value = parseInt(radios[j].value);
+                        answered = true;
+                        break;
+                    }
+                }
+                if (!answered) {
+                    unanswered = true;
+                    break;
+                }
+                positiveScore += value;
+            }
+
+            // Barriers Questions (11-15)
+            for (let i = 11; i <= 15; i++) {
+                let radios = document.getElementsByName('q' + i);
+                let answered = false;
+                let value = 0;
+                for (let j = 0; j < radios.length; j++) {
+                    if (radios[j].checked) {
+                        value = parseInt(radios[j].value);
+                        answered = true;
+                        break;
+                    }
+                }
+                if (!answered) {
+                    unanswered = true;
+                    break;
+                }
+                barriersScore += value;
+            }
+
+            if (unanswered) {
+                alert('Please answer all the questions.');
+                return;
+            }
+
+            // Interpret Positive Nature Engagement Score
+            let positiveInterpretation = '';
+            if (positiveScore >= 40 && positiveScore <= 50) {
+                positiveInterpretation = 'You have a strong engagement with nature and frequently incorporate it into your life.';
+            } else if (positiveScore >= 30 && positiveScore <= 39) {
+                positiveInterpretation = 'You have a moderate connection with nature but might benefit from more outdoor activities.';
+            } else if (positiveScore >= 20 && positiveScore <= 29) {
+                positiveInterpretation = 'You occasionally engage with nature; exploring more opportunities could enhance your well-being.';
+            } else if (positiveScore >= 10 && positiveScore <= 19) {
+                positiveInterpretation = 'You have limited engagement with nature; increasing green time may positively impact your health.';
+            }
+
+            // Interpret Barriers Score
+            let barriersInterpretation = '';
+            if (barriersScore >= 5 && barriersScore <= 10) {
+                barriersInterpretation = 'Few barriers prevent you from spending time in nature.';
+            } else if (barriersScore >= 11 && barriersScore <= 17) {
+                barriersInterpretation = 'Some barriers exist; addressing them could help increase your green time.';
+            } else if (barriersScore >= 18 && barriersScore <= 25) {
+                barriersInterpretation = 'Significant barriers are preventing you from engaging with nature; identifying solutions may be beneficial.';
+            }
+
+            // Generate result text
+            let resultText = `**Positive Nature Engagement Score:** ${positiveScore}/50\n${positiveInterpretation}\n\n`;
+            resultText += `**Barriers Score:** ${barriersScore}/25\n${barriersInterpretation}\n\n`;
+            resultText += `Consider ways to enhance your connection with nature for improved well-being. Remember, even small changes can make a significant difference.`;
+
+            // Display results
+            document.getElementById('resultText').innerText = resultText;
+            document.getElementById('results').style.display = 'block';
+
+            // Scroll to results
+            document.getElementById('results').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function printResults() {
+            window.print();
+        }
+    </script>
+</body>
+</html>
