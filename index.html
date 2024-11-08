@@ -2,85 +2,131 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Yearly Timeline</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Asksibot - The Occupational Therapy Hub</title>
     <style>
-        /* Basic styles for layout */
-        body { font-family: Arial, sans-serif; }
-        .tab { display: flex; flex-wrap: wrap; }
-        .tab button { padding: 10px; cursor: pointer; margin: 5px; }
-        .tab-content { display: none; }
-        .tab-content.active { display: block; }
-        .month { margin-bottom: 20px; }
-        .month h3 { font-size: 1.2em; }
-        .month img { max-width: 100px; margin: 5px; }
-        #map { width: 100%; height: 400px; margin: 20px 0; }
+        /* General styles */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-color: #f4f4f4;
+            text-align: center;
+        }
+
+        /* Header styles */
+        header {
+            background-color: #d3d3d3;
+            width: 100%;
+            padding: 20px 40px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        header img {
+            width: 70px;
+            height: auto;
+            margin-bottom: 10px;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 2em;
+        }
+
+        .subtext {
+            font-size: 0.9em;
+            margin-top: 5px;
+        }
+
+        nav {
+            margin-top: 10px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        nav a {
+            margin: 5px 10px;
+            color: black;
+            text-decoration: none;
+            font-size: 1em;
+        }
+
+        /* Button styles */
+        .grid-button {
+            display: inline-block;
+            padding: 15px 25px;
+            margin: 20px 0;
+            font-size: 1.2em;
+            color: #000;
+            background-color: #fdb201;
+            border-radius: 30px;
+            border: 5px solid #000;
+            text-decoration: none;
+            transition: 0.3s;
+        }
+
+        .grid-button:hover {
+            background-color: #1d1e20;
+            color: #fff;
+        }
+
+        /* Container styling */
+        .container {
+            max-width: 600px;
+            padding: 20px;
+        }
+
+        /* Responsive adjustments for smaller screens */
+        @media (max-width: 600px) {
+            header h1 {
+                font-size: 1.5em;
+            }
+
+            .subtext {
+                font-size: 0.8em;
+                line-height: 1.4em;
+            }
+
+            nav a {
+                font-size: 0.9em;
+                margin: 5px 8px;
+            }
+
+            .grid-button {
+                padding: 10px 20px;
+                font-size: 1em;
+            }
+        }
     </style>
 </head>
 <body>
 
-<h1>Yearly Timeline</h1>
+<header>
+    <img src="media/asksiboticon.png" alt="Asksibot Logo">
+    <h1>Asksibot - The Occupational Therapy Hub</h1>
+    <p class="subtext">Developed on OpenAI by Christopher Horne, OTR/L</p>
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="/surveys/survey_selection.html">Surveys</a>
+        <a href="/timeline/timelineupto80.html">Timeline</a>
+        <a href="/shop/index.html">Shop</a>
+        <a href="/contact.html">Contact</a>
+    </nav>
+</header>
 
-<!-- Tabs for each year -->
-<div class="tab">
-    <button onclick="openYear(event, '2023')">2023</button>
-    <button onclick="openYear(event, '2024')">2024</button>
-    <!-- Add more years as needed -->
+<div class="container">
+    <a href="/surveys/survey_selection.html" class="grid-button">Try Asksibot Surveys</a>
+    <a href="/info/index.html" class="grid-button">Asksibot for OT Information</a>
+    <a href="/shop/index.html" class="grid-button">Shop Asksibot</a>
 </div>
 
-<!-- Tab content for each year -->
-<div id="2023" class="tab-content">
-    <h2>2023</h2>
-    <!-- Monthly sections -->
-    <div class="month">
-        <h3>January</h3>
-        <p>Descriptions and highlights for January.</p>
-        <!-- Images for January -->
-        <img src="path_to_image1.jpg" alt="Image for January">
-        <img src="path_to_image2.jpg" alt="Another image for January">
-    </div>
-    <div class="month">
-        <h3>February</h3>
-        <p>Descriptions and highlights for February.</p>
-        <!-- Images for February -->
-    </div>
-    <!-- Continue for all months up to December -->
-</div>
-
-<div id="2024" class="tab-content">
-    <h2>2024</h2>
-    <!-- Monthly sections similar to above -->
-</div>
-
-<!-- Google Map for travel locations -->
-<h2>Travel Map</h2>
-<div id="map"></div>
-
-<script>
-    // Function to display selected year
-    function openYear(evt, yearId) {
-        const tabContents = document.querySelectorAll('.tab-content');
-        tabContents.forEach(tab => tab.classList.remove('active'));
-        document.getElementById(yearId).classList.add('active');
-    }
-
-    // Initialize Google Map
-    function initMap() {
-        const map = new google.maps.Map(document.getElementById("map"), {
-            zoom: 4,
-            center: { lat: 34.0522, lng: -118.2437 } // Center map on a default location
-        });
-        // Example marker for travel location
-        new google.maps.Marker({
-            position: { lat: 40.7128, lng: -74.0060 }, // Example location
-            map: map,
-            title: "Travel Location: New York, NY"
-        });
-        // Add more markers as needed
-    }
-</script>
-
-<!-- Load Google Maps API with your API key -->
-<script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMap" async defer></script>
 </body>
 </html>
