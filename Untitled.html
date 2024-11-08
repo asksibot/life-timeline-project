@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Asksibot - Pictogram Search Assistant</title>
+    <style>
+        /* General styles */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            text-align: center;
+        }
+
+        /* Header styles */
+        header {
+            background-color: #d3d3d3;
+            width: 100%;
+            padding: 20px 40px;
+            box-sizing: border-box;
+        }
+
+        header img {
+            width: 70px;
+            height: auto;
+            margin-bottom: 10px;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 2em;
+        }
+
+        .subtext {
+            font-size: 0.9em;
+            margin-top: 5px;
+        }
+
+        nav {
+            margin-top: 10px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        nav a {
+            margin: 5px 10px;
+            color: black;
+            text-decoration: none;
+            font-size: 1em;
+        }
+
+        /* Content styles */
+        .content {
+            max-width: 800px;
+            width: 100%;
+            margin: 20px auto;
+            padding: 0 20px;
+            box-sizing: border-box;
+            text-align: left;
+        }
+
+        .content h2 {
+            font-size: 1.8em;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        /* Form styles */
+        form {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-sizing: border-box;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        label {
+            display: block;
+            margin-top: 15px;
+            font-weight: bold;
+        }
+
+        .instruction {
+            font-size: 0.9em;
+            color: #555;
+            margin-bottom: 5px;
+        }
+
+        input[type="text"], textarea {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            box-sizing: border-box;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+        }
+
+        /* Pre-defined options styles */
+        .options-section {
+            margin-top: 10px;
+        }
+
+        .options-section h4 {
+            margin-bottom: 5px;
+            font-size: 1em;
+        }
+
+        .options-list {
+            display: flex;
+            flex-wrap: wrap;
+            margin-bottom: 10px;
+        }
+
+        .options-list button {
+            margin: 5px;
+            padding: 5px 10px;
+            font-size: 0.9em;
+            background-color: #e7e7e7;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            flex: 1 1 calc(33.333% - 10px); /* Three buttons per row */
+            box-sizing: border-box;
+        }
+
+        .options-list button:hover {
+            background-color: #ccc;
+        }
+
+        /* Adjust button sizing for smaller screens */
+        @media (max-width: 600px) {
+            .options-list button {
+                flex: 1 1 calc(50% - 10px); /* Two buttons per row */
+            }
+        }
+
+        /* Button styles */
+        button[type="submit"], .results button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #fdb201;
+            color: #000;
+            border-radius: 30px;
+            border: 2px solid #000;
+            font-size: 1em;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        button[type="submit"]:hover, .results button:hover {
+            background-color: #1d1e20;
+            color: #fff;
+        }
+
+        /* Results section */
+        #results {
+            display: none;
+            margin-top: 30px;
+            background-color: #e7f3fe;
+            padding: 20px;
+            box-sizing: border-box;
+            border-left: 6px solid #2196F3;
+            border-radius: 8px;
+        }
+
+        #results h2 {
+            color: #2196F3;
+        }
+
+        #results ol {
+            margin-left: 20px;
+        }
+
+        .attribution {
+            margin-top: 20px;
+            font-size: 0.8em;
+            color: #555;
+            text-align: center;
+        }
+
+        .attribution a {
+            color: #555;
+            text-decoration: underline;
+        }
+
+        /* Responsive adjustments for smaller screens */
+        @media (max-width: 600px) {
+            header h1 {
+                font-size: 1.5em;
+            }
+
+            .subtext {
+                font-size: 0.8em;
+                line-height: 1.4em;
+            }
+
+            nav a {
+                font-size: 0.9em;
+                margin: 5px 8px;
+            }
+
+            .content h2 {
+                font-size: 1.4em;
+            }
+
+            label {
+                font-size: 0.9em;
+            }
+
+            button {
+                font-size: 0.9em;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <img src="media/asksiboticon.png" alt="Asksibot Logo">
+    <h1>Asksibot - The Occupational Therapy Hub</h1>
+    <p class="subtext">Developed on OpenAI by Christopher Horne, OTR/L</p>
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="/surveys/survey_selection.html">Surveys</a>
+        <a href="/timeline/timelineupto80.html">Timeline</a>
+        <a href="/shop/index.html">Shop</a>
+        <a href="/contact.html">Contact</a>
+    </nav>
+</header>
+
+<div class="content">
+    <h2>Pictogram Search Assistant</h2>
+    <form id="pictogramForm">
+        <label for="topic">Topic or Subject:</label>
+        <p class="instruction">Use your own term or select a topic from below.</p>
+        <input type="text" id="topic" name="topic" required>
+
+        <!-- Pre-defined topics -->
+        <div class="options-section">
+            <h4>Select a Topic:</h4>
+            <div class="options-list" id="topicOptions">
+                <!-- Buttons will be generated here -->
+            </div>
+        </div>
+
+        <label for="keywords">Specific Keywords or Concepts:</label>
+        <p class="instruction">Enter your own keywords or select from the options below.</p>
+        <textarea id="keywords" name="keywords" placeholder="Enter keywords separated by commas" required></textarea>
+
+        <!-- Pre-defined keywords -->
+        <div class="options-section">
+            <h4>Select Keywords:</h4>
+            <div class="options-list" id="keywordOptions">
+                <!-- Buttons will be generated here -->
+            </div>
+        </div>
+
+        <label for="details">Additional Details or Requirements:</label>
+        <p class="instruction">Provide any extra information or select from the options below.</p>
+        <textarea id="details" name="details" placeholder="Optional"></textarea>
+
+        <!-- Pre-defined details -->
+        <div class="options-section">
+            <h4>Select Additional Details:</h4>
+            <div class="options-list" id="detailsOptions">
+                <!-- Buttons will be generated here -->
+            </div>
+        </div>
+
+        <button type="submit">Generate Search Terms</button>
+    </form>
+
+    <div id="results">
+        <h2>Your Search Terms</h2>
+        <ul id="searchTermsList"></ul>
+        <h3>Instructions to Find Pictograms on ARASAAC:</h3>
+        <ol>
+            <li>Click the button below to go to the ARASAAC search page.</li>
+            <li>Enter each search term into the search bar one at a time.</li>
+            <li>Browse and select the pictograms that best fit your needs.</li>
+            <li>Download the pictograms following ARASAAC's guidelines.</li>
+        </ol>
+        <a href="https://arasaac.org/pictograms/search" target="_blank">
+            <button>Go to ARASAAC Search Page</button>
+        </a>
+        <p class="attribution">
+            The pictographic symbols used are the property of the Government of Aragón and have been created by Sergio Palao for ARASAAC (<a href="http://www.arasaac.org" target="_blank">http://www.arasaac.org</a>), that distributes them under Creative Commons License BY-NC-SA.
+        </p>
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Pre-defined topics (exact array provided)
+        const topics = [
+            'Daily Routine', 'Visiting the Doctor', 'School Activities', 'Emotions', 'Weather', 'Food and Drinks',
+            'Transportation', 'Animals', 'Family Members', 'Clothing', 'Sports', 'Music',
+            'Holidays', 'Seasons', 'Nature', 'Household Chores', 'Jobs and Professions', 'Colors',
+            'Shapes', 'Numbers', 'Letters', 'Body Parts', 'Health and Hygiene', 'Technology',
+            'Safety Signs', 'Community Helpers', 'Feelings', 'Activities', 'Directions', 'Time Concepts'
+        ];
+        const topicOptionsDiv = document.getElementById('topicOptions');
+
+        topics.forEach(function(topic) {
+            const button = document.createElement('button');
+            button.type = 'button';
+            button.textContent = topic;
+            button.addEventListener('click', function() {
+                document.getElementById('topic').value = topic;
+            });
+            topicOptionsDiv.appendChild(button);
+        });
+
+        // Pre-defined keywords (exact array provided)
+        const keywords = [
+            'Brushing teeth', 'Taking a bath', 'Getting dressed', // Daily Routine
+            'Check-up', 'Medicine', 'Waiting room', // Visiting the Doctor
+            'Reading', 'Writing', 'Recess', // School Activities
+            'Happy', 'Sad', 'Angry', // Emotions
+            'Sunny', 'Rainy', 'Cloudy', // Weather
+            'Breakfast', 'Lunch', 'Dinner', // Food and Drinks
+            'Bus', 'Car', 'Train', // Transportation
+            'Dog', 'Cat', 'Bird', // Animals
+            'Mother', 'Father', 'Sibling', // Family Members
+            'Shirt', 'Pants', 'Shoes', // Clothing
+            'Soccer', 'Basketball', 'Swimming', // Sports
+            'Singing', 'Playing an instrument', 'Listening to music', // Music
+            'Christmas', 'Easter', 'Halloween', // Holidays
+            'Spring', 'Summer', 'Fall', 'Winter', // Seasons
+            'Tree', 'Flower', 'Mountain', // Nature
+            'Washing dishes', 'Vacuuming', 'Making the bed', // Household Chores
+            'Teacher', 'Doctor', 'Firefighter', // Jobs and Professions
+            'Red', 'Blue', 'Green', // Colors
+            'Circle', 'Square', 'Triangle', // Shapes
+            'One', 'Two', 'Three', // Numbers
+            'A', 'B', 'C', // Letters
+            'Hand', 'Foot', 'Head', // Body Parts
+            'Washing hands', 'Brushing teeth', 'Using the toilet', // Health and Hygiene
+            'Computer', 'Phone', 'Tablet', // Technology
+            'Stop', 'Caution', 'Exit', // Safety Signs
+            'Police officer', 'Firefighter', 'Mail carrier', // Community Helpers
+            'Excited', 'Nervous', 'Calm', // Feelings
+            'Playing', 'Drawing', 'Building', // Activities
+            'Left', 'Right', 'Straight', // Directions
+            'Morning', 'Afternoon', 'Evening' // Time Concepts
+        ];
+        const keywordOptionsDiv = document.getElementById('keywordOptions');
+
+        keywords.forEach(function(keyword) {
+            const button = document.createElement('button');
+            button.type = 'button';
+            button.textContent = keyword;
+            button.addEventListener('click', function() {
+                const keywordsField = document.getElementById('keywords');
+                let currentKeywords = keywordsField.value;
+                if (currentKeywords) {
+                    currentKeywords += ', ' + keyword;
+                } else {
+                    currentKeywords = keyword;
+                }
+                keywordsField.value = currentKeywords;
+            });
+            keywordOptionsDiv.appendChild(button);
+        });
+
+        // Pre-defined additional details (exact array provided)
+        const details = [
+            'Consistency: Ensure that the style and design are consistent',
+            'Clarity: Use clear and simple images',
+            'Relevance: Make pictograms relevant to daily life',
+            'Cultural Sensitivity: Ensure cultural appropriateness',
+            'Accessibility: Provide in multiple formats',
+            'Customization: Allow for individual preferences',
+            'High Contrast: Enhance visibility',
+            'Size: Make pictograms easily seen',
+            'Text Labels: Include textual information',
+            'Educational Resources: Provide guides and tutorials'
+        ];
+        const detailsOptionsDiv = document.getElementById('detailsOptions');
+
+        details.forEach(function(detail) {
+            const button = document.createElement('button');
+            button.type = 'button';
+            button.textContent = detail;
+            button.addEventListener('click', function() {
+                const detailsField = document.getElementById('details');
+                let currentDetails = detailsField.value;
+                if (currentDetails) {
+                    currentDetails += ' ' + detail;
+                } else {
+                    currentDetails = detail;
+                }
+                detailsField.value = currentDetails;
+            });
+            detailsOptionsDiv.appendChild(button);
+        });
+    });
+
+    // Existing form submission handler
+    document.getElementById('pictogramForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+
+        // Get user input
+        const topic = document.getElementById('topic').value.trim();
+        const keywords = document.getElementById('keywords').value.trim();
+        const details = document.getElementById('details').value.trim();
+
+        // Split keywords into an array
+        const keywordList = keywords.split(',').map(word => word.trim()).filter(word => word !== '');
+
+        // Generate search terms
+        let searchTerms = [topic, ...keywordList];
+
+        // Include additional terms from details if provided
+        if (details) {
+            const detailKeywords = details.split(/\s+/).filter(word => word.length > 3);
+            searchTerms = [...new Set([...searchTerms, ...detailKeywords])];
+        }
+
+        // Display the search terms and instructions
+        displayResults(searchTerms);
+    });
+
+    function displayResults(searchTerms) {
+        const resultsDiv = document.getElementById('results');
+        const searchTermsList = document.getElementById('searchTermsList');
+
+        // Clear previous results
+        searchTermsList.innerHTML = '';
+
+        // Populate the list with search terms
+        searchTerms.forEach(term => {
+            const listItem = document.createElement('li');
+            listItem.textContent = term;
+            searchTermsList.appendChild(listItem);
+        });
+
+        // Show the results section
+        resultsDiv.style.display = 'block';
+
+        // Scroll to the results section
+        resultsDiv.scrollIntoView({ behavior: 'smooth' });
+    }
+</script>
+
+</body>
+</html>
