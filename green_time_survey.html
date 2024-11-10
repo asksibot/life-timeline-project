@@ -8,83 +8,111 @@
         /* CSS Styling */
         body {
             font-family: Arial, sans-serif;
-            margin: 20px;
-            padding: 0;
+            margin: 0;
+            padding: 20px;
             background-color: #e8f5e9;
+            color: #333;
         }
         .container {
             max-width: 800px;
             margin: auto;
             background-color: #ffffff;
-            padding: 20px;
+            padding: 30px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
         }
-        h1, h2 {
+        h1, h2, h3 {
             text-align: center;
+            color: #2e7d32;
+        }
+        .explanation {
+            background-color: #c8e6c9;
+            padding: 15px;
+            border-left: 6px solid #66bb6a;
+            margin-bottom: 20px;
+            border-radius: 4px;
         }
         .instructions {
             background-color: #a5d6a7;
-            padding: 10px;
-            margin-bottom: 20px;
+            padding: 15px;
             border-left: 6px solid #66bb6a;
+            margin-bottom: 20px;
+            border-radius: 4px;
         }
         .question {
             margin-top: 20px;
         }
         .question p {
             font-weight: bold;
+            margin-bottom: 10px;
         }
-        .options {
+        .rating-grid {
             display: flex;
             justify-content: space-between;
-            margin-top: 10px;
+            flex-wrap: wrap;
         }
-        .options label {
-            flex: 1;
+        .rating-grid label {
+            flex: 1 1 13%;
             text-align: center;
+            margin-bottom: 5px;
+            cursor: pointer;
+            font-size: 14px;
         }
-        input[type="radio"] {
-            margin: 0 5px;
+        .rating-grid input[type="radio"] {
+            margin-right: 5px;
+            cursor: pointer;
         }
         button {
-            margin-top: 20px;
+            margin-top: 30px;
             padding: 15px;
             width: 100%;
             background-color: #66bb6a;
             color: white;
             border: none;
             font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
         }
         button:hover {
             background-color: #388e3c;
-            cursor: pointer;
         }
         #results {
             display: none;
-            margin-top: 20px;
+            margin-top: 30px;
+            background-color: #c8e6c9;
+            padding: 20px;
+            border-left: 6px solid #66bb6a;
+            border-radius: 4px;
         }
         #results h2 {
+            color: #2e7d32;
             text-align: center;
-            color: #388e3c;
         }
         #results p {
-            margin-top: 10px;
+            margin: 10px 0;
+            line-height: 1.6;
         }
         .print-button {
-            margin-top: 10px;
+            margin-top: 15px;
             padding: 10px;
             background-color: #42a5f5;
             color: white;
             border: none;
             width: 100%;
             font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
         }
         .print-button:hover {
             background-color: #1e88e5;
-            cursor: pointer;
         }
         @media (min-width: 600px) {
-            label, input, button {
+            .rating-grid label {
+                font-size: 16px;
+            }
+            button, .print-button {
                 font-size: 18px;
             }
         }
@@ -93,55 +121,341 @@
 <body>
     <div class="container">
         <h1>Green Time Survey</h1>
-        <div class="instructions">
-            <p><strong>Purpose of the Survey:</strong></p>
-            <p>This survey helps you assess how much time you spend in natural environments and understand the impact of nature exposure on your well-being.</p>
-            <p><strong>Instructions:</strong> For each statement, rate how frequently it applies to you on a scale from <strong>1 (Never)</strong> to <strong>5 (Always)</strong>. Answer honestly; there are no right or wrong answers.</p>
+        
+        <!-- Explanation Section -->
+        <div class="explanation">
+            <h3>Understanding Green Time</h3>
+            <p><strong>Green Time</strong> refers to the time individuals spend in natural environments, such as parks, forests, gardens, or any green spaces. Engaging with nature has been shown to significantly improve mood, reduce stress, enhance cognitive function, and promote overall well-being.</p>
+            <p>By participating in this survey, you'll gain insights into how much time you spend in natural settings and understand the potential impact of nature on your mental and emotional health.</p>
         </div>
+        
+        <!-- Instructions Section -->
+        <div class="instructions">
+            <h3>Survey Instructions</h3>
+            <p>Please rate how frequently each statement applies to you using the scale below:</p>
+            <ul style="list-style-type: none; padding: 0;">
+                <li><strong>1 - Almost Never:</strong> About 5% or less of the time</li>
+                <li><strong>2 - Rarely:</strong> About 25% of the time</li>
+                <li><strong>3 - Seldom:</strong> About 50% of the time</li>
+                <li><strong>4 - Occasionally:</strong> About 75% of the time</li>
+                <li><strong>5 - Frequently:</strong> About 95% or more of the time</li>
+                <li><strong>6 - Very Frequently:</strong> Nearly always</li>
+                <li><strong>7 - Always:</strong> All the time</li>
+            </ul>
+            <p>Answer honestly; there are no right or wrong answers.</p>
+        </div>
+        
+        <!-- Survey Form -->
         <form id="surveyForm">
             <!-- Section 1: Time Spent in Nature -->
             <h2>Section 1: Time Spent in Nature</h2>
-            <!-- Questions 1-5 -->
+            
+            <!-- Question 1 -->
             <div class="question">
                 <p>1. I visit parks or green spaces during my free time.</p>
-                <div class="options">
-                    <label><input type="radio" name="q1" value="1" required>1</label>
-                    <label><input type="radio" name="q1" value="2">2</label>
-                    <label><input type="radio" name="q1" value="3">3</label>
-                    <label><input type="radio" name="q1" value="4">4</label>
-                    <label><input type="radio" name="q1" value="5">5</label>
+                <div class="rating-grid">
+                    <label><input type="radio" name="q1" value="1" required>1 - Almost Never</label>
+                    <label><input type="radio" name="q1" value="2">2 - Rarely</label>
+                    <label><input type="radio" name="q1" value="3">3 - Seldom</label>
+                    <label><input type="radio" name="q1" value="4">4 - Occasionally</label>
+                    <label><input type="radio" name="q1" value="5">5 - Frequently</label>
+                    <label><input type="radio" name="q1" value="6">6 - Very Frequently</label>
+                    <label><input type="radio" name="q1" value="7">7 - Always</label>
                 </div>
             </div>
-            <!-- Repeat similar blocks for questions 2-15 -->
-            <!-- For brevity, including only question 2 -->
+            
+            <!-- Question 2 -->
             <div class="question">
                 <p>2. I spend time outdoors engaging in activities like walking, jogging, or cycling.</p>
-                <div class="options">
-                    <label><input type="radio" name="q2" value="1" required>1</label>
-                    <label><input type="radio" name="q2" value="2">2</label>
-                    <label><input type="radio" name="q2" value="3">3</label>
-                    <label><input type="radio" name="q2" value="4">4</label>
-                    <label><input type="radio" name="q2" value="5">5</label>
+                <div class="rating-grid">
+                    <label><input type="radio" name="q2" value="1" required>1 - Almost Never</label>
+                    <label><input type="radio" name="q2" value="2">2 - Rarely</label>
+                    <label><input type="radio" name="q2" value="3">3 - Seldom</label>
+                    <label><input type="radio" name="q2" value="4">4 - Occasionally</label>
+                    <label><input type="radio" name="q2" value="5">5 - Frequently</label>
+                    <label><input type="radio" name="q2" value="6">6 - Very Frequently</label>
+                    <label><input type="radio" name="q2" value="7">7 - Always</label>
                 </div>
             </div>
-            <!-- Continue adding questions 3-15 in the same format -->
+            
+            <!-- Question 3 -->
+            <div class="question">
+                <p>3. I enjoy outdoor activities such as hiking, camping, or fishing.</p>
+                <div class="rating-grid">
+                    <label><input type="radio" name="q3" value="1" required>1 - Almost Never</label>
+                    <label><input type="radio" name="q3" value="2">2 - Rarely</label>
+                    <label><input type="radio" name="q3" value="3">3 - Seldom</label>
+                    <label><input type="radio" name="q3" value="4">4 - Occasionally</label>
+                    <label><input type="radio" name="q3" value="5">5 - Frequently</label>
+                    <label><input type="radio" name="q3" value="6">6 - Very Frequently</label>
+                    <label><input type="radio" name="q3" value="7">7 - Always</label>
+                </div>
+            </div>
+            
+            <!-- Question 4 -->
+            <div class="question">
+                <p>4. I spend time gardening or working in my yard.</p>
+                <div class="rating-grid">
+                    <label><input type="radio" name="q4" value="1" required>1 - Almost Never</label>
+                    <label><input type="radio" name="q4" value="2">2 - Rarely</label>
+                    <label><input type="radio" name="q4" value="3">3 - Seldom</label>
+                    <label><input type="radio" name="q4" value="4">4 - Occasionally</label>
+                    <label><input type="radio" name="q4" value="5">5 - Frequently</label>
+                    <label><input type="radio" name="q4" value="6">6 - Very Frequently</label>
+                    <label><input type="radio" name="q4" value="7">7 - Always</label>
+                </div>
+            </div>
+            
+            <!-- Question 5 -->
+            <div class="question">
+                <p>5. I take nature walks or go bird watching.</p>
+                <div class="rating-grid">
+                    <label><input type="radio" name="q5" value="1" required>1 - Almost Never</label>
+                    <label><input type="radio" name="q5" value="2">2 - Rarely</label>
+                    <label><input type="radio" name="q5" value="3">3 - Seldom</label>
+                    <label><input type="radio" name="q5" value="4">4 - Occasionally</label>
+                    <label><input type="radio" name="q5" value="5">5 - Frequently</label>
+                    <label><input type="radio" name="q5" value="6">6 - Very Frequently</label>
+                    <label><input type="radio" name="q5" value="7">7 - Always</label>
+                </div>
+            </div>
+            
+            <!-- Question 6 -->
+            <div class="question">
+                <p>6. I participate in outdoor sports or recreational activities.</p>
+                <div class="rating-grid">
+                    <label><input type="radio" name="q6" value="1" required>1 - Almost Never</label>
+                    <label><input type="radio" name="q6" value="2">2 - Rarely</label>
+                    <label><input type="radio" name="q6" value="3">3 - Seldom</label>
+                    <label><input type="radio" name="q6" value="4">4 - Occasionally</label>
+                    <label><input type="radio" name="q6" value="5">5 - Frequently</label>
+                    <label><input type="radio" name="q6" value="6">6 - Very Frequently</label>
+                    <label><input type="radio" name="q6" value="7">7 - Always</label>
+                </div>
+            </div>
+            
+            <!-- Question 7 -->
+            <div class="question">
+                <p>7. I spend time at the beach, lake, or river.</p>
+                <div class="rating-grid">
+                    <label><input type="radio" name="q7" value="1" required>1 - Almost Never</label>
+                    <label><input type="radio" name="q7" value="2">2 - Rarely</label>
+                    <label><input type="radio" name="q7" value="3">3 - Seldom</label>
+                    <label><input type="radio" name="q7" value="4">4 - Occasionally</label>
+                    <label><input type="radio" name="q7" value="5">5 - Frequently</label>
+                    <label><input type="radio" name="q7" value="6">6 - Very Frequently</label>
+                    <label><input type="radio" name="q7" value="7">7 - Always</label>
+                </div>
+            </div>
+            
+            <!-- Question 8 -->
+            <div class="question">
+                <p>8. I enjoy picnics or outdoor gatherings.</p>
+                <div class="rating-grid">
+                    <label><input type="radio" name="q8" value="1" required>1 - Almost Never</label>
+                    <label><input type="radio" name="q8" value="2">2 - Rarely</label>
+                    <label><input type="radio" name="q8" value="3">3 - Seldom</label>
+                    <label><input type="radio" name="q8" value="4">4 - Occasionally</label>
+                    <label><input type="radio" name="q8" value="5">5 - Frequently</label>
+                    <label><input type="radio" name="q8" value="6">6 - Very Frequently</label>
+                    <label><input type="radio" name="q8" value="7">7 - Always</label>
+                </div>
+            </div>
+            
+            <!-- Question 9 -->
+            <div class="question">
+                <p>9. I take my pets for walks in natural settings.</p>
+                <div class="rating-grid">
+                    <label><input type="radio" name="q9" value="1" required>1 - Almost Never</label>
+                    <label><input type="radio" name="q9" value="2">2 - Rarely</label>
+                    <label><input type="radio" name="q9" value="3">3 - Seldom</label>
+                    <label><input type="radio" name="q9" value="4">4 - Occasionally</label>
+                    <label><input type="radio" name="q9" value="5">5 - Frequently</label>
+                    <label><input type="radio" name="q9" value="6">6 - Very Frequently</label>
+                    <label><input type="radio" name="q9" value="7">7 - Always</label>
+                </div>
+            </div>
+            
+            <!-- Question 10 -->
+            <div class="question">
+                <p>10. I spend time relaxing in my backyard or on my balcony.</p>
+                <div class="rating-grid">
+                    <label><input type="radio" name="q10" value="1" required>1 - Almost Never</label>
+                    <label><input type="radio" name="q10" value="2">2 - Rarely</label>
+                    <label><input type="radio" name="q10" value="3">3 - Seldom</label>
+                    <label><input type="radio" name="q10" value="4">4 - Occasionally</label>
+                    <label><input type="radio" name="q10" value="5">5 - Frequently</label>
+                    <label><input type="radio" name="q10" value="6">6 - Very Frequently</label>
+                    <label><input type="radio" name="q10" value="7">7 - Always</label>
+                </div>
+            </div>
+            
+            <!-- Section 2: Time Spent Indoors -->
+            <h2>Section 2: Time Spent Indoors</h2>
+            
+            <!-- Question 11 -->
+            <div class="question">
+                <p>11. I spend my free time watching TV or movies.</p>
+                <div class="rating-grid">
+                    <label><input type="radio" name="q11" value="1" required>1 - Almost Never</label>
+                    <label><input type="radio" name="q11" value="2">2 - Rarely</label>
+                    <label><input type="radio" name="q11" value="3">3 - Seldom</label>
+                    <label><input type="radio" name="q11" value="4">4 - Occasionally</label>
+                    <label><input type="radio" name="q11" value="5">5 - Frequently</label>
+                    <label><input type="radio" name="q11" value="6">6 - Very Frequently</label>
+                    <label><input type="radio" name="q11" value="7">7 - Always</label>
+                </div>
+            </div>
+            
+            <!-- Question 12 -->
+            <div class="question">
+                <p>12. I play video games or use my computer for entertainment.</p>
+                <div class="rating-grid">
+                    <label><input type="radio" name="q12" value="1" required>1 - Almost Never</label>
+                    <label><input type="radio" name="q12" value="2">2 - Rarely</label>
+                    <label><input type="radio" name="q12" value="3">3 - Seldom</label>
+                    <label><input type="radio" name="q12" value="4">4 - Occasionally</label>
+                    <label><input type="radio" name="q12" value="5">5 - Frequently</label>
+                    <label><input type="radio" name="q12" value="6">6 - Very Frequently</label>
+                    <label><input type="radio" name="q12" value="7">7 - Always</label>
+                </div>
+            </div>
+            
+            <!-- Question 13 -->
+            <div class="question">
+                <p>13. I read books, magazines, or online articles.</p>
+                <div class="rating-grid">
+                    <label><input type="radio" name="q13" value="1" required>1 - Almost Never</label>
+                    <label><input type="radio" name="q13" value="2">2 - Rarely</label>
+                    <label><input type="radio" name="q13" value="3">3 - Seldom</label>
+                    <label><input type="radio" name="q13" value="4">4 - Occasionally</label>
+                    <label><input type="radio" name="q13" value="5">5 - Frequently</label>
+                    <label><input type="radio" name="q13" value="6">6 - Very Frequently</label>
+                    <label><input type="radio" name="q13" value="7">7 - Always</label>
+                </div>
+            </div>
+            
+            <!-- Question 14 -->
+            <div class="question">
+                <p>14. I engage in indoor hobbies such as crafting, painting, or knitting.</p>
+                <div class="rating-grid">
+                    <label><input type="radio" name="q14" value="1" required>1 - Almost Never</label>
+                    <label><input type="radio" name="q14" value="2">2 - Rarely</label>
+                    <label><input type="radio" name="q14" value="3">3 - Seldom</label>
+                    <label><input type="radio" name="q14" value="4">4 - Occasionally</label>
+                    <label><input type="radio" name="q14" value="5">5 - Frequently</label>
+                    <label><input type="radio" name="q14" value="6">6 - Very Frequently</label>
+                    <label><input type="radio" name="q14" value="7">7 - Always</label>
+                </div>
+            </div>
+            
+            <!-- Question 15 -->
+            <div class="question">
+                <p>15. I spend time cooking or baking.</p>
+                <div class="rating-grid">
+                    <label><input type="radio" name="q15" value="1" required>1 - Almost Never</label>
+                    <label><input type="radio" name="q15" value="2">2 - Rarely</label>
+                    <label><input type="radio" name="q15" value="3">3 - Seldom</label>
+                    <label><input type="radio" name="q15" value="4">4 - Occasionally</label>
+                    <label><input type="radio" name="q15" value="5">5 - Frequently</label>
+                    <label><input type="radio" name="q15" value="6">6 - Very Frequently</label>
+                    <label><input type="radio" name="q15" value="7">7 - Always</label>
+                </div>
+            </div>
+            
+            <!-- Question 16 -->
+            <div class="question">
+                <p>16. I enjoy indoor fitness activities such as yoga or home workouts.</p>
+                <div class="rating-grid">
+                    <label><input type="radio" name="q16" value="1" required>1 - Almost Never</label>
+                    <label><input type="radio" name="q16" value="2">2 - Rarely</label>
+                    <label><input type="radio" name="q16" value="3">3 - Seldom</label>
+                    <label><input type="radio" name="q16" value="4">4 - Occasionally</label>
+                    <label><input type="radio" name="q16" value="5">5 - Frequently</label>
+                    <label><input type="radio" name="q16" value="6">6 - Very Frequently</label>
+                    <label><input type="radio" name="q16" value="7">7 - Always</label>
+                </div>
+            </div>
+            
+            <!-- Question 17 -->
+            <div class="question">
+                <p>17. I spend time socializing with family or friends indoors.</p>
+                <div class="rating-grid">
+                    <label><input type="radio" name="q17" value="1" required>1 - Almost Never</label>
+                    <label><input type="radio" name="q17" value="2">2 - Rarely</label>
+                    <label><input type="radio" name="q17" value="3">3 - Seldom</label>
+                    <label><input type="radio" name="q17" value="4">4 - Occasionally</label>
+                    <label><input type="radio" name="q17" value="5">5 - Frequently</label>
+                    <label><input type="radio" name="q17" value="6">6 - Very Frequently</label>
+                    <label><input type="radio" name="q17" value="7">7 - Always</label>
+                </div>
+            </div>
+            
+            <!-- Question 18 -->
+            <div class="question">
+                <p>18. I work on indoor projects or repairs.</p>
+                <div class="rating-grid">
+                    <label><input type="radio" name="q18" value="1" required>1 - Almost Never</label>
+                    <label><input type="radio" name="q18" value="2">2 - Rarely</label>
+                    <label><input type="radio" name="q18" value="3">3 - Seldom</label>
+                    <label><input type="radio" name="q18" value="4">4 - Occasionally</label>
+                    <label><input type="radio" name="q18" value="5">5 - Frequently</label>
+                    <label><input type="radio" name="q18" value="6">6 - Very Frequently</label>
+                    <label><input type="radio" name="q18" value="7">7 - Always</label>
+                </div>
+            </div>
+            
+            <!-- Question 19 -->
+            <div class="question">
+                <p>19. I organize or declutter my living space regularly.</p>
+                <div class="rating-grid">
+                    <label><input type="radio" name="q19" value="1" required>1 - Almost Never</label>
+                    <label><input type="radio" name="q19" value="2">2 - Rarely</label>
+                    <label><input type="radio" name="q19" value="3">3 - Seldom</label>
+                    <label><input type="radio" name="q19" value="4">4 - Occasionally</label>
+                    <label><input type="radio" name="q19" value="5">5 - Frequently</label>
+                    <label><input type="radio" name="q19" value="6">6 - Very Frequently</label>
+                    <label><input type="radio" name="q19" value="7">7 - Always</label>
+                </div>
+            </div>
+            
+            <!-- Question 20 -->
+            <div class="question">
+                <p>20. I practice mindfulness or meditation indoors.</p>
+                <div class="rating-grid">
+                    <label><input type="radio" name="q20" value="1" required>1 - Almost Never</label>
+                    <label><input type="radio" name="q20" value="2">2 - Rarely</label>
+                    <label><input type="radio" name="q20" value="3">3 - Seldom</label>
+                    <label><input type="radio" name="q20" value="4">4 - Occasionally</label>
+                    <label><input type="radio" name="q20" value="5">5 - Frequently</label>
+                    <label><input type="radio" name="q20" value="6">6 - Very Frequently</label>
+                    <label><input type="radio" name="q20" value="7">7 - Always</label>
+                </div>
+            </div>
+            
             <!-- Submit Button -->
             <button type="button" onclick="calculateResults()">Submit</button>
         </form>
+        
+        <!-- Results Section -->
         <div id="results">
             <h2>Your Survey Results</h2>
             <p id="resultText"></p>
             <button class="print-button" onclick="printResults()">Print or Save Results</button>
         </div>
     </div>
+    
+    <!-- JavaScript for Survey Functionality -->
     <script>
         function calculateResults() {
-            let positiveScore = 0;
-            let barriersScore = 0;
+            let outdoorScore = 0;
+            let indoorScore = 0;
             let unanswered = false;
-
-            // Positive Nature Engagement Questions (1-10)
-            for (let i = 1; i <= 10; i++) {
+            let numberOfOutdoorQuestions = 10; // Questions 1-10
+            let numberOfIndoorQuestions = 10; // Questions 11-20
+            
+            // Calculate Outdoor Score
+            for (let i = 1; i <= numberOfOutdoorQuestions; i++) {
                 let radios = document.getElementsByName('q' + i);
                 let answered = false;
                 let value = 0;
@@ -156,68 +470,69 @@
                     unanswered = true;
                     break;
                 }
-                positiveScore += value;
+                outdoorScore += value;
             }
-
-            // Barriers Questions (11-15)
-            for (let i = 11; i <= 15; i++) {
-                let radios = document.getElementsByName('q' + i);
-                let answered = false;
-                let value = 0;
-                for (let j = 0; j < radios.length; j++) {
-                    if (radios[j].checked) {
-                        value = parseInt(radios[j].value);
-                        answered = true;
+            
+            // Calculate Indoor Score
+            if (!unanswered) {
+                for (let i = 11; i <= numberOfOutdoorQuestions + numberOfIndoorQuestions; i++) {
+                    let radios = document.getElementsByName('q' + i);
+                    let answered = false;
+                    let value = 0;
+                    for (let j = 0; j < radios.length; j++) {
+                        if (radios[j].checked) {
+                            value = parseInt(radios[j].value);
+                            answered = true;
+                            break;
+                        }
+                    }
+                    if (!answered) {
+                        unanswered = true;
                         break;
                     }
+                    indoorScore += value;
                 }
-                if (!answered) {
-                    unanswered = true;
-                    break;
-                }
-                barriersScore += value;
             }
-
+            
             if (unanswered) {
                 alert('Please answer all the questions.');
                 return;
             }
-
-            // Interpret Positive Nature Engagement Score
-            let positiveInterpretation = '';
-            if (positiveScore >= 40 && positiveScore <= 50) {
-                positiveInterpretation = 'You have a strong engagement with nature and frequently incorporate it into your life.';
-            } else if (positiveScore >= 30 && positiveScore <= 39) {
-                positiveInterpretation = 'You have a moderate connection with nature but might benefit from more outdoor activities.';
-            } else if (positiveScore >= 20 && positiveScore <= 29) {
-                positiveInterpretation = 'You occasionally engage with nature; exploring more opportunities could enhance your well-being.';
-            } else if (positiveScore >= 10 && positiveScore <= 19) {
-                positiveInterpretation = 'You have limited engagement with nature; increasing green time may positively impact your health.';
+            
+            // Calculate Net Green Time Score
+            let netGreenTimeScore = outdoorScore - indoorScore;
+            let maxNetScore = numberOfOutdoorQuestions * 7 - 0; // 70
+            let minNetScore = 0 - numberOfIndoorQuestions * 7; // -70
+            
+            // Determine the category based on the net score
+            let category = '';
+            let suggestions = '';
+            if (netGreenTimeScore >= 35) { // More than half positive
+                category = 'High Engagement';
+                suggestions = 'Excellent! Keep up the great work and continue enjoying the benefits of nature on your mental and emotional health.';
+            } else if (netGreenTimeScore >= 0 && netGreenTimeScore < 35) { // Neutral to moderately positive
+                category = 'Moderate Engagement';
+                suggestions = 'You\'re doing well! Try to incorporate more varied outdoor activities to further enhance your well-being.';
+            } else { // Negative score
+                category = 'Low Engagement';
+                suggestions = 'Consider increasing your time spent in nature. Even short walks in a park can significantly boost your mood and reduce stress.';
             }
-
-            // Interpret Barriers Score
-            let barriersInterpretation = '';
-            if (barriersScore >= 5 && barriersScore <= 10) {
-                barriersInterpretation = 'Few barriers prevent you from spending time in nature.';
-            } else if (barriersScore >= 11 && barriersScore <= 17) {
-                barriersInterpretation = 'Some barriers exist; addressing them could help increase your green time.';
-            } else if (barriersScore >= 18 && barriersScore <= 25) {
-                barriersInterpretation = 'Significant barriers are preventing you from engaging with nature; identifying solutions may be beneficial.';
-            }
-
-            // Generate result text
-            let resultText = `**Positive Nature Engagement Score:** ${positiveScore}/50\n${positiveInterpretation}\n\n`;
-            resultText += `**Barriers Score:** ${barriersScore}/25\n${barriersInterpretation}\n\n`;
-            resultText += `Consider ways to enhance your connection with nature for improved well-being. Remember, even small changes can make a significant difference.`;
-
+            
+            // Generate result text with HTML formatting
+            let resultText = `<strong>Total Outdoor Score:</strong> ${outdoorScore} out of 70 (${((outdoorScore / 70) * 100).toFixed(2)}%)<br><br>`;
+            resultText += `<strong>Total Indoor Score:</strong> ${indoorScore} out of 70 (${((indoorScore / 70) * 100).toFixed(2)}%)<br><br>`;
+            resultText += `<strong>Net Green Time Score:</strong> ${netGreenTimeScore} out of 140 (${((netGreenTimeScore + 70) / 140 * 100).toFixed(2)}%)<br><br>`;
+            resultText += `<strong>Category:</strong> ${category}<br><br>`;
+            resultText += `<strong>Suggestions:</strong> ${suggestions}`;
+            
             // Display results
-            document.getElementById('resultText').innerText = resultText;
+            document.getElementById('resultText').innerHTML = resultText;
             document.getElementById('results').style.display = 'block';
-
+            
             // Scroll to results
             document.getElementById('results').scrollIntoView({ behavior: 'smooth' });
         }
-
+        
         function printResults() {
             window.print();
         }
