@@ -187,6 +187,53 @@
             text-decoration: underline;
         }
 
+        /* Pictogram styles */
+        .pictogram-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .pictogram-item {
+            border: 1px solid #ccc;
+            padding: 10px;
+            border-radius: 8px;
+            background-color: #fff;
+            width: 150px;
+            text-align: center;
+        }
+
+        .pictogram-item img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 4px;
+        }
+
+        .download-button {
+            margin-top: 5px;
+            padding: 5px 10px;
+            background-color: #fdb201;
+            color: #000;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            font-size: 0.9em;
+        }
+
+        .download-button:hover {
+            background-color: #1d1e20;
+            color: #fff;
+        }
+
+        .error-message {
+            color: red;
+            text-align: center;
+            margin-top: 20px;
+        }
+
         /* Responsive adjustments for smaller screens */
         @media (max-width: 600px) {
             header h1 {
@@ -216,6 +263,8 @@
             }
         }
     </style>
+    <!-- Include Axios from CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 </head>
 <body>
 
@@ -231,220 +280,298 @@
         <a href="/contact.html">Contact</a>
     </nav>
 </header>
-
 <div class="content">
     <h2>Pictogram Search Assistant</h2>
     <form id="pictogramForm">
         <label for="topic">Topic or Subject:</label>
         <p class="instruction">Use your own term or select a topic from below.</p>
-        <input type="text" id="topic" name="topic" required>
-
-        <!-- Pre-defined topics -->
+        <input type="text" id="topic" name="topic" placeholder="Enter a topic or select one" required>
         <div class="options-section">
             <h4>Select a Topic:</h4>
-            <div class="options-list" id="topicOptions">
-                <!-- Buttons will be generated here -->
-            </div>
+            <div class="options-list" id="topicOptions"></div>
         </div>
-
         <label for="keywords">Specific Keywords or Concepts:</label>
         <p class="instruction">Enter your own keywords or select from the options below.</p>
         <textarea id="keywords" name="keywords" placeholder="Enter keywords separated by commas" required></textarea>
-
-        <!-- Pre-defined keywords -->
         <div class="options-section">
             <h4>Select Keywords:</h4>
-            <div class="options-list" id="keywordOptions">
-                <!-- Buttons will be generated here -->
-            </div>
+            <div class="options-list" id="keywordOptions"></div>
         </div>
-
-        <label for="details">Additional Details or Requirements:</label>
-        <p class="instruction">Provide any extra information or select from the options below.</p>
-        <textarea id="details" name="details" placeholder="Optional"></textarea>
-
-        <!-- Pre-defined details -->
-        <div class="options-section">
-            <h4>Select Additional Details:</h4>
-            <div class="options-list" id="detailsOptions">
-                <!-- Buttons will be generated here -->
-            </div>
-        </div>
-
         <button type="submit">Generate Search Terms</button>
     </form>
-
     <div id="results">
         <h2>Your Search Terms</h2>
         <ul id="searchTermsList"></ul>
-        <h3>Instructions to Find Pictograms on ARASAAC:</h3>
-        <ol>
-            <li>Click the button below to go to the ARASAAC search page.</li>
-            <li>Enter each search term into the search bar one at a time.</li>
-            <li>Browse and select the pictograms that best fit your needs.</li>
-            <li>Download the pictograms following ARASAAC's guidelines.</li>
-        </ol>
-        <a href="https://arasaac.org/pictograms/search" target="_blank">
-            <button>Go to ARASAAC Search Page</button>
-        </a>
-        <p class="attribution">
-            The pictographic symbols used are the property of the Government of Aragón and have been created by Sergio Palao for ARASAAC (<a href="http://www.arasaac.org" target="_blank">http://www.arasaac.org</a>), that distributes them under Creative Commons License BY-NC-SA.
-        </p>
+        <h3>Pictograms:</h3>
+        <div id="pictogramResults" class="pictogram-container"></div>
+        <div id="error" class="error-message"></div>
     </div>
 </div>
 
+<footer>
+    <p class="attribution">
+        The pictographic symbols used are the property of the Government of Aragón and have been created by Sergio Palao for ARASAAC (<a href="http://www.arasaac.org" target="_blank">http://www.arasaac.org</a>), distributed under the Creative Commons License BY-NC-SA.
+    </p>
+</footer>
+
 <script>
     document.addEventListener('DOMContentLoaded', function() {
-        // Pre-defined topics (exact array provided)
-        const topics = [
-            'Daily Routine', 'Visiting the Doctor', 'School Activities', 'Emotions', 'Weather', 'Food and Drinks',
-            'Transportation', 'Animals', 'Family Members', 'Clothing', 'Sports', 'Music',
-            'Holidays', 'Seasons', 'Nature', 'Household Chores', 'Jobs and Professions', 'Colors',
-            'Shapes', 'Numbers', 'Letters', 'Body Parts', 'Health and Hygiene', 'Technology',
-            'Safety Signs', 'Community Helpers', 'Feelings', 'Activities', 'Directions', 'Time Concepts'
-        ];
+        // Define the 18 topics and their 30 keywords each
+        const topics = {
+            "Daily Routine": [
+                "Wake up", "Brush teeth", "Wash face", "Take a shower", "Get dressed",
+                "Eat breakfast", "Pack lunch", "Go to school/work", "Study", "Attend class",
+                "Playtime", "Lunch break", "Homework", "Snack time", "Exercise",
+                "Read a book", "Watch TV", "Dinner", "Family time", "Clean up",
+                "Take a bath", "Put on pajamas", "Bedtime story", "Go to bed", "Set alarm",
+                "Say goodnight", "Brush hair", "Use the toilet", "Wash hands", "Drink water"
+            ],
+            "Emotions": [
+                "Happy", "Sad", "Angry", "Excited", "Nervous",
+                "Calm", "Scared", "Surprised", "Confused", "Frustrated",
+                "Proud", "Embarrassed", "Lonely", "Bored", "Anxious",
+                "Jealous", "Disappointed", "Grateful", "Hopeful", "Curious",
+                "Relieved", "Guilty", "Ashamed", "Content", "Overwhelmed",
+                "Shocked", "Amused", "Confident", "Worried", "Envious"
+            ],
+            "School Activities": [
+                "Fire drill", "Standing in line", "No touching", "Sit", "Bathroom",
+                "Recess", "Work", "Circle time", "Read", "Write",
+                "Raise hand", "Listen", "Quiet", "Snack time", "Lunch",
+                "Play", "Share", "Clean up", "Art class", "Music class",
+                "Gym class", "Library", "School bus", "Teacher", "Personal space",
+                "Time out", "Stop", "More", "Good", "Student"
+            ],
+            "Well-Being Questions and Communication": [
+                "Pain", "Sore throat", "Head hurts", "Tired", "Constipated",
+                "Anxious", "How are you feeling?", "Happy", "Sad", "Angry",
+                "Hungry", "Thirsty", "Sick", "Calm", "Nervous",
+                "Excited", "Scared", "Bored", "Confused", "Frustrated",
+                "Comfortable", "Uncomfortable", "Safe", "Unsafe", "Help",
+                "Stop", "More", "Yes", "No", "Good"
+            ],
+            "Medical Appointments": [
+                "Appointment", "Waiting room", "Nurse", "Doctor", "Check-up",
+                "Blood pressure", "Temperature", "Stethoscope", "Heartbeat", "Injection",
+                "Medicine", "Pills", "Syrup", "X-ray", "MRI",
+                "Blood test", "Urine test", "Bandage", "Cast", "Thermometer",
+                "Pain", "Hurt", "Calm", "Breathe", "Sit still",
+                "Open mouth", "Say \"ah\"", "Lie down", "Stand up", "All done"
+            ],
+            "People": [
+                "Mom", "Dad", "Sister", "Brother", "Grandmother",
+                "Grandfather", "Friend", "Teacher", "Policeman", "Doctor",
+                "Occupational Therapist", "Speech Therapist", "Physical Therapist (PT)", "Priest", "Nurse",
+                "Dentist", "Neighbor", "Classmate", "Principal", "Coach",
+                "Babysitter", "Librarian", "Bus driver", "Mail carrier", "Firefighter",
+                "Chef", "Farmer", "Mechanic", "Cashier", "Waiter/Waitress"
+            ],
+            "Food and Drink": [
+                "Breakfast", "Lunch", "Dinner", "Snack", "Water",
+                "Juice", "Milk", "Tea", "Coffee", "Fruit",
+                "Vegetables", "Bread", "Cereal", "Sandwich", "Soup",
+                "Salad", "Pasta", "Rice", "Meat", "Fish",
+                "Chicken", "Eggs", "Cheese", "Yogurt", "Ice cream",
+                "Cake", "Cookies", "Candy", "Pizza", "Hamburger"
+            ],
+            "Safety Signs": [
+                "Stop", "Caution", "Exit", "No entry", "Danger",
+                "Fire exit", "Emergency", "First aid", "No smoking", "Wet floor",
+                "Do not touch", "No running", "No food or drink", "No pets", "No parking",
+                "Hand wash", "Keep out", "Authorized personnel only", "High voltage", "Poison",
+                "Biohazard", "Flammable", "Radiation", "Hard hat area", "Safety glasses required",
+                "Ear protection required", "No cell phones", "No photography", "Slippery when wet", "Keep door closed"
+            ],
+            "Household Chores": [
+                "Washing dishes", "Vacuuming", "Sweeping", "Mopping", "Dusting",
+                "Laundry", "Folding clothes", "Ironing", "Making the bed", "Cleaning windows",
+                "Taking out the trash", "Recycling", "Watering plants", "Feeding pets", "Walking the dog",
+                "Setting the table", "Clearing the table", "Cooking", "Baking", "Washing the car",
+                "Organizing toys", "Cleaning the bathroom", "Cleaning the kitchen", "Wiping surfaces", "Changing sheets",
+                "Polishing furniture", "Cleaning the fridge", "Emptying the dishwasher", "Sweeping the porch", "Raking leaves"
+            ],
+            "Directions": [
+                "Left", "Right", "Straight", "Turn around", "Up",
+                "Down", "Forward", "Backward", "Stop", "Go",
+                "Enter", "Exit", "Follow", "Wait", "Come here",
+                "Go there", "Upstairs", "Downstairs", "Inside", "Outside",
+                "Near", "Far", "Next to", "Across", "Through",
+                "Around", "Over", "Under", "Beside", "Between"
+            ],
+            "Holidays and Seasons": [
+                "Christmas", "Easter", "Halloween", "Thanksgiving", "New Year's Day",
+                "Valentine's Day", "Independence Day", "Hanukkah", "Diwali", "St. Patrick's Day",
+                "Mother's Day", "Father's Day", "Labor Day", "Memorial Day", "Veterans Day",
+                "Spring", "Summer", "Fall (Autumn)", "Winter", "Rainy",
+                "Snowy", "Sunny", "Cloudy", "Windy", "Hot",
+                "Cold", "Warm", "Cool", "Leaves falling", "Flowers blooming"
+            ],
+            "Body Parts": [
+                "Head", "Face", "Eyes", "Ears", "Nose",
+                "Mouth", "Teeth", "Tongue", "Hair", "Neck",
+                "Shoulders", "Arms", "Elbows", "Hands", "Fingers",
+                "Chest", "Stomach", "Back", "Legs", "Knees",
+                "Feet", "Toes", "Heart", "Lungs", "Brain",
+                "Muscles", "Bones", "Skin", "Nails", "Joints"
+            ],
+            "Health and Hygiene": [
+                "Wash hands", "Brush teeth", "Take a bath", "Use the toilet", "Comb hair",
+                "Cut nails", "Blow nose", "Cough", "Sneeze", "Use tissue",
+                "Wash face", "Brush hair", "Floss teeth", "Use hand sanitizer", "Drink water",
+                "Eat healthy", "Exercise", "Sleep", "Take medicine", "Visit doctor",
+                "Visit dentist", "Wear mask", "Check temperature", "Bandage", "Rest",
+                "Clean ears", "Apply lotion", "Use sunscreen", "Change clothes", "Stay clean"
+            ],
+            "Weather and Nature": [
+                "Sunny", "Rainy", "Cloudy", "Snowy", "Windy",
+                "Stormy", "Foggy", "Hot", "Cold", "Warm",
+                "Cool", "Thunder", "Lightning", "Hail", "Tornado",
+                "Tree", "Flower", "Grass", "Mountain", "River",
+                "Ocean", "Lake", "Forest", "Desert", "Beach",
+                "Rock", "Sand", "Leaf", "Animal", "Plant"
+            ],
+            "Time Concepts": [
+                "Morning", "Afternoon", "Evening", "Night", "Day",
+                "Week", "Month", "Year", "Today", "Tomorrow",
+                "Yesterday", "Calendar", "Clock", "Hour", "Minute",
+                "Second", "Now", "Later", "Soon", "Before",
+                "After", "Early", "Late", "On time", "Schedule",
+                "Alarm", "Timer", "Bedtime", "Lunchtime", "Playtime"
+            ],
+            "Health Habits": [
+                "Wash hands", "Brush teeth", "Take a bath", "Use the toilet", "Comb hair",
+                "Cut nails", "Blow nose", "Cough", "Sneeze", "Use tissue",
+                "Wash face", "Brush hair", "Floss teeth", "Use hand sanitizer", "Drink water",
+                "Eat healthy", "Exercise", "Sleep", "Take medicine", "Visit doctor",
+                "Visit dentist", "Wear mask", "Check temperature", "Bandage", "Rest",
+                "Clean ears", "Apply lotion", "Use sunscreen", "Change clothes", "Stay clean"
+            ],
+            "Fun and Recreation": [
+                "Play", "Game", "Toy", "Puzzle", "Drawing",
+                "Painting", "Coloring", "Reading", "Watching TV", "Listening to music",
+                "Dancing", "Singing", "Playing an instrument", "Sports", "Soccer",
+                "Basketball", "Swimming", "Running", "Biking", "Hiking",
+                "Camping", "Fishing", "Playing with pets", "Visiting the park", "Swinging",
+                "Sliding", "Climbing", "Building blocks", "Playing cards", "Board games"
+            ],
+            "Transportation and Technology": [
+                // Transportation
+                "Car", "Bus", "Train", "Airplane", "Bicycle",
+                "Motorcycle", "Boat", "Taxi", "Truck", "Subway",
+                "Tram", "Helicopter", "Scooter", "Ferry", "Ambulance",
+                // Technology
+                "Computer", "Laptop", "Tablet", "Smartphone", "Television",
+                "Camera", "Printer", "Keyboard", "Mouse", "Headphones",
+                "Speaker", "Charger", "Remote control", "USB drive", "Smartwatch"
+            ]
+,
+            // Continue defining all 18 topics with their keywords
+        };
+
         const topicOptionsDiv = document.getElementById('topicOptions');
-
-        topics.forEach(function(topic) {
-            const button = document.createElement('button');
-            button.type = 'button';
-            button.textContent = topic;
-            button.addEventListener('click', function() {
-                document.getElementById('topic').value = topic;
-            });
-            topicOptionsDiv.appendChild(button);
-        });
-
-        // Pre-defined keywords (exact array provided)
-        const keywords = [
-            'Brushing teeth', 'Taking a bath', 'Getting dressed', // Daily Routine
-            'Check-up', 'Medicine', 'Waiting room', // Visiting the Doctor
-            'Reading', 'Writing', 'Recess', // School Activities
-            'Happy', 'Sad', 'Angry', // Emotions
-            'Sunny', 'Rainy', 'Cloudy', // Weather
-            'Breakfast', 'Lunch', 'Dinner', // Food and Drinks
-            'Bus', 'Car', 'Train', // Transportation
-            'Dog', 'Cat', 'Bird', // Animals
-            'Mother', 'Father', 'Sibling', // Family Members
-            'Shirt', 'Pants', 'Shoes', // Clothing
-            'Soccer', 'Basketball', 'Swimming', // Sports
-            'Singing', 'Playing an instrument', 'Listening to music', // Music
-            'Christmas', 'Easter', 'Halloween', // Holidays
-            'Spring', 'Summer', 'Fall', 'Winter', // Seasons
-            'Tree', 'Flower', 'Mountain', // Nature
-            'Washing dishes', 'Vacuuming', 'Making the bed', // Household Chores
-            'Teacher', 'Doctor', 'Firefighter', // Jobs and Professions
-            'Red', 'Blue', 'Green', // Colors
-            'Circle', 'Square', 'Triangle', // Shapes
-            'One', 'Two', 'Three', // Numbers
-            'A', 'B', 'C', // Letters
-            'Hand', 'Foot', 'Head', // Body Parts
-            'Washing hands', 'Brushing teeth', 'Using the toilet', // Health and Hygiene
-            'Computer', 'Phone', 'Tablet', // Technology
-            'Stop', 'Caution', 'Exit', // Safety Signs
-            'Police officer', 'Firefighter', 'Mail carrier', // Community Helpers
-            'Excited', 'Nervous', 'Calm', // Feelings
-            'Playing', 'Drawing', 'Building', // Activities
-            'Left', 'Right', 'Straight', // Directions
-            'Morning', 'Afternoon', 'Evening' // Time Concepts
-        ];
         const keywordOptionsDiv = document.getElementById('keywordOptions');
-
-        keywords.forEach(function(keyword) {
-            const button = document.createElement('button');
-            button.type = 'button';
-            button.textContent = keyword;
-            button.addEventListener('click', function() {
-                const keywordsField = document.getElementById('keywords');
-                let currentKeywords = keywordsField.value;
-                if (currentKeywords) {
-                    currentKeywords += ', ' + keyword;
-                } else {
-                    currentKeywords = keyword;
-                }
-                keywordsField.value = currentKeywords;
-            });
-            keywordOptionsDiv.appendChild(button);
-        });
-
-        // Pre-defined additional details (exact array provided)
-        const details = [
-            'Consistency: Ensure that the style and design are consistent',
-            'Clarity: Use clear and simple images',
-            'Relevance: Make pictograms relevant to daily life',
-            'Cultural Sensitivity: Ensure cultural appropriateness',
-            'Accessibility: Provide in multiple formats',
-            'Customization: Allow for individual preferences',
-            'High Contrast: Enhance visibility',
-            'Size: Make pictograms easily seen',
-            'Text Labels: Include textual information',
-            'Educational Resources: Provide guides and tutorials'
-        ];
-        const detailsOptionsDiv = document.getElementById('detailsOptions');
-
-        details.forEach(function(detail) {
-            const button = document.createElement('button');
-            button.type = 'button';
-            button.textContent = detail;
-            button.addEventListener('click', function() {
-                const detailsField = document.getElementById('details');
-                let currentDetails = detailsField.value;
-                if (currentDetails) {
-                    currentDetails += ' ' + detail;
-                } else {
-                    currentDetails = detail;
-                }
-                detailsField.value = currentDetails;
-            });
-            detailsOptionsDiv.appendChild(button);
-        });
-    });
-
-    // Existing form submission handler
-    document.getElementById('pictogramForm').addEventListener('submit', function(e) {
-        e.preventDefault();
-
-        // Get user input
-        const topic = document.getElementById('topic').value.trim();
-        const keywords = document.getElementById('keywords').value.trim();
-        const details = document.getElementById('details').value.trim();
-
-        // Split keywords into an array
-        const keywordList = keywords.split(',').map(word => word.trim()).filter(word => word !== '');
-
-        // Generate search terms
-        let searchTerms = [topic, ...keywordList];
-
-        // Include additional terms from details if provided
-        if (details) {
-            const detailKeywords = details.split(/\s+/).filter(word => word.length > 3);
-            searchTerms = [...new Set([...searchTerms, ...detailKeywords])];
-        }
-
-        // Display the search terms and instructions
-        displayResults(searchTerms);
-    });
-
-    function displayResults(searchTerms) {
+        const topicInput = document.getElementById('topic');
+        const keywordsTextarea = document.getElementById('keywords');
+        const pictogramForm = document.getElementById('pictogramForm');
         const resultsDiv = document.getElementById('results');
         const searchTermsList = document.getElementById('searchTermsList');
+        const pictogramResultsDiv = document.getElementById('pictogramResults');
+        const errorDiv = document.getElementById('error');
 
-        // Clear previous results
-        searchTermsList.innerHTML = '';
+        function generateTopicButtons() {
+            for (let topic in topics) {
+                const button = document.createElement('button');
+                button.type = 'button';
+                button.textContent = topic;
+                button.addEventListener('click', function() {
+                    topicInput.value = topic;
+                    loadKeywords(topic);
+                });
+                topicOptionsDiv.appendChild(button);
+            }
+        }
 
-        // Populate the list with search terms
-        searchTerms.forEach(term => {
-            const listItem = document.createElement('li');
-            listItem.textContent = term;
-            searchTermsList.appendChild(listItem);
+        function loadKeywords(selectedTopic) {
+            keywordOptionsDiv.innerHTML = '';
+            (topics[selectedTopic] || []).forEach(keyword => {
+                const button = document.createElement('button');
+                button.type = 'button';
+                button.textContent = keyword;
+                button.addEventListener('click', function() {
+                    addKeywordToTextarea(keyword);
+                });
+                keywordOptionsDiv.appendChild(button);
+            });
+        }
+
+        function addKeywordToTextarea(keyword) {
+            let currentKeywords = keywordsTextarea.value.trim();
+            keywordsTextarea.value = currentKeywords ? `${currentKeywords}, ${keyword}` : keyword;
+        }
+
+        pictogramForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const topic = topicInput.value.trim();
+            const keywords = keywordsTextarea.value.trim();
+            if (!topic && !keywords) {
+                errorDiv.textContent = 'Please enter a topic or at least one keyword.';
+                return;
+            }
+
+            const searchTerms = [topic, ...keywords.split(',').map(k => k.trim())].filter(Boolean);
+            displayResults([...new Set(searchTerms)]);
+            fetchPictograms(searchTerms.slice(0, 5));
         });
 
-        // Show the results section
-        resultsDiv.style.display = 'block';
+        function displayResults(searchTerms) {
+            searchTermsList.innerHTML = searchTerms.map(term => `<li>${term}</li>`).join('');
+            resultsDiv.style.display = 'block';
+            resultsDiv.scrollIntoView({ behavior: 'smooth' });
+        }
 
-        // Scroll to the results section
-        resultsDiv.scrollIntoView({ behavior: 'smooth' });
-    }
+        async function fetchPictograms(searchTerms) {
+            pictogramResultsDiv.innerHTML = '';
+            errorDiv.textContent = '';
+            for (const term of searchTerms) {
+                try {
+                    const response = await axios.get(`https://api.arasaac.org/api/pictograms/en/search/${encodeURIComponent(term)}`);
+                    const pictograms = response.data.slice(0, 10); // Limit to 10 pictograms per term
+
+                    if (pictograms.length === 0) continue;
+
+                    const section = document.createElement('div');
+                    section.innerHTML = `<h4>Pictograms for "${term}"</h4>`;
+                    const container = document.createElement('div');
+                    container.classList.add('pictogram-container');
+
+                    pictograms.forEach(pictogram => {
+                        const pictogramItem = document.createElement('div');
+                        pictogramItem.classList.add('pictogram-item');
+
+                        const link = document.createElement('a');
+                        link.href = `https://static.arasaac.org/pictograms/${pictogram._id}/${pictogram._id}_500.png`;
+                        link.target = '_blank';
+
+                        const img = document.createElement('img');
+                        img.src = `https://static.arasaac.org/pictograms/${pictogram._id}/${pictogram._id}_300.png`;
+                        img.alt = pictogram.keywords.map(k => k.keyword).join(', ');
+                        link.appendChild(img);
+
+                        pictogramItem.appendChild(link);
+                        container.appendChild(pictogramItem);
+                    });
+
+                    section.appendChild(container);
+                    pictogramResultsDiv.appendChild(section);
+                } catch (error) {
+                    errorDiv.textContent = 'An error occurred while fetching pictograms.';
+                }
+            }
+        }
+
+        generateTopicButtons();
+        loadKeywords("Daily Routine"); // Load default topic
+    });
 </script>
 
 </body>
