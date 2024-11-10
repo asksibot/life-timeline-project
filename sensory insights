@@ -3,679 +3,754 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Navigating My Sensory World: Understanding How I Process Information</title>
+    <title>Sensory Insights</title>
     <style>
-    /* Basic Styles */
-    body {
-        font-family: Arial, sans-serif;
-        margin: 10px;
-        padding: 10px;
-    }
-    h1, h2 {
-        text-align: center;
-        font-size: 1.5em;
-    }
-    label {
-        font-weight: bold;
-        display: block;
-        margin-bottom: 5px;
-    }
-    .section, .submit-section, .question-group {
-        margin-bottom: 20px;
-    }
-    .question {
-        margin-bottom: 15px; /* Space between questions and Likert scale */
-    }
-    .rating-grid {
-        display: grid;
-        grid-template-columns: repeat(7, 1fr);
-        gap: 5px;
-        text-align: center;
-        align-items: center; /* Center-aligns labels and radio buttons */
-    }
-    .rating-grid label {
-        font-size: 14px;
-    }
-    .rating-grid input[type="radio"] {
-        margin: 0 auto;
-        width: 18px;
-        height: 18px;
-        appearance: none;
-        background-color: #fff;
-        border: 1px solid #ccc;
-        border-radius: 50%;
-        outline: none;
-        cursor: pointer;
-        display: inline-block;
-    }
-    .rating-grid input[type="radio"]:checked {
-        background-color: #007BFF;
-        border-color: #007BFF;
-    }
-    .submit-btn {
-        display: block;
-        margin: 20px auto;
-        padding: 10px 20px;
-        font-size: 16px;
-    }
-    #summary {
-        margin-top: 20px;
-        text-align: left;
-    }
-
-    /* Responsive Styles */
-    @media (max-width: 768px) {
-        h1, h2 {
-            font-size: 1.3em;
+        /* Basic Styles */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 10px;
+            padding: 10px;
+        }
+        h1, h2, h3 {
+            text-align: center;
+        }
+        h1 {
+            font-size: 2em;
+            margin-bottom: 10px;
+        }
+        h2 {
+            font-size: 1.5em;
+            margin-bottom: 10px;
+        }
+        h3 {
+            font-size: 1.2em;
+            margin-bottom: 10px;
+        }
+        label {
+            font-weight: bold;
+            display: block;
+            margin-bottom: 5px;
+        }
+        .section, .submit-section, .question-group {
+            margin-bottom: 30px;
+        }
+        .question {
+            margin-bottom: 20px; /* Space between questions and Likert scale */
         }
         .rating-grid {
-            grid-template-columns: repeat(4, 1fr);
-        }
-        .submit-btn {
-            font-size: 14px;
-            padding: 8px 15px;
-        }
-    }
-    
-    @media (max-width: 480px) {
-        .rating-grid {
-            grid-template-columns: repeat(2, 1fr);
-            gap: 3px;
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
         }
         .rating-grid label {
-            font-size: 12px; /* Smaller font for mobile readability */
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            cursor: pointer;
         }
         .rating-grid input[type="radio"] {
-            width: 16px;
-            height: 16px;
+            margin-right: 10px;
+            width: 18px;
+            height: 18px;
+            appearance: none;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            border-radius: 50%;
+            outline: none;
+            cursor: pointer;
+            position: relative;
         }
-    }
-</style>
+        .rating-grid input[type="radio"]:checked::before {
+            content: "";
+            position: absolute;
+            top: 4px;
+            left: 4px;
+            width: 8px;
+            height: 8px;
+            background-color: #007BFF;
+            border-radius: 50%;
+        }
+        .rating-grid input[type="radio"]:hover {
+            border-color: #007BFF;
+        }
+        .submit-btn {
+            display: block;
+            margin: 20px auto;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            background-color: #007BFF;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+        }
+        #summary {
+            margin-top: 20px;
+            text-align: left;
+        }
 
+        /* Instructions Section Styles */
+        .instructions-section {
+            margin-bottom: 20px;
+        }
+        .instructions-section ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        .instructions-section li {
+            margin-bottom: 5px;
+            font-size: 0.9em;
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+            h1, h2, h3 {
+                font-size: 1.3em;
+            }
+            .rating-grid input[type="radio"] {
+                width: 16px;
+                height: 16px;
+            }
+            .submit-btn {
+                font-size: 14px;
+                padding: 8px 15px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .rating-grid {
+                flex-direction: column;
+                gap: 3px;
+            }
+            .rating-grid label {
+                font-size: 12px; /* Smaller font for mobile readability */
+            }
+            .rating-grid input[type="radio"] {
+                width: 16px;
+                height: 16px;
+            }
+        }
+    </style>
 </head>
 <body>
 
 <h1>Sensory Insights</h1>
-<p style="text-align: center;">Date: <input type="date" name="date"></p>
+<p style="text-align: center;">Date: <input type="date" name="date" required></p>
 
 <form id="sensoryInsightsForm">
+    <!-- Section A: Sensitivity to Environment (SE) -->
     <div class="section">
-        <h2 style="text-align: left;">Section A: Sensitivity to Environment (SE)</h2>
+        <h2>Section A: Sensitivity to Environment (SE)</h2>
         
-<!-- Question 1 already provided -->
-    <div class="question">
-        <label>1. I notice small changes in my environment that others might miss.</label>
-        <div class="rating-grid">
-            <label>1</label><label>2</label><label>3</label><label>4</label><label>5</label><label>6</label><label>7</label>
-            <input type="radio" name="response1" value="1">
-            <input type="radio" name="response1" value="2">
-            <input type="radio" name="response1" value="3">
-            <input type="radio" name="response1" value="4">
-            <input type="radio" name="response1" value="5">
-            <input type="radio" name="response1" value="6">
-            <input type="radio" name="response1" value="7">
+        <!-- Instructions for Section A -->
+        <div class="question-group instructions-section">
+            <h3>Instructions</h3>
+            <p>Please check the radio button that best describes the frequency with which you experience the following behaviors:</p>
+            <ul>
+                <li><strong>1 - Almost Never</strong>: About 5% or less of the time</li>
+                <li><strong>2 - Rarely</strong>: About 25% of the time</li>
+                <li><strong>3 - Seldom</strong>: About 50% of the time</li>
+                <li><strong>4 - Occasionally</strong>: About 75% of the time</li>
+                <li><strong>5 - Frequently</strong>: About 95% or more of the time</li>
+                <li><strong>6 - Very Frequently</strong>: Some additional explanation if needed</li>
+                <li><strong>7 - Always</strong>: Some additional explanation if needed</li>
+            </ul>
+        </div>
+
+        <!-- Question 1 -->
+        <div class="question">
+            <label>1. I notice small changes in my environment that others might miss.</label>
+            <div class="rating-grid">
+                <label><input type="radio" name="response1" value="1" required> 1 - Almost Never</label>
+                <label><input type="radio" name="response1" value="2"> 2 - Rarely</label>
+                <label><input type="radio" name="response1" value="3"> 3 - Seldom</label>
+                <label><input type="radio" name="response1" value="4"> 4 - Occasionally</label>
+                <label><input type="radio" name="response1" value="5"> 5 - Frequently</label>
+                <label><input type="radio" name="response1" value="6"> 6 - Very Frequently</label>
+                <label><input type="radio" name="response1" value="7"> 7 - Always</label>
+            </div>
+        </div>
+
+        <!-- Question 2 -->
+        <div class="question">
+            <label>2. Loud noises or bright lights bother me more than they do others.</label>
+            <div class="rating-grid">
+                <label><input type="radio" name="response2" value="1" required> 1 - Almost Never</label>
+                <label><input type="radio" name="response2" value="2"> 2 - Rarely</label>
+                <label><input type="radio" name="response2" value="3"> 3 - Seldom</label>
+                <label><input type="radio" name="response2" value="4"> 4 - Occasionally</label>
+                <label><input type="radio" name="response2" value="5"> 5 - Frequently</label>
+                <label><input type="radio" name="response2" value="6"> 6 - Very Frequently</label>
+                <label><input type="radio" name="response2" value="7"> 7 - Always</label>
+            </div>
+        </div>
+
+        <!-- Question 3 -->
+        <div class="question">
+            <label>3. I am deeply affected by other people's moods.</label>
+            <div class="rating-grid">
+                <label><input type="radio" name="response3" value="1" required> 1 - Almost Never</label>
+                <label><input type="radio" name="response3" value="2"> 2 - Rarely</label>
+                <label><input type="radio" name="response3" value="3"> 3 - Seldom</label>
+                <label><input type="radio" name="response3" value="4"> 4 - Occasionally</label>
+                <label><input type="radio" name="response3" value="5"> 5 - Frequently</label>
+                <label><input type="radio" name="response3" value="6"> 6 - Very Frequently</label>
+                <label><input type="radio" name="response3" value="7"> 7 - Always</label>
+            </div>
+        </div>
+
+        <!-- Question 4 -->
+        <div class="question">
+            <label>4. I feel overwhelmed in crowded or chaotic places.</label>
+            <div class="rating-grid">
+                <label><input type="radio" name="response4" value="1" required> 1 - Almost Never</label>
+                <label><input type="radio" name="response4" value="2"> 2 - Rarely</label>
+                <label><input type="radio" name="response4" value="3"> 3 - Seldom</label>
+                <label><input type="radio" name="response4" value="4"> 4 - Occasionally</label>
+                <label><input type="radio" name="response4" value="5"> 5 - Frequently</label>
+                <label><input type="radio" name="response4" value="6"> 6 - Very Frequently</label>
+                <label><input type="radio" name="response4" value="7"> 7 - Always</label>
+            </div>
+        </div>
+
+        <!-- Question 5 -->
+        <div class="question">
+            <label>5. I have strong emotional reactions to movies, stories, or events.</label>
+            <div class="rating-grid">
+                <label><input type="radio" name="response5" value="1" required> 1 - Almost Never</label>
+                <label><input type="radio" name="response5" value="2"> 2 - Rarely</label>
+                <label><input type="radio" name="response5" value="3"> 3 - Seldom</label>
+                <label><input type="radio" name="response5" value="4"> 4 - Occasionally</label>
+                <label><input type="radio" name="response5" value="5"> 5 - Frequently</label>
+                <label><input type="radio" name="response5" value="6"> 6 - Very Frequently</label>
+                <label><input type="radio" name="response5" value="7"> 7 - Always</label>
+            </div>
+        </div>
+
+        <!-- Question 6 -->
+        <div class="question">
+            <label>6. I am easily startled by sudden noises.</label>
+            <div class="rating-grid">
+                <label><input type="radio" name="response6" value="1" required> 1 - Almost Never</label>
+                <label><input type="radio" name="response6" value="2"> 2 - Rarely</label>
+                <label><input type="radio" name="response6" value="3"> 3 - Seldom</label>
+                <label><input type="radio" name="response6" value="4"> 4 - Occasionally</label>
+                <label><input type="radio" name="response6" value="5"> 5 - Frequently</label>
+                <label><input type="radio" name="response6" value="6"> 6 - Very Frequently</label>
+                <label><input type="radio" name="response6" value="7"> 7 - Always</label>
+            </div>
+        </div>
+
+        <!-- Question 7 -->
+        <div class="question">
+            <label>7. I prefer quiet and calm environments.</label>
+            <div class="rating-grid">
+                <label><input type="radio" name="response7" value="1" required> 1 - Almost Never</label>
+                <label><input type="radio" name="response7" value="2"> 2 - Rarely</label>
+                <label><input type="radio" name="response7" value="3"> 3 - Seldom</label>
+                <label><input type="radio" name="response7" value="4"> 4 - Occasionally</label>
+                <label><input type="radio" name="response7" value="5"> 5 - Frequently</label>
+                <label><input type="radio" name="response7" value="6"> 6 - Very Frequently</label>
+                <label><input type="radio" name="response7" value="7"> 7 - Always</label>
+            </div>
         </div>
     </div>
+        <!-- Section B: Resilience and Adaptability (RA) -->
+        <div class="section">
+            <h2>Section B: Resilience and Adaptability (RA)</h2>
+            
+            <!-- Instructions for Section B -->
+            <div class="question-group instructions-section">
+                <h3>Instructions</h3>
+                <p>Please check the radio button that best describes the frequency with which you experience the following behaviors:</p>
+                <ul>
+                    <li><strong>1 - Almost Never</strong>: About 5% or less of the time</li>
+                    <li><strong>2 - Rarely</strong>: About 25% of the time</li>
+                    <li><strong>3 - Seldom</strong>: About 50% of the time</li>
+                    <li><strong>4 - Occasionally</strong>: About 75% of the time</li>
+                    <li><strong>5 - Frequently</strong>: About 95% or more of the time</li>
+                    <li><strong>6 - Very Frequently</strong>: Some additional explanation if needed</li>
+                    <li><strong>7 - Always</strong>: Some additional explanation if needed</li>
+                </ul>
+            </div>
 
-    <!-- Question 2 -->
-    <div class="question">
-        <label>2. Loud noises or bright lights bother me more than they do others.</label>
-        <div class="rating-grid">
-            <label>1</label><label>2</label><label>3</label><label>4</label><label>5</label><label>6</label><label>7</label>
-            <input type="radio" name="response2" value="1">
-            <input type="radio" name="response2" value="2">
-            <input type="radio" name="response2" value="3">
-            <input type="radio" name="response2" value="4">
-            <input type="radio" name="response2" value="5">
-            <input type="radio" name="response2" value="6">
-            <input type="radio" name="response2" value="7">
+            <!-- Question 8 -->
+            <div class="question">
+                <label>8. I adapt easily to new situations or changes in routine.</label>
+                <div class="rating-grid">
+                    <label><input type="radio" name="response8" value="1" required> 1 - Almost Never</label>
+                    <label><input type="radio" name="response8" value="2"> 2 - Rarely</label>
+                    <label><input type="radio" name="response8" value="3"> 3 - Seldom</label>
+                    <label><input type="radio" name="response8" value="4"> 4 - Occasionally</label>
+                    <label><input type="radio" name="response8" value="5"> 5 - Frequently</label>
+                    <label><input type="radio" name="response8" value="6"> 6 - Very Frequently</label>
+                    <label><input type="radio" name="response8" value="7"> 7 - Always</label>
+                </div>
+            </div>
+
+            <!-- Question 9 -->
+            <div class="question">
+                <label>9. I can handle stress without getting too upset.</label>
+                <div class="rating-grid">
+                    <label><input type="radio" name="response9" value="1" required> 1 - Almost Never</label>
+                    <label><input type="radio" name="response9" value="2"> 2 - Rarely</label>
+                    <label><input type="radio" name="response9" value="3"> 3 - Seldom</label>
+                    <label><input type="radio" name="response9" value="4"> 4 - Occasionally</label>
+                    <label><input type="radio" name="response9" value="5"> 5 - Frequently</label>
+                    <label><input type="radio" name="response9" value="6"> 6 - Very Frequently</label>
+                    <label><input type="radio" name="response9" value="7"> 7 - Always</label>
+                </div>
+            </div>
+
+            <!-- Question 10 -->
+            <div class="question">
+                <label>10. I bounce back quickly after experiencing a setback.</label>
+                <div class="rating-grid">
+                    <label><input type="radio" name="response10" value="1" required> 1 - Almost Never</label>
+                    <label><input type="radio" name="response10" value="2"> 2 - Rarely</label>
+                    <label><input type="radio" name="response10" value="3"> 3 - Seldom</label>
+                    <label><input type="radio" name="response10" value="4"> 4 - Occasionally</label>
+                    <label><input type="radio" name="response10" value="5"> 5 - Frequently</label>
+                    <label><input type="radio" name="response10" value="6"> 6 - Very Frequently</label>
+                    <label><input type="radio" name="response10" value="7"> 7 - Always</label>
+                </div>
+            </div>
+
+            <!-- Question 11 -->
+            <div class="question">
+                <label>11. I stay calm even when things don't go as planned.</label>
+                <div class="rating-grid">
+                    <label><input type="radio" name="response11" value="1" required> 1 - Almost Never</label>
+                    <label><input type="radio" name="response11" value="2"> 2 - Rarely</label>
+                    <label><input type="radio" name="response11" value="3"> 3 - Seldom</label>
+                    <label><input type="radio" name="response11" value="4"> 4 - Occasionally</label>
+                    <label><input type="radio" name="response11" value="5"> 5 - Frequently</label>
+                    <label><input type="radio" name="response11" value="6"> 6 - Very Frequently</label>
+                    <label><input type="radio" name="response11" value="7"> 7 - Always</label>
+                </div>
+            </div>
+
+            <!-- Question 12 -->
+            <div class="question">
+                <label>12. I am able to cope with challenges without feeling overwhelmed.</label>
+                <div class="rating-grid">
+                    <label><input type="radio" name="response12" value="1" required> 1 - Almost Never</label>
+                    <label><input type="radio" name="response12" value="2"> 2 - Rarely</label>
+                    <label><input type="radio" name="response12" value="3"> 3 - Seldom</label>
+                    <label><input type="radio" name="response12" value="4"> 4 - Occasionally</label>
+                    <label><input type="radio" name="response12" value="5"> 5 - Frequently</label>
+                    <label><input type="radio" name="response12" value="6"> 6 - Very Frequently</label>
+                    <label><input type="radio" name="response12" value="7"> 7 - Always</label>
+                </div>
+            </div>
+
+            <!-- Question 13 -->
+            <div class="question">
+                <label>13. I can work under pressure and still perform well.</label>
+                <div class="rating-grid">
+                    <label><input type="radio" name="response13" value="1" required> 1 - Almost Never</label>
+                    <label><input type="radio" name="response13" value="2"> 2 - Rarely</label>
+                    <label><input type="radio" name="response13" value="3"> 3 - Seldom</label>
+                    <label><input type="radio" name="response13" value="4"> 4 - Occasionally</label>
+                    <label><input type="radio" name="response13" value="5"> 5 - Frequently</label>
+                    <label><input type="radio" name="response13" value="6"> 6 - Very Frequently</label>
+                    <label><input type="radio" name="response13" value="7"> 7 - Always</label>
+                </div>
+            </div>
+
+            <!-- Question 14 -->
+            <div class="question">
+                <label>14. I maintain a positive attitude even in difficult times.</label>
+                <div class="rating-grid">
+                    <label><input type="radio" name="response14" value="1" required> 1 - Almost Never</label>
+                    <label><input type="radio" name="response14" value="2"> 2 - Rarely</label>
+                    <label><input type="radio" name="response14" value="3"> 3 - Seldom</label>
+                    <label><input type="radio" name="response14" value="4"> 4 - Occasionally</label>
+                    <label><input type="radio" name="response14" value="5"> 5 - Frequently</label>
+                    <label><input type="radio" name="response14" value="6"> 6 - Very Frequently</label>
+                    <label><input type="radio" name="response14" value="7"> 7 - Always</label>
+                </div>
+            </div>
         </div>
-    </div>
-
-    <!-- Question 3 -->
-    <div class="question">
-        <label>3. I am deeply affected by other people's moods.</label>
-        <div class="rating-grid">
-            <label>1</label><label>2</label><label>3</label><label>4</label><label>5</label><label>6</label><label>7</label>
-            <input type="radio" name="response3" value="1">
-            <input type="radio" name="response3" value="2">
-            <input type="radio" name="response3" value="3">
-            <input type="radio" name="response3" value="4">
-            <input type="radio" name="response3" value="5">
-            <input type="radio" name="response3" value="6">
-            <input type="radio" name="response3" value="7">
-        </div>
-    </div>
-
-    <!-- Question 4 -->
-    <div class="question">
-        <label>4. I feel overwhelmed in crowded or chaotic places.</label>
-        <div class="rating-grid">
-            <label>1</label><label>2</label><label>3</label><label>4</label><label>5</label><label>6</label><label>7</label>
-            <input type="radio" name="response4" value="1">
-            <input type="radio" name="response4" value="2">
-            <input type="radio" name="response4" value="3">
-            <input type="radio" name="response4" value="4">
-            <input type="radio" name="response4" value="5">
-            <input type="radio" name="response4" value="6">
-            <input type="radio" name="response4" value="7">
-        </div>
-    </div>
-
-    <!-- Question 5 -->
-    <div class="question">
-        <label>5. I have strong emotional reactions to movies, stories, or events.</label>
-        <div class="rating-grid">
-            <label>1</label><label>2</label><label>3</label><label>4</label><label>5</label><label>6</label><label>7</label>
-            <input type="radio" name="response5" value="1">
-            <input type="radio" name="response5" value="2">
-            <input type="radio" name="response5" value="3">
-            <input type="radio" name="response5" value="4">
-            <input type="radio" name="response5" value="5">
-            <input type="radio" name="response5" value="6">
-            <input type="radio" name="response5" value="7">
-        </div>
-    </div>
-
-    <!-- Question 6 -->
-    <div class="question">
-        <label>6. I am easily startled by sudden noises.</label>
-        <div class="rating-grid">
-            <label>1</label><label>2</label><label>3</label><label>4</label><label>5</label><label>6</label><label>7</label>
-            <input type="radio" name="response6" value="1">
-            <input type="radio" name="response6" value="2">
-            <input type="radio" name="response6" value="3">
-            <input type="radio" name="response6" value="4">
-            <input type="radio" name="response6" value="5">
-            <input type="radio" name="response6" value="6">
-            <input type="radio" name="response6" value="7">
-        </div>
-    </div>
-
-    <!-- Question 7 -->
-    <div class="question">
-        <label>7. I prefer quiet and calm environments.</label>
-        <div class="rating-grid">
-            <label>1</label><label>2</label><label>3</label><label>4</label><label>5</label><label>6</label><label>7</label>
-            <input type="radio" name="response7" value="1">
-            <input type="radio" name="response7" value="2">
-            <input type="radio" name="response7" value="3">
-            <input type="radio" name="response7" value="4">
-            <input type="radio" name="response7" value="5">
-            <input type="radio" name="response7" value="6">
-            <input type="radio" name="response7" value="7">
-        </div>
-    </div>
-</div>
-
-
-    <!-- Section B: Resilience and Adaptability (Code: RA) -->
-<div class="section">
-    <h3>Section B: Resilience and Adaptability (RA)</h3>
+                <!-- Section C: Emotional Intensity (EI) -->
+            <div class="section">
+                <h2>Section C: Emotional Intensity (EI)</h2>
+                
+                <!-- Instructions for Section C -->
+                <div class="question-group instructions-section">
+                    <h3>Instructions</h3>
+                    <p>Please check the radio button that best describes the frequency with which you experience the following behaviors:</p>
+                    <ul>
+                        <li><strong>1 - Almost Never</strong>: About 5% or less of the time</li>
+                        <li><strong>2 - Rarely</strong>: About 25% of the time</li>
+                        <li><strong>3 - Seldom</strong>: About 50% of the time</li>
+                        <li><strong>4 - Occasionally</strong>: About 75% of the time</li>
+                        <li><strong>5 - Frequently</strong>: About 95% or more of the time</li>
+                        <li><strong>6 - Very Frequently</strong>: Some additional explanation if needed</li>
+                        <li><strong>7 - Always</strong>: Some additional explanation if needed</li>
+                    </ul>
+                </div>
     
-    <div class="question">
-        <label>8. I adapt easily to new situations or changes in routine.</label>
-        <div class="rating-grid">
-            <label>1</label><label>2</label><label>3</label><label>4</label><label>5</label><label>6</label><label>7</label>
-            <input type="radio" name="response8" value="1">
-            <input type="radio" name="response8" value="2">
-            <input type="radio" name="response8" value="3">
-            <input type="radio" name="response8" value="4">
-            <input type="radio" name="response8" value="5">
-            <input type="radio" name="response8" value="6">
-            <input type="radio" name="response8" value="7">
-        </div>
-    </div>
-
-    <div class="question">
-        <label>9. I can handle stress without getting too upset.</label>
-        <div class="rating-grid">
-            <label>1</label><label>2</label><label>3</label><label>4</label><label>5</label><label>6</label><label>7</label>
-            <input type="radio" name="response9" value="1">
-            <input type="radio" name="response9" value="2">
-            <input type="radio" name="response9" value="3">
-            <input type="radio" name="response9" value="4">
-            <input type="radio" name="response9" value="5">
-            <input type="radio" name="response9" value="6">
-            <input type="radio" name="response9" value="7">
-        </div>
-    </div>
-
-    <div class="question">
-        <label>10. I bounce back quickly after experiencing a setback.</label>
-        <div class="rating-grid">
-            <label>1</label><label>2</label><label>3</label><label>4</label><label>5</label><label>6</label><label>7</label>
-            <input type="radio" name="response10" value="1">
-            <input type="radio" name="response10" value="2">
-            <input type="radio" name="response10" value="3">
-            <input type="radio" name="response10" value="4">
-            <input type="radio" name="response10" value="5">
-            <input type="radio" name="response10" value="6">
-            <input type="radio" name="response10" value="7">
-        </div>
-    </div>
-
-    <div class="question">
-        <label>11. I stay calm even when things don't go as planned.</label>
-        <div class="rating-grid">
-            <label>1</label><label>2</label><label>3</label><label>4</label><label>5</label><label>6</label><label>7</label>
-            <input type="radio" name="response11" value="1">
-            <input type="radio" name="response11" value="2">
-            <input type="radio" name="response11" value="3">
-            <input type="radio" name="response11" value="4">
-            <input type="radio" name="response11" value="5">
-            <input type="radio" name="response11" value="6">
-            <input type="radio" name="response11" value="7">
-        </div>
-    </div>
-
-    <div class="question">
-        <label>12. I am able to cope with challenges without feeling overwhelmed.</label>
-        <div class="rating-grid">
-            <label>1</label><label>2</label><label>3</label><label>4</label><label>5</label><label>6</label><label>7</label>
-            <input type="radio" name="response12" value="1">
-            <input type="radio" name="response12" value="2">
-            <input type="radio" name="response12" value="3">
-            <input type="radio" name="response12" value="4">
-            <input type="radio" name="response12" value="5">
-            <input type="radio" name="response12" value="6">
-            <input type="radio" name="response12" value="7">
-        </div>
-    </div>
-
-    <div class="question">
-        <label>13. I can work under pressure and still perform well.</label>
-        <div class="rating-grid">
-            <label>1</label><label>2</label><label>3</label><label>4</label><label>5</label><label>6</label><label>7</label>
-            <input type="radio" name="response13" value="1">
-            <input type="radio" name="response13" value="2">
-            <input type="radio" name="response13" value="3">
-            <input type="radio" name="response13" value="4">
-            <input type="radio" name="response13" value="5">
-            <input type="radio" name="response13" value="6">
-            <input type="radio" name="response13" value="7">
-        </div>
-    </div>
-
-    <div class="question">
-        <label>14. I maintain a positive attitude even in difficult times.</label>
-        <div class="rating-grid">
-            <label>1</label><label>2</label><label>3</label><label>4</label><label>5</label><label>6</label><label>7</label>
-            <input type="radio" name="response14" value="1">
-            <input type="radio" name="response14" value="2">
-            <input type="radio" name="response14" value="3">
-            <input type="radio" name="response14" value="4">
-            <input type="radio" name="response14" value="5">
-            <input type="radio" name="response14" value="6">
-            <input type="radio" name="response14" value="7">
-        </div>
-    </div>
-</div>
-
-
-    <!-- Add remaining sections similarly (Section C: EI, Section D: SI, Section E: SR) -->
-<!-- Section C: Emotional Intensity (Code: EI) -->
-<div class="section">
-    <h3>Section C: Emotional Intensity (EI)</h3>
-
-    <div class="question">
-        <label>15. I experience emotions very intensely.</label>
-        <div class="rating-grid">
-            <label>1</label><label>2</label><label>3</label><label>4</label><label>5</label><label>6</label><label>7</label>
-            <input type="radio" name="response15" value="1">
-            <input type="radio" name="response15" value="2">
-            <input type="radio" name="response15" value="3">
-            <input type="radio" name="response15" value="4">
-            <input type="radio" name="response15" value="5">
-            <input type="radio" name="response15" value="6">
-            <input type="radio" name="response15" value="7">
-        </div>
-    </div>
-
-    <div class="question">
-        <label>16. My feelings can change quickly based on what's happening around me.</label>
-        <div class="rating-grid">
-            <label>1</label><label>2</label><label>3</label><label>4</label><label>5</label><label>6</label><label>7</label>
-            <input type="radio" name="response16" value="1">
-            <input type="radio" name="response16" value="2">
-            <input type="radio" name="response16" value="3">
-            <input type="radio" name="response16" value="4">
-            <input type="radio" name="response16" value="5">
-            <input type="radio" name="response16" value="6">
-            <input type="radio" name="response16" value="7">
-        </div>
-    </div>
-
-    <div class="question">
-        <label>17. I find it hard to hide how I'm feeling.</label>
-        <div class="rating-grid">
-            <label>1</label><label>2</label><label>3</label><label>4</label><label>5</label><label>6</label><label>7</label>
-            <input type="radio" name="response17" value="1">
-            <input type="radio" name="response17" value="2">
-            <input type="radio" name="response17" value="3">
-            <input type="radio" name="response17" value="4">
-            <input type="radio" name="response17" value="5">
-            <input type="radio" name="response17" value="6">
-            <input type="radio" name="response17" value="7">
-        </div>
-    </div>
-
-    <div class="question">
-        <label>18. When I'm happy or excited, I feel it very strongly.</label>
-        <div class="rating-grid">
-            <label>1</label><label>2</label><label>3</label><label>4</label><label>5</label><label>6</label><label>7</label>
-            <input type="radio" name="response18" value="1">
-            <input type="radio" name="response18" value="2">
-            <input type="radio" name="response18" value="3">
-            <input type="radio" name="response18" value="4">
-            <input type="radio" name="response18" value="5">
-            <input type="radio" name="response18" value="6">
-            <input type="radio" name="response18" value="7">
-        </div>
-    </div>
-
-    <div class="question">
-        <label>19. When I'm sad or upset, it feels overwhelming.</label>
-        <div class="rating-grid">
-            <label>1</label><label>2</label><label>3</label><label>4</label><label>5</label><label>6</label><label>7</label>
-            <input type="radio" name="response19" value="1">
-            <input type="radio" name="response19" value="2">
-            <input type="radio" name="response19" value="3">
-            <input type="radio" name="response19" value="4">
-            <input type="radio" name="response19" value="5">
-            <input type="radio" name="response19" value="6">
-            <input type="radio" name="response19" value="7">
-        </div>
-    </div>
-
-    <div class="question">
-        <label>20. I often feel things more deeply than others seem to.</label>
-        <div class="rating-grid">
-            <label>1</label><label>2</label><label>3</label><label>4</label><label>5</label><label>6</label><label>7</label>
-            <input type="radio" name="response20" value="1">
-            <input type="radio" name="response20" value="2">
-            <input type="radio" name="response20" value="3">
-            <input type="radio" name="response20" value="4">
-            <input type="radio" name="response20" value="5">
-            <input type="radio" name="response20" value="6">
-            <input type="radio" name="response20" value="7">
-        </div>
-    </div>
-</div>
-
- <!-- Section D: Social Interaction (Code: SI) -->
-<div class="section">
-    <h3>Section D: Social Interaction (SI)</h3>
-
-    <div class="question">
-        <label>21. I make friends easily and enjoy being around others.</label>
-        <div class="rating-grid">
-            <label>1</label><label>2</label><label>3</label><label>4</label><label>5</label><label>6</label><label>7</label>
-            <input type="radio" name="response21" value="1">
-            <input type="radio" name="response21" value="2">
-            <input type="radio" name="response21" value="3">
-            <input type="radio" name="response21" value="4">
-            <input type="radio" name="response21" value="5">
-            <input type="radio" name="response21" value="6">
-            <input type="radio" name="response21" value="7">
-        </div>
-    </div>
-
-    <div class="question">
-        <label>22. I feel comfortable talking to new people.</label>
-        <div class="rating-grid">
-            <label>1</label><label>2</label><label>3</label><label>4</label><label>5</label><label>6</label><label>7</label>
-            <input type="radio" name="response22" value="1">
-            <input type="radio" name="response22" value="2">
-            <input type="radio" name="response22" value="3">
-            <input type="radio" name="response22" value="4">
-            <input type="radio" name="response22" value="5">
-            <input type="radio" name="response22" value="6">
-            <input type="radio" name="response22" value="7">
-        </div>
-    </div>
-
-    <div class="question">
-        <label>23. I prefer to spend time with others rather than being alone.</label>
-        <div class="rating-grid">
-            <label>1</label><label>2</label><label>3</label><label>4</label><label>5</label><label>6</label><label>7</label>
-            <input type="radio" name="response23" value="1">
-            <input type="radio" name="response23" value="2">
-            <input type="radio" name="response23" value="3">
-            <input type="radio" name="response23" value="4">
-            <input type="radio" name="response23" value="5">
-            <input type="radio" name="response23" value="6">
-            <input type="radio" name="response23" value="7">
-        </div>
-    </div>
-
-    <div class="question">
-        <label>24. I adjust my behavior depending on who I'm with.</label>
-        <div class="rating-grid">
-            <label>1</label><label>2</label><label>3</label><label>4</label><label>5</label><label>6</label><label>7</label>
-            <input type="radio" name="response24" value="1">
-            <input type="radio" name="response24" value="2">
-            <input type="radio" name="response24" value="3">
-            <input type="radio" name="response24" value="4">
-            <input type="radio" name="response24" value="5">
-            <input type="radio" name="response24" value="6">
-            <input type="radio" name="response24" value="7">
-        </div>
-    </div>
-
-    <div class="question">
-        <label>25. I feel energized after spending time with friends.</label>
-        <div class="rating-grid">
-            <label>1</label><label>2</label><label>3</label><label>4</label><label>5</label><label>6</label><label>7</label>
-            <input type="radio" name="response25" value="1">
-            <input type="radio" name="response25" value="2">
-            <input type="radio" name="response25" value="3">
-            <input type="radio" name="response25" value="4">
-            <input type="radio" name="response25" value="5">
-            <input type="radio" name="response25" value="6">
-            <input type="radio" name="response25" value="7">
-        </div>
-    </div>
-</div>
-
-
-<!-- Section E: Stress Response (Code: SR) -->
-<div class="section">
-    <h3>Section E: Stress Response (SR)</h3>
-
-    <div class="question">
-        <label>26. I feel stressed in new or unfamiliar situations.</label>
-        <div class="rating-grid">
-            <label>1</label><label>2</label><label>3</label><label>4</label><label>5</label><label>6</label><label>7</label>
-            <input type="radio" name="response26" value="1">
-            <input type="radio" name="response26" value="2">
-            <input type="radio" name="response26" value="3">
-            <input type="radio" name="response26" value="4">
-            <input type="radio" name="response26" value="5">
-            <input type="radio" name="response26" value="6">
-            <input type="radio" name="response26" value="7">
-        </div>
-    </div>
-
-    <div class="question">
-        <label>27. I get nervous before big events or changes.</label>
-        <div class="rating-grid">
-            <label>1</label><label>2</label><label>3</label><label>4</label><label>5</label><label>6</label><label>7</label>
-            <input type="radio" name="response27" value="1">
-            <input type="radio" name="response27" value="2">
-            <input type="radio" name="response27" value="3">
-            <input type="radio" name="response27" value="4">
-            <input type="radio" name="response27" value="5">
-            <input type="radio" name="response27" value="6">
-            <input type="radio" name="response27" value="7">
-        </div>
-    </div>
-
-    <div class="question">
-        <label>28. Small problems can make me feel very anxious.</label>
-        <div class="rating-grid">
-            <label>1</label><label>2</label><label>3</label><label>4</label><label>5</label><label>6</label><label>7</label>
-            <input type="radio" name="response28" value="1">
-            <input type="radio" name="response28" value="2">
-            <input type="radio" name="response28" value="3">
-            <input type="radio" name="response28" value="4">
-            <input type="radio" name="response28" value="5">
-            <input type="radio" name="response28" value="6">
-            <input type="radio" name="response28" value="7">
-        </div>
-    </div>
-
-    <div class="question">
-        <label>29. I often worry about things that might happen.</label>
-        <div class="rating-grid">
-            <label>1</label><label>2</label><label>3</label><label>4</label><label>5</label><label>6</label><label>7</label>
-            <input type="radio" name="response29" value="1">
-            <input type="radio" name="response29" value="2">
-            <input type="radio" name="response29" value="3">
-            <input type="radio" name="response29" value="4">
-            <input type="radio" name="response29" value="5">
-            <input type="radio" name="response29" value="6">
-            <input type="radio" name="response29" value="7">
-        </div>
-    </div>
-
-    <div class="question">
-        <label>30. I need time to relax after being in a busy environment.</label>
-        <div class="rating-grid">
-            <label>1</label><label>2</label><label>3</label><label>4</label><label>5</label><label>6</label><label>7</label>
-            <input type="radio" name="response30" value="1">
-            <input type="radio" name="response30" value="2">
-            <input type="radio" name="response30" value="3">
-            <input type="radio" name="response30" value="4">
-            <input type="radio" name="response30" value="5">
-            <input type="radio" name="response30" value="6">
-            <input type="radio" name="response30" value="7">
-        </div>
-    </div>
-</div>
-<div class="submit-section">
-        <button type="submit">Submit</button>
+                <!-- Question 15 -->
+                <div class="question">
+                    <label>15. I experience emotions very intensely.</label>
+                    <div class="rating-grid">
+                        <label><input type="radio" name="response15" value="1" required> 1 - Almost Never</label>
+                        <label><input type="radio" name="response15" value="2"> 2 - Rarely</label>
+                        <label><input type="radio" name="response15" value="3"> 3 - Seldom</label>
+                        <label><input type="radio" name="response15" value="4"> 4 - Occasionally</label>
+                        <label><input type="radio" name="response15" value="5"> 5 - Frequently</label>
+                        <label><input type="radio" name="response15" value="6"> 6 - Very Frequently</label>
+                        <label><input type="radio" name="response15" value="7"> 7 - Always</label>
+                    </div>
+                </div>
+    
+                <!-- Question 16 -->
+                <div class="question">
+                    <label>16. I find it easy to express my emotions.</label>
+                    <div class="rating-grid">
+                        <label><input type="radio" name="response16" value="1" required> 1 - Almost Never</label>
+                        <label><input type="radio" name="response16" value="2"> 2 - Rarely</label>
+                        <label><input type="radio" name="response16" value="3"> 3 - Seldom</label>
+                        <label><input type="radio" name="response16" value="4"> 4 - Occasionally</label>
+                        <label><input type="radio" name="response16" value="5"> 5 - Frequently</label>
+                        <label><input type="radio" name="response16" value="6"> 6 - Very Frequently</label>
+                        <label><input type="radio" name="response16" value="7"> 7 - Always</label>
+                    </div>
+                </div>
+    
+                <!-- Question 17 -->
+                <div class="question">
+                    <label>17. I get easily frustrated when things don't go my way.</label>
+                    <div class="rating-grid">
+                        <label><input type="radio" name="response17" value="1" required> 1 - Almost Never</label>
+                        <label><input type="radio" name="response17" value="2"> 2 - Rarely</label>
+                        <label><input type="radio" name="response17" value="3"> 3 - Seldom</label>
+                        <label><input type="radio" name="response17" value="4"> 4 - Occasionally</label>
+                        <label><input type="radio" name="response17" value="5"> 5 - Frequently</label>
+                        <label><input type="radio" name="response17" value="6"> 6 - Very Frequently</label>
+                        <label><input type="radio" name="response17" value="7"> 7 - Always</label>
+                    </div>
+                </div>
+    
+                <!-- Question 18 -->
+                <div class="question">
+                    <label>18. I find it difficult to control my emotions.</label>
+                    <div class="rating-grid">
+                        <label><input type="radio" name="response18" value="1" required> 1 - Almost Never</label>
+                        <label><input type="radio" name="response18" value="2"> 2 - Rarely</label>
+                        <label><input type="radio" name="response18" value="3"> 3 - Seldom</label>
+                        <label><input type="radio" name="response18" value="4"> 4 - Occasionally</label>
+                        <label><input type="radio" name="response18" value="5"> 5 - Frequently</label>
+                        <label><input type="radio" name="response18" value="6"> 6 - Very Frequently</label>
+                        <label><input type="radio" name="response18" value="7"> 7 - Always</label>
+                    </div>
+                </div>
+    
+                <!-- Question 19 -->
+                <div class="question">
+                    <label>19. I often feel overwhelmed by my emotions.</label>
+                    <div class="rating-grid">
+                        <label><input type="radio" name="response19" value="1" required> 1 - Almost Never</label>
+                        <label><input type="radio" name="response19" value="2"> 2 - Rarely</label>
+                        <label><input type="radio" name="response19" value="3"> 3 - Seldom</label>
+                        <label><input type="radio" name="response19" value="4"> 4 - Occasionally</label>
+                        <label><input type="radio" name="response19" value="5"> 5 - Frequently</label>
+                        <label><input type="radio" name="response19" value="6"> 6 - Very Frequently</label>
+                        <label><input type="radio" name="response19" value="7"> 7 - Always</label>
+                    </div>
+                </div>
+    
+                <!-- Question 20 -->
+                <div class="question">
+                    <label>20. I find it hard to relax when I'm feeling emotional.</label>
+                    <div class="rating-grid">
+                        <label><input type="radio" name="response20" value="1" required> 1 - Almost Never</label>
+                        <label><input type="radio" name="response20" value="2"> 2 - Rarely</label>
+                        <label><input type="radio" name="response20" value="3"> 3 - Seldom</label>
+                        <label><input type="radio" name="response20" value="4"> 4 - Occasionally</label>
+                        <label><input type="radio" name="response20" value="5"> 5 - Frequently</label>
+                        <label><input type="radio" name="response20" value="6"> 6 - Very Frequently</label>
+                        <label><input type="radio" name="response20" value="7"> 7 - Always</label>
+                    </div>
+                </div>
+            </div>
+    
+                <!-- Section D: Social Interaction (SI) -->
+                <div class="section">
+                    <h2>Section D: Social Interaction (SI)</h2>
+                    
+                    <!-- Instructions for Section D -->
+                    <div class="question-group instructions-section">
+                        <h3>Instructions</h3>
+                        <p>Please check the radio button that best describes the frequency with which you experience the following behaviors:</p>
+                        <ul>
+                            <li><strong>1 - Almost Never</strong>: About 5% or less of the time</li>
+                            <li><strong>2 - Rarely</strong>: About 25% of the time</li>
+                            <li><strong>3 - Seldom</strong>: About 50% of the time</li>
+                            <li><strong>4 - Occasionally</strong>: About 75% of the time</li>
+                            <li><strong>5 - Frequently</strong>: About 95% or more of the time</li>
+                            <li><strong>6 - Very Frequently</strong>: Some additional explanation if needed</li>
+                            <li><strong>7 - Always</strong>: Some additional explanation if needed</li>
+                        </ul>
+                    </div>
         
-    </div>
-</form>
-
-<div id="result" class="result-box"></div>
-
-<script>
-    // Function to handle form submission and generate summary of responses
-    document.getElementById('sensoryInsightsForm').addEventListener('submit', function(event) {
-        event.preventDefault();
-
-        // Variables to track section totals
-        let SE_total = 0, RA_total = 0, EI_total = 0, SI_total = 0, SR_total = 0;
-
-        // Arrays of question numbers for each section
-        const SE_questions = [1, 2, 3, 4, 5, 6, 7];
-        const RA_questions = [8, 9, 10, 11, 12, 13, 14];
-        const EI_questions = [15, 16, 17, 18, 19, 20];
-        const SI_questions = [21, 22, 23, 24, 25];
-        const SR_questions = [26, 27, 28, 29, 30];
-
-        // Function to sum up responses for a section
-        function sumSection(questionsArray) {
-            let total = 0;
-            for (let i = 0; i < questionsArray.length; i++) {
-                const qNum = questionsArray[i];
-                const response = document.querySelector(`input[name="response${qNum}"]:checked`);
-                if (response) {
-                    total += parseInt(response.value);
+                    <!-- Question 21 -->
+                    <div class="question">
+                        <label>21. I make friends easily and enjoy being around others.</label>
+                        <div class="rating-grid">
+                            <label><input type="radio" name="response21" value="1" required> 1 - Almost Never</label>
+                            <label><input type="radio" name="response21" value="2"> 2 - Rarely</label>
+                            <label><input type="radio" name="response21" value="3"> 3 - Seldom</label>
+                            <label><input type="radio" name="response21" value="4"> 4 - Occasionally</label>
+                            <label><input type="radio" name="response21" value="5"> 5 - Frequently</label>
+                            <label><input type="radio" name="response21" value="6"> 6 - Very Frequently</label>
+                            <label><input type="radio" name="response21" value="7"> 7 - Always</label>
+                        </div>
+                    </div>
+        
+                    <!-- Question 22 -->
+                    <div class="question">
+                        <label>22. I enjoy participating in group activities.</label>
+                        <div class="rating-grid">
+                            <label><input type="radio" name="response22" value="1" required> 1 - Almost Never</label>
+                            <label><input type="radio" name="response22" value="2"> 2 - Rarely</label>
+                            <label><input type="radio" name="response22" value="3"> 3 - Seldom</label>
+                            <label><input type="radio" name="response22" value="4"> 4 - Occasionally</label>
+                            <label><input type="radio" name="response22" value="5"> 5 - Frequently</label>
+                            <label><input type="radio" name="response22" value="6"> 6 - Very Frequently</label>
+                            <label><input type="radio" name="response22" value="7"> 7 - Always</label>
+                        </div>
+                    </div>
+        
+                    <!-- Question 23 -->
+                    <div class="question">
+                        <label>23. I feel comfortable initiating conversations with strangers.</label>
+                        <div class="rating-grid">
+                            <label><input type="radio" name="response23" value="1" required> 1 - Almost Never</label>
+                            <label><input type="radio" name="response23" value="2"> 2 - Rarely</label>
+                            <label><input type="radio" name="response23" value="3"> 3 - Seldom</label>
+                            <label><input type="radio" name="response23" value="4"> 4 - Occasionally</label>
+                            <label><input type="radio" name="response23" value="5"> 5 - Frequently</label>
+                            <label><input type="radio" name="response23" value="6"> 6 - Very Frequently</label>
+                            <label><input type="radio" name="response23" value="7"> 7 - Always</label>
+                        </div>
+                    </div>
+        
+                    <!-- Question 24 -->
+                    <div class="question">
+                        <label>24. I enjoy collaborating with others to achieve a goal.</label>
+                        <div class="rating-grid">
+                            <label><input type="radio" name="response24" value="1" required> 1 - Almost Never</label>
+                            <label><input type="radio" name="response24" value="2"> 2 - Rarely</label>
+                            <label><input type="radio" name="response24" value="3"> 3 - Seldom</label>
+                            <label><input type="radio" name="response24" value="4"> 4 - Occasionally</label>
+                            <label><input type="radio" name="response24" value="5"> 5 - Frequently</label>
+                            <label><input type="radio" name="response24" value="6"> 6 - Very Frequently</label>
+                            <label><input type="radio" name="response24" value="7"> 7 - Always</label>
+                        </div>
+                    </div>
+        
+                    <!-- Question 25 -->
+                    <div class="question">
+                        <label>25. I seek out opportunities to socialize and meet new people.</label>
+                        <div class="rating-grid">
+                            <label><input type="radio" name="response25" value="1" required> 1 - Almost Never</label>
+                            <label><input type="radio" name="response25" value="2"> 2 - Rarely</label>
+                            <label><input type="radio" name="response25" value="3"> 3 - Seldom</label>
+                            <label><input type="radio" name="response25" value="4"> 4 - Occasionally</label>
+                            <label><input type="radio" name="response25" value="5"> 5 - Frequently</label>
+                            <label><input type="radio" name="response25" value="6"> 6 - Very Frequently</label>
+                            <label><input type="radio" name="response25" value="7"> 7 - Always</label>
+                        </div>
+                    </div>
+                </div>
+                        <!-- Section E: Stress Response (SR) -->
+                    <div class="section">
+                        <h2>Section E: Stress Response (SR)</h2>
+                        
+                        <!-- Instructions for Section E -->
+                        <div class="question-group instructions-section">
+                            <h3>Instructions</h3>
+                            <p>Please check the radio button that best describes the frequency with which you experience the following behaviors:</p>
+                            <ul>
+                                <li><strong>1 - Almost Never</strong>: About 5% or less of the time</li>
+                                <li><strong>2 - Rarely</strong>: About 25% of the time</li>
+                                <li><strong>3 - Seldom</strong>: About 50% of the time</li>
+                                <li><strong>4 - Occasionally</strong>: About 75% of the time</li>
+                                <li><strong>5 - Frequently</strong>: About 95% or more of the time</li>
+                                <li><strong>6 - Very Frequently</strong>: Some additional explanation if needed</li>
+                                <li><strong>7 - Always</strong>: Some additional explanation if needed</li>
+                            </ul>
+                        </div>
+            
+                        <!-- Question 26 -->
+                        <div class="question">
+                            <label>26. I feel stressed in new or unfamiliar situations.</label>
+                            <div class="rating-grid">
+                                <label><input type="radio" name="response26" value="1" required> 1 - Almost Never</label>
+                                <label><input type="radio" name="response26" value="2"> 2 - Rarely</label>
+                                <label><input type="radio" name="response26" value="3"> 3 - Seldom</label>
+                                <label><input type="radio" name="response26" value="4"> 4 - Occasionally</label>
+                                <label><input type="radio" name="response26" value="5"> 5 - Frequently</label>
+                                <label><input type="radio" name="response26" value="6"> 6 - Very Frequently</label>
+                                <label><input type="radio" name="response26" value="7"> 7 - Always</label>
+                            </div>
+                        </div>
+            
+                        <!-- Question 27 -->
+                        <div class="question">
+                            <label>27. I get nervous before big events or changes.</label>
+                            <div class="rating-grid">
+                                <label><input type="radio" name="response27" value="1" required> 1 - Almost Never</label>
+                                <label><input type="radio" name="response27" value="2"> 2 - Rarely</label>
+                                <label><input type="radio" name="response27" value="3"> 3 - Seldom</label>
+                                <label><input type="radio" name="response27" value="4"> 4 - Occasionally</label>
+                                <label><input type="radio" name="response27" value="5"> 5 - Frequently</label>
+                                <label><input type="radio" name="response27" value="6"> 6 - Very Frequently</label>
+                                <label><input type="radio" name="response27" value="7"> 7 - Always</label>
+                            </div>
+                        </div>
+            
+                        <!-- Question 28 -->
+                        <div class="question">
+                            <label>28. Small problems can make me feel very anxious.</label>
+                            <div class="rating-grid">
+                                <label><input type="radio" name="response28" value="1" required> 1 - Almost Never</label>
+                                <label><input type="radio" name="response28" value="2"> 2 - Rarely</label>
+                                <label><input type="radio" name="response28" value="3"> 3 - Seldom</label>
+                                <label><input type="radio" name="response28" value="4"> 4 - Occasionally</label>
+                                <label><input type="radio" name="response28" value="5"> 5 - Frequently</label>
+                                <label><input type="radio" name="response28" value="6"> 6 - Very Frequently</label>
+                                <label><input type="radio" name="response28" value="7"> 7 - Always</label>
+                            </div>
+                        </div>
+            
+                        <!-- Question 29 -->
+                        <div class="question">
+                            <label>29. I often worry about things that might happen.</label>
+                            <div class="rating-grid">
+                                <label><input type="radio" name="response29" value="1" required> 1 - Almost Never</label>
+                                <label><input type="radio" name="response29" value="2"> 2 - Rarely</label>
+                                <label><input type="radio" name="response29" value="3"> 3 - Seldom</label>
+                                <label><input type="radio" name="response29" value="4"> 4 - Occasionally</label>
+                                <label><input type="radio" name="response29" value="5"> 5 - Frequently</label>
+                                <label><input type="radio" name="response29" value="6"> 6 - Very Frequently</label>
+                                <label><input type="radio" name="response29" value="7"> 7 - Always</label>
+                            </div>
+                        </div>
+            
+                        <!-- Question 30 -->
+                        <div class="question">
+                            <label>30. I need time to relax after being in a busy environment.</label>
+                            <div class="rating-grid">
+                                <label><input type="radio" name="response30" value="1" required> 1 - Almost Never</label>
+                                <label><input type="radio" name="response30" value="2"> 2 - Rarely</label>
+                                <label><input type="radio" name="response30" value="3"> 3 - Seldom</label>
+                                <label><input type="radio" name="response30" value="4"> 4 - Occasionally</label>
+                                <label><input type="radio" name="response30" value="5"> 5 - Frequently</label>
+                                <label><input type="radio" name="response30" value="6"> 6 - Very Frequently</label>
+                                <label><input type="radio" name="response30" value="7"> 7 - Always</label>
+                            </div>
+                        </div>
+                    </div>
+       
+<!-- Submit Button -->
+            <div class="submit-section">
+                <button type="submit" class="submit-btn">Submit</button>
+            </div>
+        </form>
+        
+        <!-- Summary Display Section -->
+        <div id="summary" style="display:none;">
+            <h2>Summary Score Sheet</h2>
+            <p><strong>Low Registration (Quadrant 1) Total:</strong> <span id="q1Total">0</span></p>
+            <p><strong>Sensation Seeking (Quadrant 2) Total:</strong> <span id="q2Total">0</span></p>
+            <p><strong>Sensory Sensitivity (Quadrant 3) Total:</strong> <span id="q3Total">0</span></p>
+            <p><strong>Sensation Avoiding (Quadrant 4) Total:</strong> <span id="q4Total">0</span></p>
+        
+            <h3>Detailed Explanations:</h3>
+            <p><strong>Low Registration:</strong> Individuals may need more sensory input to react. Suggested modifications include increasing visual cues, using alarms for reminders, and providing tactile input tools.</p>
+            <p><strong>Sensation Seeking:</strong> Individuals enjoy sensory experiences and actively seek them out. Suggested modifications include allowing movement breaks, providing sensory-friendly tools, and engaging in sensory-rich activities.</p>
+            <p><strong>Sensory Sensitivity:</strong> Individuals may become easily overwhelmed by sensory stimuli. Suggested modifications include limiting overstimulating environments, providing quiet spaces, and adjusting sensory input levels.</p>
+            <p><strong>Sensation Avoiding:</strong> Individuals may seek to limit their exposure to sensory stimuli. Suggested modifications include respecting personal space, simplifying their environment, and using calming strategies.</p>
+        
+            <button type="button" class="submit-btn" onclick="saveAndDownloadResponses()">Download Summary</button>
+        </div>
+        
+        <script>
+            // Function to toggle the explanation textarea (if applicable)
+            function toggleExplanation(show) {
+                const explanationDiv = document.getElementById('explanation');
+                if (show) {
+                    explanationDiv.style.display = 'block';
+                    document.getElementById('explanationText').required = true;
+                } else {
+                    explanationDiv.style.display = 'none';
+                    document.getElementById('explanationText').required = false;
                 }
             }
-            return total;
-        }
-
-        // Sum up each section
-        SE_total = sumSection(SE_questions);
-        RA_total = sumSection(RA_questions);
-        EI_total = sumSection(EI_questions);
-        SI_total = sumSection(SI_questions);
-        SR_total = sumSection(SR_questions);
-
-        // Calculate final scores
-        let orchidScore = SE_total + EI_total + SR_total;
-        let dandelionScore = RA_total + SI_total;
-
-        // Generate the result summary
-        let resultHtml = `<h2>How I Process Environmental Stimuli and Manage Stress</h2>`;
-        resultHtml += `<p><strong>Sensitivity to Environment (SE) Total:</strong> ${SE_total}</p>`;
-        resultHtml += `<p><strong>Resilience and Adaptability (RA) Total:</strong> ${RA_total}</p>`;
-        resultHtml += `<p><strong>Emotional Intensity (EI) Total:</strong> ${EI_total}</p>`;
-        resultHtml += `<p><strong>Social Interaction (SI) Total:</strong> ${SI_total}</p>`;
-        resultHtml += `<p><strong>Stress Response (SR) Total:</strong> ${SR_total}</p>`;
-        resultHtml += `<h3>Total Orchid Score: ${orchidScore}</h3>`;
-        resultHtml += `<h3>Total Dandelion Score: ${dandelionScore}</h3>`;
-
-        // Add definitions based on the total scores
-        resultHtml += `<h3>What Your Scores Mean:</h3>`;
-
-        if (orchidScore > dandelionScore) {
-            resultHtml += `<p><strong>Orchid Traits:</strong> You are likely more sensitive to your environment and emotional experiences. You may thrive in supportive, nurturing environments but find it more challenging to adapt to stress or change. People with orchid traits often need a stable, caring setting to flourish.</p>`;
-        } else if (dandelionScore > orchidScore) {
-            resultHtml += `<p><strong>Dandelion Traits:</strong> You are likely more resilient and adaptable. You can handle stress well, adapt to changes easily, and are less sensitive to environmental factors. People with dandelion traits tend to thrive in a variety of situations without requiring much additional support.</p>`;
-        } else {
-            resultHtml += `<p><strong>Balanced Traits:</strong> You exhibit a balance of orchid and dandelion characteristics, allowing you to adapt to various environments while also being sensitive to your surroundings.</p>`;
-        }
-
-        // Section explanations
-        resultHtml += `<h3>Section Explanations:</h3>`;
-        resultHtml += `<p><strong>Sensitivity to Environment (SE):</strong> High scores indicate sensitivity to environmental changes, sounds, lights, and other sensory stimuli.</p>`;
-        resultHtml += `<p><strong>Resilience and Adaptability (RA):</strong> High scores indicate that you adapt well to changes, handle stress, and bounce back from challenges easily.</p>`;
-        resultHtml += `<p><strong>Emotional Intensity (EI):</strong> High scores reflect a tendency to experience emotions more deeply and intensely than others.</p>`;
-        resultHtml += `<p><strong>Social Interaction (SI):</strong> High scores show that you enjoy being around others, feel energized by socializing, and make friends easily.</p>`;
-        resultHtml += `<p><strong>Stress Response (SR):</strong> High scores suggest that you may struggle with stress or anxiety in challenging situations or new environments.</p>`;
-
-        const resultDiv = document.getElementById('result');
-        resultDiv.innerHTML = resultHtml;
-
-        // Create a downloadable file of the results
-        let resultText = `Your Orchid-Dandelion Profile\n\nSensitivity to Environment (SE) Total: ${SE_total}\nResilience and Adaptability (RA) Total: ${RA_total}\nEmotional Intensity (EI) Total: ${EI_total}\nSocial Interaction (SI) Total: ${SI_total}\nStress Response (SR) Total: ${SR_total}\n\nTotal Orchid Score: ${orchidScore}\nTotal Dandelion Score: ${dandelionScore}\n\n`;
-
-        if (orchidScore > dandelionScore) {
-            resultText += `Orchid Traits: You are likely more sensitive to your environment and emotional experiences.\n`;
-        } else if (dandelionScore > orchidScore) {
-            resultText += `Dandelion Traits: You are likely more resilient and adaptable.\n`;
-        } else {
-            resultText += `Balanced Traits: You exhibit a balance of orchid and dandelion characteristics.\n`;
-        }
-
-        resultText += `\nSection Explanations:\n`;
-        resultText += `Sensitivity to Environment (SE): High scores indicate sensitivity to environmental changes, sounds, lights, and other sensory stimuli.\n`;
-        resultText += `Resilience and Adaptability (RA): High scores indicate that you adapt well to changes, handle stress, and bounce back from challenges easily.\n`;
-        resultText += `Emotional Intensity (EI): High scores reflect a tendency to experience emotions more deeply and intensely than others.\n`;
-        resultText += `Social Interaction (SI): High scores show that you enjoy being around others, feel energized by socializing, and make friends easily.\n`;
-        resultText += `Stress Response (SR): High scores suggest that you may struggle with stress or anxiety in challenging situations or new environments.\n`;
-
-        createDownloadLink(resultText);
-
-        // Hide the form after submission
-        document.getElementById('sensoryInsightsForm').style.display = 'none';
-    });
-
-    // Function to create a downloadable text file of the results
-    function createDownloadLink(text) {
-        const blob = new Blob([text], { type: 'text/plain' });
-        const link = document.createElement('a');
-        link.href = URL.createObjectURL(blob);
-        link.download = 'orchid_dandelion_results.txt';
-        link.textContent = 'Download Your Results';
-        link.style.display = 'inline-block';
-        link.style.marginTop = '20px';
-        link.style.padding = '10px 20px';
-        link.style.backgroundColor = '#007BFF';
-        link.style.color = '#fff';
-        link.style.textDecoration = 'none';
-        link.style.borderRadius = '5px';
-
-        const resultDiv = document.getElementById('result');
-        resultDiv.appendChild(document.createElement('br'));
-        resultDiv.appendChild(link);
-    }
-</script>
-
-</body>
-</html>
+        
+            // Function to calculate and display the summary
+            function calculateSummary() {
+                const formData = new FormData(document.getElementById('sensoryInsightsForm'));
+                const responses = {};
+                formData.forEach((value, key) => responses[key] = parseInt(value) || 0);
+        
+                // Define questions by quadrant
+                const quadrant1Items = [3, 6, 12, 15, 21, 23, 36, 37, 39, 41, 44, 45, 52, 55, 59];
+                const quadrant2Items = [2, 4, 8, 10, 14, 17, 19, 28, 30, 32, 40, 42, 47, 50, 58];
+                const quadrant3Items = [7, 9, 13, 16, 20, 22, 25, 27, 31, 33, 34, 48, 51, 54, 60];
+                const quadrant4Items = [1, 5, 11, 18, 24, 26, 29, 35, 38, 43, 46, 49, 53, 56, 57];
+        
+                // Calculate totals for each quadrant
+                const q1Total = quadrant1Items.reduce((total, q) => total + (responses[`response${q}`] || 0), 0);
+                const q2Total = quadrant2Items.reduce((total, q) => total + (responses[`response${q}`] || 0), 0);
+                const q3Total = quadrant3Items.reduce((total, q) => total + (responses[`response${q}`] || 0), 0);
+                const q4Total = quadrant4Items.reduce((total, q) => total + (responses[`response${q}`] || 0), 0);
+        
+                // Display totals
+                document.getElementById('q1Total').textContent = q1Total;
+                document.getElementById('q2Total').textContent = q2Total;
+                document.getElementById('q3Total').textContent = q3Total;
+                document.getElementById('q4Total').textContent = q4Total;
+        
+                document.getElementById('summary').style.display = 'block';
+            }
+        
+            // Function to save and download the summary
+            function saveAndDownloadResponses() {
+                const date = document.querySelector('input[name="date"]').value;
+        
+                const summaryText = `Date: ${date}\n\n` +
+                    `Summary Score Sheet\n\n` +
+                    `Low Registration (Quadrant 1) Total: ${document.getElementById('q1Total').textContent}\n` +
+                    `Sensation Seeking (Quadrant 2) Total: ${document.getElementById('q2Total').textContent}\n` +
+                    `Sensory Sensitivity (Quadrant 3) Total: ${document.getElementById('q3Total').textContent}\n` +
+                    `Sensation Avoiding (Quadrant 4) Total: ${document.getElementById('q4Total').textContent}\n\n` +
+                    `Detailed Explanations:\n` +
+                    `Low Registration: Individuals may need more sensory input to react.\n` +
+                    `Sensation Seeking: Individuals enjoy sensory experiences and actively seek them out.\n` +
+                    `Sensory Sensitivity: Individuals may become easily overwhelmed by sensory stimuli.\n` +
+                    `Sensation Avoiding: Individuals may seek to limit their exposure to sensory stimuli.\n`;
+        
+                const blob = new Blob([summaryText], { type: 'text/plain' });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = 'SensoryProfileSummary.txt';
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                URL.revokeObjectURL(url);
+            }
+        
+            // Handle form submission
+            document.getElementById('sensoryInsightsForm').addEventListener('submit', function(event) {
+                event.preventDefault();
+                calculateSummary();
+            });
+        </script>
+        
+    </body>
+    </html>
