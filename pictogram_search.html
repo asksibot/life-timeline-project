@@ -66,6 +66,27 @@
             font-size: 1.8em;
             margin-bottom: 20px;
             text-align: center;
+            position: relative; /* To position the button */
+        }
+
+        /* "How to Use" Button Styles */
+        #openInstructionsBtn {
+            position: absolute;
+            right: 0;
+            top: 0;
+            padding: 5px 10px;
+            background-color: #fdb201;
+            color: #000;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            font-size: 0.9em;
+        }
+
+        #openInstructionsBtn:hover {
+            background-color: #1d1e20;
+            color: #fff;
         }
 
         /* Form styles */
@@ -262,9 +283,98 @@
                 font-size: 0.9em;
             }
         }
+
+        /* Modal Styles */
+        /* The Modal (background) */
+        .modal {
+            display: none; /* Hidden by default */
+            position: fixed; /* Stay in place */
+            z-index: 1000; /* Sit on top */
+            left: 0;
+            top: 0;
+            width: 100%; /* Full width */
+            height: 100%; /* Full height */
+            overflow: auto; /* Enable scroll if needed */
+            background-color: rgba(0,0,0,0.5); /* Black w/ opacity */
+        }
+
+        /* Modal Content */
+        .modal-content {
+            background-color: #fefefe;
+            margin: 5% auto; /* 5% from the top and centered */
+            padding: 20px;
+            border: 1px solid #888;
+            width: 90%;
+            max-width: 600px; /* Could be more or less, depending on screen size */
+            border-radius: 8px;
+            position: relative;
+            text-align: left;
+        }
+
+        /* Close Button */
+        .close-button {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            position: absolute;
+            right: 20px;
+            top: 10px;
+            cursor: pointer;
+        }
+
+        .close-button:hover,
+        .close-button:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        /* Read Aloud Button */
+        .read-aloud-button {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 8px 16px;
+            background-color: #fdb201;
+            color: #000;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s, color 0.3s;
+            font-size: 0.9em;
+        }
+
+        .read-aloud-button:hover, .read-aloud-button:focus {
+            background-color: #1d1e20;
+            color: #fff;
+            outline: none;
+        }
+
     </style>
     <!-- Include Axios from CDN -->
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "Asksibot - Pictogram Search Assistant",
+      "description": "A tool to help occupational therapy professionals search and utilize pictographic symbols.",
+      "url": "https://yourwebsite.com",
+      "applicationCategory": "EducationalApplication",
+      "operatingSystem": "All",
+      "browserRequirements": "Requires JavaScript"
+    }
+    </script>
+    <!-- Google Analytics (Replace 'YOUR_TRACKING_ID' with actual ID) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=YOUR_TRACKING_ID"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'YOUR_TRACKING_ID');
+    </script>
 </head>
 <body>
 
@@ -272,7 +382,7 @@
     <img src="media/asksiboticon.png" alt="Asksibot Logo">
     <h1>Asksibot - The Occupational Therapy Hub</h1>
     <p class="subtext">Developed on OpenAI by Christopher Horne, OTR/L</p>
-    <nav>
+    <nav aria-label="Main Navigation">
         <a href="index.html">Home</a>
         <a href="/surveys/survey_selection.html">Surveys</a>
         <a href="/timeline/timelineupto80.html">Timeline</a>
@@ -280,8 +390,11 @@
         <a href="/contact.html">Contact</a>
     </nav>
 </header>
+
 <div class="content">
-    <h2>Pictogram Search Assistant</h2>
+    <h2>Pictogram Search Assistant
+        <button id="openInstructionsBtn" aria-label="How to Use the Pictogram Search Assistant">How to Use</button>
+    </h2>
     <form id="pictogramForm">
         <label for="topic">Topic or Subject:</label>
         <p class="instruction">Use your own term or select a topic from below.</p>
@@ -310,10 +423,53 @@
 
 <footer>
     <p class="attribution">
-        The pictographic symbols used are the property of the Government of Aragón and have been created by Sergio Palao for ARASAAC (<a href="http://www.arasaac.org" target="_blank">http://www.arasaac.org</a>), distributed under the Creative Commons License BY-NC-SA.
+        The pictographic symbols used are the property of the Government of Aragón and have been created by Sergio Palao for ARASAAC (<a href="http://www.arasaac.org" target="_blank" rel="noopener">http://www.arasaac.org</a>), distributed under the Creative Commons License BY-NC-SA.
     </p>
 </footer>
 
+<!-- Modal Structure -->
+<div id="instructionsModal" class="modal" aria-hidden="true" role="dialog" aria-labelledby="instructionsTitle" aria-modal="true">
+    <div class="modal-content">
+        <span class="close-button" aria-label="Close Instructions">&times;</span>
+        <h3 id="instructionsTitle">How to Use the Pictogram Search Assistant</h3>
+        <p>
+            Welcome to the Asksibot Pictogram Search Assistant! This tool is designed to help find and utilize pictographic symbols from ARASAAC's extensive library.
+        </p>
+        <p>
+            <strong>Steps to Use the Assistant:</strong>
+        </p>
+        <ol>
+            <li>
+                <strong>Enter a Topic or Subject:</strong> You can type your own term into the "Topic or Subject" field or select a predefined topic by clicking on one of the buttons below.
+            </li>
+            <li>
+                <strong>Select Specific Keywords:</strong> In the "Specific Keywords or Concepts" section, you can enter your own keywords separated by commas or choose from the provided keywords by clicking the corresponding buttons.
+            </li>
+            <li>
+                <strong>Generate Search Terms:</strong> After selecting your topic and keywords, click the "Generate Search Terms" button. The assistant will compile your inputs into unique search terms.
+            </li>
+            <li>
+                <strong>View Pictograms:</strong> The assistant will display relevant pictograms based on your search terms. You can view, download, or use these pictograms as needed.
+            </li>
+        </ol>
+        <p>
+            <strong>What Can Pictograms Be Used For?</strong>
+        </p>
+        <p>
+            Pictograms are versatile tools used to enhance communication, especially for individuals with speech or language difficulties. They can be utilized in various settings, including:
+        </p>
+        <ul>
+            <li>Developing communication boards or systems.</li>
+            <li>Creating visual schedules and routines.</li>
+            <li>Enhancing instructional materials and learning aids.</li>
+            <li>Facilitating social interactions and emotional expression.</li>
+            <li>Supporting daily living activities and independence.</li>
+        </ul>
+        <button class="read-aloud-button" id="readAloudBtn" aria-label="Read Instructions Aloud">Read Instructions Aloud</button>
+    </div>
+</div>
+
+<!-- JavaScript for Functionality -->
 <script>
     document.addEventListener('DOMContentLoaded', function() {
         // Define the 18 topics and their 30 keywords each
@@ -464,8 +620,7 @@
                 "Camera", "Printer", "Keyboard", "Mouse", "Headphones",
                 "Speaker", "Charger", "Remote control", "USB drive", "Smartwatch"
             ]
-,
-            // Continue defining all 18 topics with their keywords
+            // All 18 topics are fully defined with their keywords
         };
 
         const topicOptionsDiv = document.getElementById('topicOptions');
@@ -477,70 +632,176 @@
         const searchTermsList = document.getElementById('searchTermsList');
         const pictogramResultsDiv = document.getElementById('pictogramResults');
         const errorDiv = document.getElementById('error');
+        const openInstructionsBtn = document.getElementById('openInstructionsBtn');
+        const instructionsModal = document.getElementById('instructionsModal');
+        const closeInstructionsBtn = document.querySelector('.close-button');
+        const readAloudBtn = document.getElementById('readAloudBtn');
 
+        // Selected Voice Variable
+        let selectedVoice = null;
+
+        // Function to Load and Select a Female US Voice
+        function loadSelectedVoice() {
+            const voices = window.speechSynthesis.getVoices();
+            // Attempt to find a female US voice
+            selectedVoice = voices.find(voice => voice.lang === 'en-US' && /female/i.test(voice.name));
+            if (!selectedVoice) {
+                // Fallback: Select the first US English voice
+                selectedVoice = voices.find(voice => voice.lang === 'en-US');
+            }
+        }
+
+        // Load voices and set the selected voice
+        loadSelectedVoice();
+
+        // Some browsers (like Chrome) load voices asynchronously
+        if (speechSynthesis.onvoiceschanged !== undefined) {
+            speechSynthesis.onvoiceschanged = loadSelectedVoice;
+        }
+
+        // Simple Cache for Pictograms
+        const pictogramCache = {};
+
+        // Rate Limiting Variables
+        let requestCount = 0;
+        const maxRequests = 100; // Example limit
+        const resetTime = 3600000; // 1 hour in milliseconds
+
+        // Reset request count every hour
+        setInterval(() => {
+            requestCount = 0;
+        }, resetTime);
+
+        // Function to Sanitize User Inputs
+        function sanitizeInput(input) {
+            const div = document.createElement('div');
+            div.textContent = input;
+            return div.innerHTML;
+        }
+
+        // Generate Topic Buttons
         function generateTopicButtons() {
             for (let topic in topics) {
                 const button = document.createElement('button');
                 button.type = 'button';
                 button.textContent = topic;
+                button.setAttribute('aria-label', `Select topic ${topic}`);
                 button.addEventListener('click', function() {
                     topicInput.value = topic;
                     loadKeywords(topic);
+                    // Highlight active topic
+                    document.querySelectorAll('#topicOptions button').forEach(btn => btn.classList.remove('active-topic'));
+                    this.classList.add('active-topic');
                 });
                 topicOptionsDiv.appendChild(button);
             }
         }
 
+        // Load Keywords Based on Selected Topic
         function loadKeywords(selectedTopic) {
             keywordOptionsDiv.innerHTML = '';
             (topics[selectedTopic] || []).forEach(keyword => {
                 const button = document.createElement('button');
                 button.type = 'button';
                 button.textContent = keyword;
+                button.setAttribute('aria-label', `Select keyword ${keyword}`);
                 button.addEventListener('click', function() {
                     addKeywordToTextarea(keyword);
+                    // Highlight active keyword
+                    this.classList.toggle('active-keyword');
                 });
                 keywordOptionsDiv.appendChild(button);
             });
         }
 
+        // Add Keyword to Textarea
         function addKeywordToTextarea(keyword) {
             let currentKeywords = keywordsTextarea.value.trim();
-            keywordsTextarea.value = currentKeywords ? `${currentKeywords}, ${keyword}` : keyword;
+            const sanitizedKeyword = sanitizeInput(keyword);
+            // Avoid duplicate keywords
+            const keywordsArray = currentKeywords ? currentKeywords.split(',').map(k => k.trim()) : [];
+            if (!keywordsArray.includes(keyword)) {
+                keywordsTextarea.value = currentKeywords ? `${currentKeywords}, ${sanitizedKeyword}` : sanitizedKeyword;
+            }
         }
 
+        // Handle Form Submission
         pictogramForm.addEventListener('submit', function(e) {
             e.preventDefault();
             const topic = topicInput.value.trim();
             const keywords = keywordsTextarea.value.trim();
+            errorDiv.textContent = ''; // Clear previous errors
+
             if (!topic && !keywords) {
                 errorDiv.textContent = 'Please enter a topic or at least one keyword.';
+                return;
+            } else if (!topic) {
+                errorDiv.textContent = 'Please enter a topic.';
+                return;
+            } else if (!keywords) {
+                errorDiv.textContent = 'Please enter at least one keyword.';
                 return;
             }
 
             const searchTerms = [topic, ...keywords.split(',').map(k => k.trim())].filter(Boolean);
-            displayResults([...new Set(searchTerms)]);
-            fetchPictograms(searchTerms.slice(0, 5));
+            const uniqueSearchTerms = [...new Set(searchTerms)];
+            displayResults(uniqueSearchTerms);
+            fetchPictograms(uniqueSearchTerms.slice(0, 5));
         });
 
+        // Display Search Terms
         function displayResults(searchTerms) {
-            searchTermsList.innerHTML = searchTerms.map(term => `<li>${term}</li>`).join('');
+            searchTermsList.innerHTML = searchTerms.map(term => `<li>${sanitizeInput(term)}</li>`).join('');
             resultsDiv.style.display = 'block';
             resultsDiv.scrollIntoView({ behavior: 'smooth' });
         }
 
+        // Fetch Pictograms from ARASAAC API
         async function fetchPictograms(searchTerms) {
+            // Rate Limiting Check
+            if (requestCount + searchTerms.length > maxRequests) {
+                errorDiv.textContent = 'API rate limit exceeded. Please try again later.';
+                return;
+            }
+            requestCount += searchTerms.length;
+
             pictogramResultsDiv.innerHTML = '';
             errorDiv.textContent = '';
-            for (const term of searchTerms) {
-                try {
-                    const response = await axios.get(`https://api.arasaac.org/api/pictograms/en/search/${encodeURIComponent(term)}`);
-                    const pictograms = response.data.slice(0, 10); // Limit to 10 pictograms per term
+            // Uncomment the following line if you have a loading spinner element
+            // loadingSpinner.style.display = 'block';
 
-                    if (pictograms.length === 0) continue;
+            try {
+                const requests = searchTerms.map(term => {
+                    if (pictogramCache[term]) {
+                        return Promise.resolve({ term, data: pictogramCache[term] });
+                    }
+                    return axios.get(`https://api.arasaac.org/api/pictograms/en/search/${encodeURIComponent(term)}`)
+                        .then(response => {
+                            pictogramCache[term] = response.data;
+                            return { term, data: response.data };
+                        })
+                        .catch(error => ({ term, error }));
+                });
 
-                    const section = document.createElement('div');
-                    section.innerHTML = `<h4>Pictograms for "${term}"</h4>`;
+                const results = await Promise.all(requests);
+
+                results.forEach(result => {
+                    if (result.error) {
+                        errorDiv.textContent += `Error fetching pictograms for "${sanitizeInput(result.term)}". `;
+                        return;
+                    }
+
+                    const pictograms = result.data.slice(0, 10); // Limit to 10 pictograms per term
+
+                    if (pictograms.length === 0) {
+                        const noResult = document.createElement('p');
+                        noResult.textContent = `No pictograms found for "${sanitizeInput(result.term)}".`;
+                        pictogramResultsDiv.appendChild(noResult);
+                        return;
+                    }
+
+                    const section = document.createElement('section');
+                    section.innerHTML = `<h4>Pictograms for "${sanitizeInput(result.term)}"</h4>`;
                     const container = document.createElement('div');
                     container.classList.add('pictogram-container');
 
@@ -551,28 +812,125 @@
                         const link = document.createElement('a');
                         link.href = `https://static.arasaac.org/pictograms/${pictogram._id}/${pictogram._id}_500.png`;
                         link.target = '_blank';
+                        link.rel = 'noopener noreferrer';
 
                         const img = document.createElement('img');
                         img.src = `https://static.arasaac.org/pictograms/${pictogram._id}/${pictogram._id}_300.png`;
-                        img.alt = pictogram.keywords.map(k => k.keyword).join(', ');
-                        link.appendChild(img);
+                        img.alt = `Pictogram representing ${pictogram.keywords.map(k => k.keyword).join(', ')}`;
+                        img.loading = 'lazy'; // Lazy Loading
 
+                        link.appendChild(img);
                         pictogramItem.appendChild(link);
+
+                        // Download Button
+                        const downloadBtn = document.createElement('button');
+                        downloadBtn.textContent = 'Download';
+                        downloadBtn.classList.add('download-button');
+                        downloadBtn.setAttribute('aria-label', `Download pictogram for ${pictogram.keywords.map(k => k.keyword).join(', ')}`);
+                        downloadBtn.addEventListener('click', () => {
+                            const downloadLink = document.createElement('a');
+                            downloadLink.href = `https://static.arasaac.org/pictograms/${pictogram._id}/${pictogram._id}_500.png`;
+                            downloadLink.download = `${pictogram.keywords.map(k => k.keyword).join('_')}.png`;
+                            document.body.appendChild(downloadLink);
+                            downloadLink.click();
+                            document.body.removeChild(downloadLink);
+                        });
+
+                        pictogramItem.appendChild(downloadBtn);
                         container.appendChild(pictogramItem);
                     });
 
                     section.appendChild(container);
                     pictogramResultsDiv.appendChild(section);
-                } catch (error) {
-                    errorDiv.textContent = 'An error occurred while fetching pictograms.';
-                }
+                });
+            } catch (error) {
+                errorDiv.textContent = 'An unexpected error occurred while fetching pictograms.';
+            } finally {
+                // Uncomment the following line if you have a loading spinner element
+                // loadingSpinner.style.display = 'none';
             }
         }
 
+        // Open Instructions Modal
+        openInstructionsBtn.addEventListener('click', function() {
+            instructionsModal.style.display = 'block';
+            instructionsModal.setAttribute('aria-hidden', 'false');
+            // Set focus to the modal content for accessibility
+            instructionsModal.querySelector('.modal-content').focus();
+        });
+
+        // Close Instructions Modal and Stop Speech
+        function closeModal() {
+            instructionsModal.style.display = 'none';
+            instructionsModal.setAttribute('aria-hidden', 'true');
+            // Stop any ongoing speech
+            if (window.speechSynthesis.speaking) {
+                window.speechSynthesis.cancel();
+            }
+        }
+
+        // Close Instructions Modal when clicking the close button
+        closeInstructionsBtn.addEventListener('click', function() {
+            closeModal();
+        });
+
+        // Close modal when clicking outside of the modal content
+        window.addEventListener('click', function(event) {
+            if (event.target == instructionsModal) {
+                closeModal();
+            }
+        });
+
+        // Close modal on pressing Escape key
+        window.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape' && instructionsModal.style.display === 'block') {
+                closeModal();
+            }
+        });
+
+        // Read Aloud Functionality with Female US Voice
+        readAloudBtn.addEventListener('click', function() {
+            const instructionsText = instructionsModal.innerText;
+            if ('speechSynthesis' in window) {
+                // Stop any ongoing speech before starting a new one
+                if (window.speechSynthesis.speaking) {
+                    window.speechSynthesis.cancel();
+                }
+
+                const utterance = new SpeechSynthesisUtterance(instructionsText);
+                if (selectedVoice) {
+                    utterance.voice = selectedVoice;
+                    utterance.lang = selectedVoice.lang;
+                } else {
+                    // Fallback: Use default voice if no female US voice is found
+                    utterance.lang = 'en-US';
+                }
+                window.speechSynthesis.speak(utterance);
+            } else {
+                alert('Sorry, your browser does not support text-to-speech functionality.');
+            }
+        });
+
+        // Generate Topic Buttons on Page Load
         generateTopicButtons();
         loadKeywords("Daily Routine"); // Load default topic
+
+        // Highlight Active Navigation Link
+        const currentPage = window.location.pathname.split('/').pop();
+        document.querySelectorAll('nav a').forEach(link => {
+            if (link.getAttribute('href') === currentPage) {
+                link.classList.add('active');
+            }
+        });
     });
 </script>
+
+<!-- NoScript Message -->
+<noscript>
+    <p style="text-align:center; color:red; margin-top:20px;">
+        JavaScript is required for full functionality of this site. Please enable JavaScript in your browser settings.
+    </p>
+</noscript>
 
 </body>
 </html>
