@@ -4,22 +4,72 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Asksibot - Pictogram Search Assistant</title>
+    <!-- Include Axios from CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js" defer></script>
+    <!-- Structured Data -->
+    <script type="application/ld+json" defer>
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "Asksibot - Pictogram Search Assistant",
+      "description": "A tool to help occupational therapy professionals search and utilize pictographic symbols.",
+      "url": "https://yourwebsite.com",
+      "applicationCategory": "EducationalApplication",
+      "operatingSystem": "All",
+      "browserRequirements": "Requires JavaScript"
+    }
+    </script>
+    <!-- Google Analytics (Replace 'YOUR_TRACKING_ID' with actual ID) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=YOUR_TRACKING_ID"></script>
+    <script defer>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'YOUR_TRACKING_ID');
+    </script>
+    
     <style>
+        /* Reset some default styles */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Variables */
+        :root {
+            --primary-color: #fdb201;
+            --secondary-color: #1d1e20;
+            --background-color: #f4f4f4;
+            --header-bg-color: #d3d3d3;
+            --text-color: #333;
+            --subtext-color: #555;
+            --button-text-color: #000;
+            --button-hover-bg-color: #1d1e20;
+            --button-hover-text-color: #fff;
+            --modal-bg-color: rgba(0,0,0,0.5);
+            --modal-content-bg: #fefefe;
+            --error-color: red;
+            --success-color: green;
+        }
+
         /* General styles */
         body {
             font-family: Arial, sans-serif;
+            background-color: var(--background-color);
+            text-align: center;
+            color: var(--text-color);
             margin: 0;
             padding: 0;
-            background-color: #f4f4f4;
-            text-align: center;
         }
 
         /* Header styles */
         header {
-            background-color: #d3d3d3;
-            width: 100%;
+            background-color: var(--header-bg-color);
             padding: 20px 40px;
-            box-sizing: border-box;
+            width: 100%;
+            position: relative; /* To position the button */
         }
 
         header img {
@@ -31,6 +81,28 @@
         header h1 {
             margin: 0;
             font-size: 2em;
+            display: inline-block;
+            vertical-align: middle;
+        }
+
+        /* "How to Use" Button Styles */
+        #openInstructionsBtn {
+            position: absolute;
+            right: 40px;
+            top: 20px;
+            padding: 5px 10px;
+            background-color: var(--primary-color);
+            color: var(--button-text-color);
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            font-size: 0.9em;
+        }
+
+        #openInstructionsBtn:hover {
+            background-color: var(--button-hover-bg-color);
+            color: var(--button-hover-text-color);
         }
 
         .subtext {
@@ -38,6 +110,7 @@
             margin-top: 5px;
         }
 
+        /* Navigation styles */
         nav {
             margin-top: 10px;
             display: flex;
@@ -47,18 +120,21 @@
 
         nav a {
             margin: 5px 10px;
-            color: black;
+            color: var(--button-text-color);
             text-decoration: none;
             font-size: 1em;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: var(--primary-color);
         }
 
         /* Content styles */
         .content {
             max-width: 800px;
-            width: 100%;
             margin: 20px auto;
             padding: 0 20px;
-            box-sizing: border-box;
             text-align: left;
         }
 
@@ -66,27 +142,7 @@
             font-size: 1.8em;
             margin-bottom: 20px;
             text-align: center;
-            position: relative; /* To position the button */
-        }
-
-        /* "How to Use" Button Styles */
-        #openInstructionsBtn {
-            position: absolute;
-            right: 0;
-            top: 0;
-            padding: 5px 10px;
-            background-color: #fdb201;
-            color: #000;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            transition: background-color 0.3s;
-            font-size: 0.9em;
-        }
-
-        #openInstructionsBtn:hover {
-            background-color: #1d1e20;
-            color: #fff;
+            position: relative; /* To position additional buttons if needed */
         }
 
         /* Form styles */
@@ -94,13 +150,18 @@
             background-color: #fff;
             padding: 20px;
             border-radius: 8px;
-            box-sizing: border-box;
             box-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }
 
-        label {
-            display: block;
-            margin-top: 15px;
+        fieldset {
+            border: 1px solid #ccc;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        legend {
+            padding: 0 10px;
             font-weight: bold;
         }
 
@@ -110,71 +171,61 @@
             margin-bottom: 5px;
         }
 
-        input[type="text"], textarea {
+        /* Radio Button Styles for Topics */
+        .options-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .options-list label {
+            display: flex;
+            align-items: center;
+            font-size: 0.95em;
+            cursor: pointer;
+        }
+
+        .options-list input[type="radio"],
+        .options-list input[type="checkbox"] {
+            margin-right: 5px;
+            transform: scale(1.2);
+            cursor: pointer;
+        }
+
+        /* Textarea Styles */
+        textarea {
             width: 100%;
             padding: 8px;
             margin-top: 5px;
             box-sizing: border-box;
             border-radius: 4px;
             border: 1px solid #ccc;
-        }
-
-        /* Pre-defined options styles */
-        .options-section {
-            margin-top: 10px;
-        }
-
-        .options-section h4 {
-            margin-bottom: 5px;
-            font-size: 1em;
-        }
-
-        .options-list {
-            display: flex;
-            flex-wrap: wrap;
-            margin-bottom: 10px;
-        }
-
-        .options-list button {
-            margin: 5px;
-            padding: 5px 10px;
-            font-size: 0.9em;
-            background-color: #e7e7e7;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            transition: background-color 0.3s;
-            flex: 1 1 calc(33.333% - 10px); /* Three buttons per row */
-            box-sizing: border-box;
-        }
-
-        .options-list button:hover {
-            background-color: #ccc;
-        }
-
-        /* Adjust button sizing for smaller screens */
-        @media (max-width: 600px) {
-            .options-list button {
-                flex: 1 1 calc(50% - 10px); /* Two buttons per row */
-            }
+            resize: vertical;
+            min-height: 60px;
         }
 
         /* Button styles */
-        button[type="submit"], .results button {
-            margin-top: 20px;
-            padding: 10px 20px;
-            background-color: #fdb201;
-            color: #000;
-            border-radius: 30px;
-            border: 2px solid #000;
-            font-size: 1em;
+        button[type="submit"], .results button, #createSlideshowBtn, .download-button, .how-to-use-button, #howToUseBtn, #howToUseSlideshowBtn {
+            margin-top: 10px;
+            padding: 8px 16px;
+            background-color: var(--primary-color);
+            color: var(--button-text-color);
+            border: none;
+            border-radius: 4px;
+            font-size: 0.9em;
             cursor: pointer;
-            transition: 0.3s;
+            transition: background-color 0.3s, color 0.3s;
         }
 
-        button[type="submit"]:hover, .results button:hover {
-            background-color: #1d1e20;
-            color: #fff;
+        button[type="submit"]:hover,
+        .results button:hover,
+        #createSlideshowBtn:hover,
+        .download-button:hover,
+        .how-to-use-button:hover,
+        #howToUseBtn:hover,
+        #howToUseSlideshowBtn:hover {
+            background-color: var(--button-hover-bg-color);
+            color: var(--button-hover-text-color);
         }
 
         /* Results section */
@@ -192,10 +243,58 @@
             color: #2196F3;
         }
 
-        #results ol {
+        #results ul {
+            list-style-type: disc;
             margin-left: 20px;
+            margin-bottom: 20px;
         }
 
+        .pictogram-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            justify-content: center;
+        }
+
+        .pictogram-item {
+            background-color: #fff;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            width: 150px;
+            text-align: center;
+            position: relative;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .pictogram-item img {
+            width: 100%;
+            height: auto;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .pictogram-item input[type="checkbox"] {
+            margin-top: 10px;
+            transform: scale(1.2);
+            cursor: pointer;
+        }
+
+        .download-button,
+        .how-to-use-button {
+            margin-top: 5px;
+            padding: 5px 10px;
+            font-size: 0.8em;
+        }
+
+        /* Error Message Styles */
+        .error-message {
+            color: var(--error-color);
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        /* Attribution styles */
         .attribution {
             margin-top: 20px;
             font-size: 0.8em;
@@ -206,56 +305,135 @@
         .attribution a {
             color: #555;
             text-decoration: underline;
+            transition: color 0.3s;
         }
 
-        /* Pictogram styles */
-        .pictogram-container {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-            justify-content: center;
-            margin-top: 20px;
+        .attribution a:hover {
+            color: var(--primary-color);
         }
 
-        .pictogram-item {
-            border: 1px solid #ccc;
-            padding: 10px;
+        /* Slideshow Modal Styles */
+        .modal {
+            display: none; /* Hidden by default */
+            position: fixed; /* Stay in place */
+            z-index: 1000; /* Sit on top */
+            left: 0;
+            top: 0;
+            width: 100%; /* Full width */
+            height: 100%; /* Full height */
+            overflow: auto; /* Enable scroll if needed */
+            background-color: var(--modal-bg-color); /* Black w/ opacity */
+        }
+
+        /* Modal Content */
+        .modal-content {
+            background-color: var(--modal-content-bg);
+            margin: 5% auto; /* 5% from the top and centered */
+            padding: 20px;
+            border: 1px solid #888;
+            width: 90%;
+            max-width: 600px; /* Could be more or less, depending on screen size */
             border-radius: 8px;
-            background-color: #fff;
-            width: 150px;
+            position: relative;
+            text-align: left;
+        }
+
+        /* Close Button */
+        .close-button, .close-slideshow-button, .close-how-to-use-button {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            position: absolute;
+            right: 20px;
+            top: 10px;
+            cursor: pointer;
+        }
+
+        .close-button:hover,
+        .close-button:focus,
+        .close-slideshow-button:hover,
+        .close-slideshow-button:focus,
+        .close-how-to-use-button:hover,
+        .close-how-to-use-button:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        /* Read Aloud Button */
+        .read-aloud-button {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 8px 16px;
+            background-color: var(--primary-color);
+            color: var(--button-text-color);
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s, color 0.3s;
+            font-size: 0.9em;
+        }
+
+        .read-aloud-button:hover, .read-aloud-button:focus {
+            background-color: var(--button-hover-bg-color);
+            color: var(--button-hover-text-color);
+            outline: none;
+        }
+
+        /* Slideshow Modal Styles */
+        #slideshowModal .modal-content {
+            width: 90%;
+            max-width: 800px;
+            padding: 20px;
+            border-radius: 8px;
+            position: relative;
             text-align: center;
         }
 
-        .pictogram-item img {
-            max-width: 100%;
-            height: auto;
-            border-radius: 4px;
+        .slideshow-container {
+            position: relative;
+            margin-top: 20px;
         }
 
-        .download-button {
-            margin-top: 5px;
-            padding: 5px 10px;
-            background-color: #fdb201;
-            color: #000;
+        .slideshow-controls {
+            margin-top: 15px;
+        }
+
+        .slideshow-controls button {
+            margin: 0 10px;
+            padding: 8px 16px;
+            background-color: var(--primary-color);
+            color: var(--button-text-color);
             border: none;
             border-radius: 4px;
             cursor: pointer;
             transition: background-color 0.3s;
-            font-size: 0.9em;
         }
 
-        .download-button:hover {
-            background-color: #1d1e20;
-            color: #fff;
+        .slideshow-controls button:hover {
+            background-color: var(--button-hover-bg-color);
+            color: var(--button-hover-text-color);
         }
 
-        .error-message {
-            color: red;
-            text-align: center;
-            margin-top: 20px;
+        /* Fade Animation */
+        .fade {
+            animation-name: fade;
+            animation-duration: 1s;
         }
 
-        /* Responsive adjustments for smaller screens */
+        @keyframes fade {
+            from {opacity: .4}
+            to {opacity: 1}
+        }
+
+        /* Active Topic and Keyword Styles */
+        .active-topic, .active-keyword {
+            background-color: var(--secondary-color);
+            color: var(--button-hover-text-color);
+        }
+
+        /* Responsive Adjustments */
         @media (max-width: 600px) {
             header h1 {
                 font-size: 1.5em;
@@ -282,105 +460,38 @@
             button {
                 font-size: 0.9em;
             }
-        }
 
-        /* Modal Styles */
-        /* The Modal (background) */
-        .modal {
-            display: none; /* Hidden by default */
-            position: fixed; /* Stay in place */
-            z-index: 1000; /* Sit on top */
-            left: 0;
-            top: 0;
-            width: 100%; /* Full width */
-            height: 100%; /* Full height */
-            overflow: auto; /* Enable scroll if needed */
-            background-color: rgba(0,0,0,0.5); /* Black w/ opacity */
-        }
+            .prev, .next {
+                font-size: 14px;
+                padding: 12px;
+            }
 
-        /* Modal Content */
-        .modal-content {
-            background-color: #fefefe;
-            margin: 5% auto; /* 5% from the top and centered */
-            padding: 20px;
-            border: 1px solid #888;
-            width: 90%;
-            max-width: 600px; /* Could be more or less, depending on screen size */
-            border-radius: 8px;
-            position: relative;
-            text-align: left;
-        }
+            .slideshow-controls button {
+                padding: 6px 12px;
+                font-size: 0.9em;
+            }
 
-        /* Close Button */
-        .close-button {
-            color: #aaa;
-            float: right;
-            font-size: 28px;
-            font-weight: bold;
-            position: absolute;
-            right: 20px;
-            top: 10px;
-            cursor: pointer;
-        }
+            .options-list {
+                flex: 1 1 calc(50% - 10px); /* Two buttons per row on small screens */
+            }
 
-        .close-button:hover,
-        .close-button:focus {
-            color: black;
-            text-decoration: none;
-            cursor: pointer;
-        }
+            .pictogram-item {
+                width: 120px;
+            }
 
-        /* Read Aloud Button */
-        .read-aloud-button {
-            display: inline-block;
-            margin-top: 10px;
-            padding: 8px 16px;
-            background-color: #fdb201;
-            color: #000;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            transition: background-color 0.3s, color 0.3s;
-            font-size: 0.9em;
+            #openInstructionsBtn {
+                position: static;
+                margin: 10px 0;
+            }
         }
-
-        .read-aloud-button:hover, .read-aloud-button:focus {
-            background-color: #1d1e20;
-            color: #fff;
-            outline: none;
-        }
-
     </style>
-    <!-- Include Axios from CDN -->
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-    <!-- Structured Data -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "WebApplication",
-      "name": "Asksibot - Pictogram Search Assistant",
-      "description": "A tool to help occupational therapy professionals search and utilize pictographic symbols.",
-      "url": "https://yourwebsite.com",
-      "applicationCategory": "EducationalApplication",
-      "operatingSystem": "All",
-      "browserRequirements": "Requires JavaScript"
-    }
-    </script>
-    <!-- Google Analytics (Replace 'YOUR_TRACKING_ID' with actual ID) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=YOUR_TRACKING_ID"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-
-      gtag('config', 'YOUR_TRACKING_ID');
-    </script>
 </head>
 <body>
 
 <header>
     <img src="media/asksiboticon.png" alt="Asksibot Logo">
     <h1>Asksibot - The Occupational Therapy Hub</h1>
+    <button id="openInstructionsBtn" aria-label="How to Use the Pictogram Search Assistant">How to Use</button>
     <p class="subtext">Developed on OpenAI by Christopher Horne, OTR/L</p>
     <nav aria-label="Main Navigation">
         <a href="index.html">Home</a>
@@ -391,35 +502,46 @@
     </nav>
 </header>
 
-<div class="content">
-    <h2>Pictogram Search Assistant
-        <button id="openInstructionsBtn" aria-label="How to Use the Pictogram Search Assistant">How to Use</button>
-    </h2>
-    <form id="pictogramForm">
-        <label for="topic">Topic or Subject:</label>
-        <p class="instruction">Use your own term or select a topic from below.</p>
-        <input type="text" id="topic" name="topic" placeholder="Enter a topic or select one" required>
-        <div class="options-section">
-            <h4>Select a Topic:</h4>
-            <div class="options-list" id="topicOptions"></div>
+<main>
+    <section class="content">
+        <h2>Pictogram Search Assistant</h2>
+        <form id="pictogramForm">
+            <!-- Topic Selection -->
+            <fieldset>
+                <legend>Topic or Subject:</legend>
+                <p class="instruction">Select one topic from the options below.</p>
+                <div class="options-list" id="topicOptions">
+                    <!-- Dynamically Generated Topic Radio Buttons -->
+                </div>
+            </fieldset>
+
+            <!-- Keywords Selection -->
+            <fieldset>
+                <legend>Specific Keywords or Concepts:</legend>
+                <p class="instruction">Select one or more keywords from the options below or enter your own.</p>
+                <div class="options-list" id="keywordOptions">
+                    <!-- Dynamically Generated Keyword Checkboxes -->
+                </div>
+                <textarea id="keywords" name="keywords" placeholder="Enter keywords separated by commas (optional)"></textarea>
+            </fieldset>
+
+            <button type="submit">Generate Search Terms</button>
+        </form>
+        <div id="results">
+            <h2>Your Search Terms</h2>
+            <ul id="searchTermsList"></ul>
+            <!-- Updated: Separate How to Use Buttons -->
+            <button id="howToUseBtn" aria-label="How to Use Instructions">How to Use Assistant</button>
+            <button id="howToUseSlideshowBtn" aria-label="How to Use Slideshow Instructions">How to Use Slideshow</button>
+            <h3>Pictograms:</h3>
+            <div class="pictogram-container" id="pictogramContainer">
+                <!-- Pictograms will be injected here -->
+            </div>
+            <div id="error" class="error-message"></div>
+            <button id="createSlideshowBtn" type="button">Create Slideshow</button>
         </div>
-        <label for="keywords">Specific Keywords or Concepts:</label>
-        <p class="instruction">Enter your own keywords or select from the options below.</p>
-        <textarea id="keywords" name="keywords" placeholder="Enter keywords separated by commas" required></textarea>
-        <div class="options-section">
-            <h4>Select Keywords:</h4>
-            <div class="options-list" id="keywordOptions"></div>
-        </div>
-        <button type="submit">Generate Search Terms</button>
-    </form>
-    <div id="results">
-        <h2>Your Search Terms</h2>
-        <ul id="searchTermsList"></ul>
-        <h3>Pictograms:</h3>
-        <div id="pictogramResults" class="pictogram-container"></div>
-        <div id="error" class="error-message"></div>
-    </div>
-</div>
+    </section>
+</main>
 
 <footer>
     <p class="attribution">
@@ -427,36 +549,39 @@
     </p>
 </footer>
 
-<!-- Modal Structure -->
+<!-- Instructions Modal Structure -->
 <div id="instructionsModal" class="modal" aria-hidden="true" role="dialog" aria-labelledby="instructionsTitle" aria-modal="true">
     <div class="modal-content">
         <span class="close-button" aria-label="Close Instructions">&times;</span>
         <h3 id="instructionsTitle">How to Use the Pictogram Search Assistant</h3>
         <p>
-            Welcome to the Asksibot Pictogram Search Assistant! This tool is designed to help find and utilize pictographic symbols from ARASAAC's extensive library.
+            Welcome to the Pictogram Assistant! It is designed to help find and utilize pictographic symbols from ARASAAC's extensive library.
         </p>
         <p>
             <strong>Steps to Use the Assistant:</strong>
         </p>
         <ol>
             <li>
-                <strong>Enter a Topic or Subject:</strong> You can type your own term into the "Topic or Subject" field or select a predefined topic by clicking on one of the buttons below.
+                <strong>Select a Topic:</strong> Choose one topic that best describes your needs from the available options. Your choice generates keywords to try.
             </li>
             <li>
-                <strong>Select Specific Keywords:</strong> In the "Specific Keywords or Concepts" section, you can enter your own keywords separated by commas or choose from the provided keywords by clicking the corresponding buttons.
+                <strong>Select Keywords:</strong> Choose relevant keywords related to your selected topic or enter your own specific keywords separated by commas.
             </li>
             <li>
-                <strong>Generate Search Terms:</strong> After selecting your topic and keywords, click the "Generate Search Terms" button. The assistant will compile your inputs into unique search terms.
+                <strong>Generate Search Terms:</strong> Click the "Generate Search Terms" button to compile your selections into unique search terms.
             </li>
             <li>
-                <strong>View Pictograms:</strong> The assistant will display relevant pictograms based on your search terms. You can view, download, or use these pictograms as needed.
+                <strong>View Pictograms:</strong> The assistant will display relevant pictograms based on your keyword.
+            </li>
+            <li>
+                <strong>Create a Slideshow:</strong> Select the pictograms you wish to include in your slideshow by checking the box next to each pictogram. Once selected, click the "Create Slideshow" button to view your selected pictograms in a slideshow format.
             </li>
         </ol>
         <p>
             <strong>What Can Pictograms Be Used For?</strong>
         </p>
         <p>
-            Pictograms are versatile tools used to enhance communication, especially for individuals with speech or language difficulties. They can be utilized in various settings, including:
+            Pictograms help to enhance communication, especially for individuals with speech or language difficulties. They can be utilized in various settings, including:
         </p>
         <ul>
             <li>Developing communication boards or systems.</li>
@@ -469,10 +594,58 @@
     </div>
 </div>
 
+<!-- Slideshow Instructions Modal Structure -->
+<div id="slideshowInstructionsModal" class="modal" aria-hidden="true" role="dialog" aria-labelledby="slideshowInstructionsTitle" aria-modal="true">
+    <div class="modal-content">
+        <span class="close-how-to-use-button" aria-label="Close Slideshow Instructions">&times;</span>
+        <h3 id="slideshowInstructionsTitle">How to Use the Slideshow</h3>
+        <p>
+            Follow these steps to effectively utilize your slideshow:
+        </p>
+        <ol>
+            <li>
+                <strong>Select Pictograms:</strong> Browse through the displayed pictograms and check the boxes next to the ones you want to include in your slideshow.
+            </li>
+            <li>
+                <strong>Create Slideshow:</strong> Click the "Create Slideshow" button to compile your selected pictograms into a slideshow format.
+            </li>
+            <li>
+                <strong>Preview Slideshow:</strong> Use the "Prev" and "Next" buttons to navigate through your slideshow and ensure it meets your expectations.
+            </li>
+            <li>
+                <strong>Save or Download:</strong> You can use the slideshow directly from the site or download it by following the provided instructions within the slideshow modal.
+            </li>
+            <li>
+                <strong>Use the Slideshow:</strong> Utilize the slideshow in your desired setting, whether it's for communication boards, visual schedules, instructional materials, or any other purpose.
+            </li>
+        </ol>
+        <button class="read-aloud-button" id="readSlideshowAloudBtn" aria-label="Read Slideshow Instructions Aloud">Read Slideshow Instructions Aloud</button>
+    </div>
+</div>
+
+<!-- Slideshow Modal Structure -->
+<div id="slideshowModal" class="modal" aria-hidden="true" role="dialog" aria-labelledby="slideshowTitle" aria-modal="true">
+    <div class="modal-content">
+        <span class="close-slideshow-button" aria-label="Close Slideshow">&times;</span>
+        <h3 id="slideshowTitle">Your Pictogram Slideshow</h3>
+        <!-- Removed the "How to Use Slideshow" Button -->
+        <!-- Added Keyword Display -->
+        <p id="slideshowKeyword" style="font-size: 1em; margin-top: 10px; color: var(--secondary-color);"></p>
+        <div class="slideshow-container">
+            <img id="slideshowImage" src="" alt="Slideshow Pictogram" class="fade" style="width:100%; max-height:500px; object-fit: contain;">
+            <div class="slideshow-controls">
+                <button id="prevBtn" aria-label="Previous Pictogram">&#10094; Prev</button>
+                <button id="nextBtn" aria-label="Next Pictogram">Next &#10095;</button>
+            </div>
+        </div>
+        <div id="slideshowError" class="error-message"></div>
+    </div>
+</div>
+
 <!-- JavaScript for Functionality -->
 <script>
     document.addEventListener('DOMContentLoaded', function() {
-        // Define the 18 topics and their 30 keywords each
+        // Define the 18 topics and their corresponding keywords
         const topics = {
             "Daily Routine": [
                 "Wake up", "Brush teeth", "Wash face", "Take a shower", "Get dressed",
@@ -593,60 +766,46 @@
                 "Second", "Now", "Later", "Soon", "Before",
                 "After", "Early", "Late", "On time", "Schedule",
                 "Alarm", "Timer", "Bedtime", "Lunchtime", "Playtime"
-            ],
-            "Health Habits": [
-                "Wash hands", "Brush teeth", "Take a bath", "Use the toilet", "Comb hair",
-                "Cut nails", "Blow nose", "Cough", "Sneeze", "Use tissue",
-                "Wash face", "Brush hair", "Floss teeth", "Use hand sanitizer", "Drink water",
-                "Eat healthy", "Exercise", "Sleep", "Take medicine", "Visit doctor",
-                "Visit dentist", "Wear mask", "Check temperature", "Bandage", "Rest",
-                "Clean ears", "Apply lotion", "Use sunscreen", "Change clothes", "Stay clean"
-            ],
-            "Fun and Recreation": [
-                "Play", "Game", "Toy", "Puzzle", "Drawing",
-                "Painting", "Coloring", "Reading", "Watching TV", "Listening to music",
-                "Dancing", "Singing", "Playing an instrument", "Sports", "Soccer",
-                "Basketball", "Swimming", "Running", "Biking", "Hiking",
-                "Camping", "Fishing", "Playing with pets", "Visiting the park", "Swinging",
-                "Sliding", "Climbing", "Building blocks", "Playing cards", "Board games"
-            ],
-            "Transportation and Technology": [
-                // Transportation
-                "Car", "Bus", "Train", "Airplane", "Bicycle",
-                "Motorcycle", "Boat", "Taxi", "Truck", "Subway",
-                "Tram", "Helicopter", "Scooter", "Ferry", "Ambulance",
-                // Technology
-                "Computer", "Laptop", "Tablet", "Smartphone", "Television",
-                "Camera", "Printer", "Keyboard", "Mouse", "Headphones",
-                "Speaker", "Charger", "Remote control", "USB drive", "Smartwatch"
             ]
-            // All 18 topics are fully defined with their keywords
+            // Add more topics as needed
         };
 
+        // Initialize variables
         const topicOptionsDiv = document.getElementById('topicOptions');
         const keywordOptionsDiv = document.getElementById('keywordOptions');
-        const topicInput = document.getElementById('topic');
         const keywordsTextarea = document.getElementById('keywords');
         const pictogramForm = document.getElementById('pictogramForm');
         const resultsDiv = document.getElementById('results');
         const searchTermsList = document.getElementById('searchTermsList');
-        const pictogramResultsDiv = document.getElementById('pictogramResults');
+        const pictogramContainer = document.getElementById('pictogramContainer');
         const errorDiv = document.getElementById('error');
         const openInstructionsBtn = document.getElementById('openInstructionsBtn');
         const instructionsModal = document.getElementById('instructionsModal');
-        const closeInstructionsBtn = document.querySelector('.close-button');
+        const closeInstructionsBtn = instructionsModal.querySelector('.close-button');
         const readAloudBtn = document.getElementById('readAloudBtn');
+        const howToUseBtn = document.getElementById('howToUseBtn'); // How to Use Assistant
+        const howToUseSlideshowBtn = document.getElementById('howToUseSlideshowBtn'); // How to Use Slideshow
+        const slideshowModal = document.getElementById('slideshowModal');
+        const closeSlideshowBtn = slideshowModal.querySelector('.close-slideshow-button');
+        const slideshowImage = document.getElementById('slideshowImage');
+        const slideshowKeyword = document.getElementById('slideshowKeyword'); // New Element
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        const slideshowErrorDiv = document.getElementById('slideshowError');
+        const slideshowInstructionsModal = document.getElementById('slideshowInstructionsModal');
+        const closeSlideshowInstructionsBtn = slideshowInstructionsModal.querySelector('.close-how-to-use-button');
+        const readSlideshowAloudBtn = document.getElementById('readSlideshowAloudBtn');
 
-        // Selected Voice Variable
         let selectedVoice = null;
+        let slideshowPictograms = [];
+        let currentSlideIndex = 0;
+        let slideshowInterval = null;
 
-        // Function to Load and Select a Female US Voice
+        // Load and select a female US voice for text-to-speech
         function loadSelectedVoice() {
             const voices = window.speechSynthesis.getVoices();
-            // Attempt to find a female US voice
             selectedVoice = voices.find(voice => voice.lang === 'en-US' && /female/i.test(voice.name));
             if (!selectedVoice) {
-                // Fallback: Select the first US English voice
                 selectedVoice = voices.find(voice => voice.lang === 'en-US');
             }
         }
@@ -659,58 +818,57 @@
             speechSynthesis.onvoiceschanged = loadSelectedVoice;
         }
 
-        // Simple Cache for Pictograms
-        const pictogramCache = {};
-
-        // Rate Limiting Variables
-        let requestCount = 0;
-        const maxRequests = 100; // Example limit
-        const resetTime = 3600000; // 1 hour in milliseconds
-
-        // Reset request count every hour
-        setInterval(() => {
-            requestCount = 0;
-        }, resetTime);
-
-        // Function to Sanitize User Inputs
-        function sanitizeInput(input) {
-            const div = document.createElement('div');
-            div.textContent = input;
-            return div.innerHTML;
-        }
-
-        // Generate Topic Buttons
-        function generateTopicButtons() {
+        // Generate Topic Radio Buttons
+        function generateTopicRadioButtons() {
             for (let topic in topics) {
-                const button = document.createElement('button');
-                button.type = 'button';
-                button.textContent = topic;
-                button.setAttribute('aria-label', `Select topic ${topic}`);
-                button.addEventListener('click', function() {
-                    topicInput.value = topic;
+                const label = document.createElement('label');
+                label.setAttribute('for', `topic-${topic}`);
+
+                const radio = document.createElement('input');
+                radio.type = 'radio';
+                radio.id = `topic-${topic}`;
+                radio.name = 'topic';
+                radio.value = topic;
+                radio.setAttribute('aria-label', `Select topic ${topic}`);
+                radio.addEventListener('change', function() {
                     loadKeywords(topic);
-                    // Highlight active topic
-                    document.querySelectorAll('#topicOptions button').forEach(btn => btn.classList.remove('active-topic'));
-                    this.classList.add('active-topic');
                 });
-                topicOptionsDiv.appendChild(button);
+
+                label.appendChild(radio);
+                label.appendChild(document.createTextNode(topic));
+
+                topicOptionsDiv.appendChild(label);
             }
         }
 
         // Load Keywords Based on Selected Topic
         function loadKeywords(selectedTopic) {
-            keywordOptionsDiv.innerHTML = '';
-            (topics[selectedTopic] || []).forEach(keyword => {
-                const button = document.createElement('button');
-                button.type = 'button';
-                button.textContent = keyword;
-                button.setAttribute('aria-label', `Select keyword ${keyword}`);
-                button.addEventListener('click', function() {
-                    addKeywordToTextarea(keyword);
-                    // Highlight active keyword
-                    this.classList.toggle('active-keyword');
+            keywordOptionsDiv.innerHTML = ''; // Clear previous keywords
+            keywordsTextarea.value = ''; // Clear additional keywords
+
+            const keywords = topics[selectedTopic];
+            keywords.forEach(keyword => {
+                const label = document.createElement('label');
+                label.setAttribute('for', `keyword-${keyword}`);
+
+                const checkbox = document.createElement('input');
+                checkbox.type = 'checkbox';
+                checkbox.id = `keyword-${keyword}`;
+                checkbox.name = 'keyword';
+                checkbox.value = keyword;
+                checkbox.setAttribute('aria-label', `Select keyword ${keyword}`);
+                checkbox.addEventListener('change', function() {
+                    if (this.checked) {
+                        addKeywordToTextarea(keyword);
+                    } else {
+                        removeKeywordFromTextarea(keyword);
+                    }
                 });
-                keywordOptionsDiv.appendChild(button);
+
+                label.appendChild(checkbox);
+                label.appendChild(document.createTextNode(keyword));
+
+                keywordOptionsDiv.appendChild(label);
             });
         }
 
@@ -725,176 +883,182 @@
             }
         }
 
+        // Remove Keyword from Textarea
+        function removeKeywordFromTextarea(keyword) {
+            let currentKeywords = keywordsTextarea.value.trim();
+            let keywordsArray = currentKeywords ? currentKeywords.split(',').map(k => k.trim()) : [];
+            keywordsArray = keywordsArray.filter(k => k !== keyword);
+            keywordsTextarea.value = keywordsArray.join(', ');
+        }
+
+        // Sanitize User Inputs
+        function sanitizeInput(input) {
+            const div = document.createElement('div');
+            div.textContent = input;
+            return div.innerHTML;
+        }
+
         // Handle Form Submission
         pictogramForm.addEventListener('submit', function(e) {
             e.preventDefault();
-            const topic = topicInput.value.trim();
-            const keywords = keywordsTextarea.value.trim();
-            errorDiv.textContent = ''; // Clear previous errors
+            const keywordsSelected = Array.from(document.querySelectorAll('input[name="keyword"]:checked')).map(cb => cb.value);
+            const additionalKeywords = keywordsTextarea.value.split(',').map(k => k.trim()).filter(k => k);
 
-            if (!topic && !keywords) {
-                errorDiv.textContent = 'Please enter a topic or at least one keyword.';
-                return;
-            } else if (!topic) {
-                errorDiv.textContent = 'Please enter a topic.';
-                return;
-            } else if (!keywords) {
-                errorDiv.textContent = 'Please enter at least one keyword.';
+            // Combine keywords from checkboxes and additional input
+            let searchTerms = [...keywordsSelected, ...additionalKeywords];
+
+            // Remove duplicates
+            searchTerms = [...new Set(searchTerms)];
+
+            if (searchTerms.length === 0) {
+                errorDiv.textContent = 'Please select at least one keyword or enter your own.';
+                resultsDiv.style.display = 'none';
+                pictogramContainer.innerHTML = '';
                 return;
             }
 
-            const searchTerms = [topic, ...keywords.split(',').map(k => k.trim())].filter(Boolean);
-            const uniqueSearchTerms = [...new Set(searchTerms)];
-            displayResults(uniqueSearchTerms);
-            fetchPictograms(uniqueSearchTerms.slice(0, 5));
+            // Display search terms
+            displaySearchTerms(searchTerms);
+
+            // Fetch pictograms
+            fetchPictograms(searchTerms);
         });
 
         // Display Search Terms
-        function displayResults(searchTerms) {
-            searchTermsList.innerHTML = searchTerms.map(term => `<li>${sanitizeInput(term)}</li>`).join('');
+        function displaySearchTerms(searchTerms) {
+            searchTermsList.innerHTML = '';
+            searchTerms.forEach(term => {
+                const li = document.createElement('li');
+                li.textContent = term;
+                searchTermsList.appendChild(li);
+            });
             resultsDiv.style.display = 'block';
-            resultsDiv.scrollIntoView({ behavior: 'smooth' });
         }
 
         // Fetch Pictograms from ARASAAC API
         async function fetchPictograms(searchTerms) {
-            // Rate Limiting Check
-            if (requestCount + searchTerms.length > maxRequests) {
-                errorDiv.textContent = 'API rate limit exceeded. Please try again later.';
-                return;
-            }
-            requestCount += searchTerms.length;
-
-            pictogramResultsDiv.innerHTML = '';
             errorDiv.textContent = '';
-            // Uncomment the following line if you have a loading spinner element
-            // loadingSpinner.style.display = 'block';
+            pictogramContainer.innerHTML = ''; // Clear previous pictograms
 
-            try {
-                const requests = searchTerms.map(term => {
-                    if (pictogramCache[term]) {
-                        return Promise.resolve({ term, data: pictogramCache[term] });
-                    }
-                    return axios.get(`https://api.arasaac.org/api/pictograms/en/search/${encodeURIComponent(term)}`)
-                        .then(response => {
-                            pictogramCache[term] = response.data;
-                            return { term, data: response.data };
-                        })
-                        .catch(error => ({ term, error }));
-                });
-
-                const results = await Promise.all(requests);
-
-                results.forEach(result => {
-                    if (result.error) {
-                        errorDiv.textContent += `Error fetching pictograms for "${sanitizeInput(result.term)}". `;
-                        return;
-                    }
-
-                    const pictograms = result.data.slice(0, 10); // Limit to 10 pictograms per term
+            for (let term of searchTerms) {
+                try {
+                    const response = await axios.get(`https://api.arasaac.org/api/pictograms/en/search/${encodeURIComponent(term)}`);
+                    const pictograms = response.data.slice(0, 6); // Max 6 pictograms per keyword
 
                     if (pictograms.length === 0) {
-                        const noResult = document.createElement('p');
-                        noResult.textContent = `No pictograms found for "${sanitizeInput(result.term)}".`;
-                        pictogramResultsDiv.appendChild(noResult);
-                        return;
+                        throw new Error(`No pictograms found for "${term}".`);
                     }
 
-                    const section = document.createElement('section');
-                    section.innerHTML = `<h4>Pictograms for "${sanitizeInput(result.term)}"</h4>`;
-                    const container = document.createElement('div');
-                    container.classList.add('pictogram-container');
-
                     pictograms.forEach(pictogram => {
-                        const pictogramItem = document.createElement('div');
-                        pictogramItem.classList.add('pictogram-item');
-
-                        const link = document.createElement('a');
-                        link.href = `https://static.arasaac.org/pictograms/${pictogram._id}/${pictogram._id}_500.png`;
-                        link.target = '_blank';
-                        link.rel = 'noopener noreferrer';
-
-                        const img = document.createElement('img');
-                        img.src = `https://static.arasaac.org/pictograms/${pictogram._id}/${pictogram._id}_300.png`;
-                        img.alt = `Pictogram representing ${pictogram.keywords.map(k => k.keyword).join(', ')}`;
-                        img.loading = 'lazy'; // Lazy Loading
-
-                        link.appendChild(img);
-                        pictogramItem.appendChild(link);
-
-                        // Download Button
-                        const downloadBtn = document.createElement('button');
-                        downloadBtn.textContent = 'Download';
-                        downloadBtn.classList.add('download-button');
-                        downloadBtn.setAttribute('aria-label', `Download pictogram for ${pictogram.keywords.map(k => k.keyword).join(', ')}`);
-                        downloadBtn.addEventListener('click', () => {
-                            const downloadLink = document.createElement('a');
-                            downloadLink.href = `https://static.arasaac.org/pictograms/${pictogram._id}/${pictogram._id}_500.png`;
-                            downloadLink.download = `${pictogram.keywords.map(k => k.keyword).join('_')}.png`;
-                            document.body.appendChild(downloadLink);
-                            downloadLink.click();
-                            document.body.removeChild(downloadLink);
-                        });
-
-                        pictogramItem.appendChild(downloadBtn);
-                        container.appendChild(pictogramItem);
+                        displayPictogram(pictogram);
                     });
 
-                    section.appendChild(container);
-                    pictogramResultsDiv.appendChild(section);
-                });
-            } catch (error) {
-                errorDiv.textContent = 'An unexpected error occurred while fetching pictograms.';
-            } finally {
-                // Uncomment the following line if you have a loading spinner element
-                // loadingSpinner.style.display = 'none';
+                } catch (error) {
+                    errorDiv.textContent += `Error fetching pictograms for "${sanitizeInput(term)}". `;
+                }
             }
+
+            if (pictogramContainer.childElementCount === 0) {
+                pictogramContainer.innerHTML = '<p>No pictograms available to display.</p>';
+            }
+        }
+
+        // Display Pictogram
+        function displayPictogram(pictogram) {
+            const pictogramItem = document.createElement('div');
+            pictogramItem.classList.add('pictogram-item');
+
+            // Image that opens in a new window when clicked
+            const img = document.createElement('img');
+            img.src = `https://static.arasaac.org/pictograms/${pictogram._id}/${pictogram._id}_300.png`;
+            img.alt = `Pictogram representing ${pictogram.keywords.map(k => k.keyword).join(', ')}`;
+            img.loading = 'lazy'; // Lazy Loading
+            img.addEventListener('click', function() {
+                window.open(`https://static.arasaac.org/pictograms/${pictogram._id}/${pictogram._id}_500.png`, '_blank');
+            });
+            pictogramItem.appendChild(img);
+
+            // Checkbox for selecting pictogram for slideshow
+            const checkbox = document.createElement('input');
+            checkbox.type = 'checkbox';
+            checkbox.id = `select-${pictogram._id}`;
+            checkbox.value = pictogram._id;
+            checkbox.setAttribute('aria-label', `Select pictogram for slideshow: ${pictogram.keywords.map(k => k.keyword).join(', ')}`);
+            pictogramItem.appendChild(checkbox);
+
+            const checkboxLabel = document.createElement('label');
+            checkboxLabel.htmlFor = `select-${pictogram._id}`;
+            checkboxLabel.textContent = ' Select';
+            pictogramItem.appendChild(checkboxLabel);
+
+            // Download Button
+            const downloadBtn = document.createElement('button');
+            downloadBtn.textContent = 'Download';
+            downloadBtn.classList.add('download-button');
+            downloadBtn.setAttribute('aria-label', `Download pictogram for ${pictogram.keywords.map(k => k.keyword).join(', ')}`);
+            downloadBtn.addEventListener('click', () => {
+                window.open(`https://static.arasaac.org/pictograms/${pictogram._id}/${pictogram._id}_500.png`, '_blank');
+            });
+            pictogramItem.appendChild(downloadBtn);
+
+            pictogramContainer.appendChild(pictogramItem);
         }
 
         // Open Instructions Modal
-        openInstructionsBtn.addEventListener('click', function() {
+        function openInstructionsModal() {
             instructionsModal.style.display = 'block';
             instructionsModal.setAttribute('aria-hidden', 'false');
-            // Set focus to the modal content for accessibility
             instructionsModal.querySelector('.modal-content').focus();
-        });
+        }
 
-        // Close Instructions Modal and Stop Speech
-        function closeModal() {
+        // Close Instructions Modal
+        function closeInstructionsModal() {
             instructionsModal.style.display = 'none';
             instructionsModal.setAttribute('aria-hidden', 'true');
             // Stop any ongoing speech
-            if (window.speechSynthesis.speaking) {
-                window.speechSynthesis.cancel();
+            if (speechSynthesis.speaking) {
+                speechSynthesis.cancel();
             }
         }
 
-        // Close Instructions Modal when clicking the close button
-        closeInstructionsBtn.addEventListener('click', function() {
-            closeModal();
-        });
+        // Open Instructions Modal when "How to Use" Button is Clicked
+        openInstructionsBtn.addEventListener('click', openInstructionsModal);
 
-        // Close modal when clicking outside of the modal content
+        // Close Instructions Modal when close button is clicked
+        closeInstructionsBtn.addEventListener('click', closeInstructionsModal);
+
+        // Close Instructions Modal when clicking outside of the modal content
         window.addEventListener('click', function(event) {
             if (event.target == instructionsModal) {
-                closeModal();
+                closeInstructionsModal();
+            }
+            if (event.target == slideshowInstructionsModal) {
+                closeSlideshowInstructionsModal();
             }
         });
 
-        // Close modal on pressing Escape key
+        // Close All Modals on pressing Escape key
         window.addEventListener('keydown', function(event) {
-            if (event.key === 'Escape' && instructionsModal.style.display === 'block') {
-                closeModal();
+            if (event.key === 'Escape') {
+                if (instructionsModal.style.display === 'block') {
+                    closeInstructionsModal();
+                }
+                if (slideshowModal.style.display === 'block') {
+                    closeSlideshowModal();
+                }
+                if (slideshowInstructionsModal.style.display === 'block') {
+                    closeSlideshowInstructionsModal();
+                }
             }
         });
 
-        // Read Aloud Functionality with Female US Voice
+        // Read Aloud Functionality for Instructions Modal
         readAloudBtn.addEventListener('click', function() {
             const instructionsText = instructionsModal.innerText;
             if ('speechSynthesis' in window) {
                 // Stop any ongoing speech before starting a new one
-                if (window.speechSynthesis.speaking) {
-                    window.speechSynthesis.cancel();
+                if (speechSynthesis.speaking) {
+                    speechSynthesis.cancel();
                 }
 
                 const utterance = new SpeechSynthesisUtterance(instructionsText);
@@ -905,23 +1069,172 @@
                     // Fallback: Use default voice if no female US voice is found
                     utterance.lang = 'en-US';
                 }
-                window.speechSynthesis.speak(utterance);
+                speechSynthesis.speak(utterance);
             } else {
                 alert('Sorry, your browser does not support text-to-speech functionality.');
             }
         });
 
-        // Generate Topic Buttons on Page Load
-        generateTopicButtons();
-        loadKeywords("Daily Routine"); // Load default topic
+        // Open How to Use Modal from Results Section
+        howToUseBtn.addEventListener('click', openInstructionsModal);
 
-        // Highlight Active Navigation Link
-        const currentPage = window.location.pathname.split('/').pop();
-        document.querySelectorAll('nav a').forEach(link => {
-            if (link.getAttribute('href') === currentPage) {
-                link.classList.add('active');
+        // Slideshow Instructions Modal Functionality
+        function openSlideshowInstructionsModal() {
+            slideshowInstructionsModal.style.display = 'block';
+            slideshowInstructionsModal.setAttribute('aria-hidden', 'false');
+            slideshowInstructionsModal.querySelector('.modal-content').focus();
+        }
+
+        function closeSlideshowInstructionsModal() {
+            slideshowInstructionsModal.style.display = 'none';
+            slideshowInstructionsModal.setAttribute('aria-hidden', 'true');
+            // Stop any ongoing speech
+            if (speechSynthesis.speaking) {
+                speechSynthesis.cancel();
+            }
+        }
+
+        // Open Slideshow Instructions Modal when "How to Use Slideshow" Button is Clicked
+        howToUseSlideshowBtn.addEventListener('click', openSlideshowInstructionsModal);
+
+        // Close Slideshow Instructions Modal when close button is clicked
+        closeSlideshowInstructionsBtn.addEventListener('click', closeSlideshowInstructionsModal);
+
+        // Read Aloud Functionality for Slideshow Instructions Modal
+        readSlideshowAloudBtn.addEventListener('click', function() {
+            const slideshowInstructionsText = slideshowInstructionsModal.innerText;
+            if ('speechSynthesis' in window) {
+                // Stop any ongoing speech before starting a new one
+                if (speechSynthesis.speaking) {
+                    speechSynthesis.cancel();
+                }
+
+                const utterance = new SpeechSynthesisUtterance(slideshowInstructionsText);
+                if (selectedVoice) {
+                    utterance.voice = selectedVoice;
+                    utterance.lang = selectedVoice.lang;
+                } else {
+                    // Fallback: Use default voice if no female US voice is found
+                    utterance.lang = 'en-US';
+                }
+                speechSynthesis.speak(utterance);
+            } else {
+                alert('Sorry, your browser does not support text-to-speech functionality.');
             }
         });
+
+        // Slideshow Modal Functionality
+        createSlideshowBtn.addEventListener('click', function() {
+            const selectedPictograms = Array.from(document.querySelectorAll('#pictogramContainer .pictogram-item input[type="checkbox"]:checked')).map(cb => {
+                const img = cb.parentElement.querySelector('img');
+                return {
+                    src: img.src,
+                    alt: img.alt
+                };
+            });
+
+            if (selectedPictograms.length === 0) {
+                alert('Please select at least one pictogram to create a slideshow.');
+                return;
+            }
+
+            // Populate Slideshow Modal
+            slideshowImage.src = selectedPictograms[0].src;
+            slideshowImage.alt = selectedPictograms[0].alt;
+            slideshowKeyword.textContent = extractKeywordsFromAlt(selectedPictograms[0].alt);
+            slideshowModal.style.display = 'block';
+            slideshowModal.setAttribute('aria-hidden', 'false');
+            currentSlideIndex = 0;
+
+            // Store pictograms for slideshow navigation
+            slideshowPictograms = selectedPictograms;
+        });
+
+        // Function to extract keywords from alt text
+        function extractKeywordsFromAlt(altText) {
+            const prefix = "Pictogram representing ";
+            if (altText.startsWith(prefix)) {
+                return altText.substring(prefix.length);
+            }
+            return "";
+        }
+
+        // Close Slideshow Modal
+        function closeSlideshowModal() {
+            slideshowModal.style.display = 'none';
+            slideshowModal.setAttribute('aria-hidden', 'true');
+            // Stop any slideshow animations if implemented
+            if (slideshowInterval) {
+                clearInterval(slideshowInterval);
+                slideshowInterval = null;
+            }
+            // Stop any ongoing speech
+            if (speechSynthesis.speaking) {
+                speechSynthesis.cancel();
+            }
+        }
+
+        closeSlideshowBtn.addEventListener('click', closeSlideshowModal);
+
+        // Slideshow Navigation Controls
+        prevBtn.addEventListener('click', function() {
+            if (slideshowPictograms.length === 0) return;
+            currentSlideIndex = (currentSlideIndex - 1 + slideshowPictograms.length) % slideshowPictograms.length;
+            updateSlideshow();
+        });
+
+        nextBtn.addEventListener('click', function() {
+            if (slideshowPictograms.length === 0) return;
+            currentSlideIndex = (currentSlideIndex + 1) % slideshowPictograms.length;
+            updateSlideshow();
+        });
+
+        // Function to update slideshow image and keyword
+        function updateSlideshow() {
+            const currentPictogram = slideshowPictograms[currentSlideIndex];
+            slideshowImage.classList.add('fade');
+            setTimeout(() => {
+                slideshowImage.src = currentPictogram.src;
+                slideshowImage.alt = currentPictogram.alt;
+                slideshowImage.classList.remove('fade');
+                slideshowKeyword.textContent = extractKeywordsFromAlt(currentPictogram.alt);
+            }, 500);
+        }
+
+        // Accessibility: Trap focus within modals
+        function trapFocus(modal) {
+            const focusableElements = modal.querySelectorAll('a[href], button, textarea, input, select');
+            const firstFocusable = focusableElements[0];
+            const lastFocusable = focusableElements[focusableElements.length - 1];
+
+            modal.addEventListener('keydown', function(e) {
+                if (e.key === 'Tab') {
+                    if (e.shiftKey) { // Shift + Tab
+                        if (document.activeElement === firstFocusable) {
+                            e.preventDefault();
+                            lastFocusable.focus();
+                        }
+                    } else { // Tab
+                        if (document.activeElement === lastFocusable) {
+                            e.preventDefault();
+                            firstFocusable.focus();
+                        }
+                    }
+                }
+            });
+        }
+
+        // Apply focus trapping to all modals
+        const modals = document.querySelectorAll('.modal');
+        modals.forEach(modal => {
+            const modalContent = modal.querySelector('.modal-content');
+            if (modalContent) {
+                trapFocus(modalContent);
+            }
+        });
+
+        // Initialize Topic Radio Buttons on Page Load
+        generateTopicRadioButtons();
     });
 </script>
 
