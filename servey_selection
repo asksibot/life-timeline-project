@@ -52,6 +52,26 @@
             height: auto;
         }
 
+        /* Home button styling */
+        .home-button {
+            display: block;
+            padding: 15px;
+            margin: 20px auto;
+            max-width: 300px;
+            background-color: #fdb201;
+            color: #000;
+            text-decoration: none;
+            font-size: 1.2em;
+            border: 2px solid #000;
+            border-radius: 30px;
+            transition: 0.3s;
+        }
+
+        .home-button:hover {
+            background-color: #1d1e20;
+            color: #fff;
+        }
+
         @media (min-width: 768px) {
             .icon {
                 max-width: 200px;
@@ -71,7 +91,6 @@
     <a href="Navigating_My_Sensory_World.html" class="survey-link">Navigating My Sensory World</a>
     <a href="Sensory_Insights.html" class="survey-link">Sensory Insights</a>
     <a href="Working_Style.html" class="survey-link">Working Style</a>
-    <!-- New Buttons Added Below -->
     <a href="green_time_survey.html" class="survey-link">Green Time Survey</a>
     <a href="well_being_survey.html" class="survey-link">Well Being Information</a>
 </div>
@@ -79,6 +98,9 @@
 <div class="icon-container">
     <img src="/media/asksiboticon.png" alt="Asksibot Icon" class="icon">
 </div>
+
+<!-- Return to Home Page Button -->
+<a href="https://asksibot.org" class="home-button">Return to Home Page</a>
 
 </body>
 </html>
