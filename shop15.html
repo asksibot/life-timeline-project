@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Asksibot OT Hub Bookstore</title>
+    <style>
+        /* General Styles */
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+            color: #333;
+        }
+        .container {
+            width: 90%;
+            max-width: 1000px;
+            margin: auto;
+            padding: 20px;
+        }
+        header {
+            background: #333;
+            color: #fff;
+            padding: 15px 0;
+            text-align: center;
+        }
+        header h1 {
+            margin: 0;
+        }
+        nav {
+            background: #444;
+            overflow: hidden;
+        }
+        nav a {
+            display: block;
+            color: #fff;
+            padding: 14px 16px;
+            text-decoration: none;
+            float: left;
+        }
+        nav a:hover {
+            background: #575757;
+        }
+        .affiliate-note {
+            font-size: 0.9em;
+            color: #555;
+            text-align: center;
+            margin-top: 5px;
+        }
+        .survey-section, .book-section {
+            background: #fff;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+        }
+        .survey-section h2, .book-section h2 {
+            margin-top: 0;
+            color: #444;
+        }
+        .survey-section label {
+            display: block;
+            margin-top: 10px;
+            font-weight: bold;
+        }
+        .survey-section select, .survey-section button {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        .survey-section button {
+            background: #28a745;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+        }
+        .survey-section button:hover {
+            background: #218838;
+        }
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 100;
+            padding-top: 100px;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.5);
+        }
+        .modal-content {
+            background-color: #fff;
+            margin: auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            max-width: 600px;
+            border-radius: 5px;
+            position: relative;
+        }
+        .close-btn {
+            color: #aaa;
+            position: absolute;
+            right: 15px;
+            top: 10px;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .close-btn:hover {
+            color: #000;
+        }
+        .book-list {
+            margin-top: 10px;
+            list-style-type: none;
+            padding: 0;
+        }
+        .book-list li {
+            margin: 5px 0;
+        }
+        .book-list a {
+            color: #007BFF;
+            text-decoration: none;
+        }
+        .book-list a:hover {
+            text-decoration: underline;
+        }
+        footer {
+            text-align: center;
+            padding: 10px 0;
+            background: #333;
+            color: #fff;
+            margin-top: 20px;
+        }
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+            nav a {
+                float: none;
+                text-align: center;
+            }
+            .container {
+                width: 100%;
+                padding: 10px;
+            }
+            header h1 {
+                font-size: 1.8em;
+            }
+        }
+    </style>
+    <script>
+        function showRecommendation(event) {
+            event.preventDefault(); // Prevent form submission
+
+            // Collect selected options
+            const visitorType = document.getElementById('visitor-type').value;
+            const learningStyle = document.getElementById('learning-style').value;
+            const personalityType = document.getElementById('personality-type').value;
+            const ageGroup = document.getElementById('age-group').value;
+
+            // Check if at least one selection is made
+            if (visitorType === '' && learningStyle === '' && personalityType === '' && ageGroup === '') {
+                alert("Please select at least one option to get recommendations.");
+                return;
+            }
+
+            let recommendationText = "<h3>Recommended Resources for You:</h3><ul>";
+
+            // Visitor Type Recommendations
+            if (visitorType !== '') {
+                if (visitorType === 'Individual') {
+                    recommendationText += "<li>As an individual facing sensory integration challenges, explore resources that provide practical techniques and tools. See <a href='#individual'>Individual Resources</a>.</li>";
+                }
+                if (visitorType === 'Neurodivergent Individual') {
+                    recommendationText += "<li>As a neurodivergent individual, find strategies to manage sensory processing issues and understand your sensory needs. See <a href='#neurodivergent'>Neurodivergent Resources</a>.</li>";
+                }
+                if (visitorType === 'Caregiver') {
+                    recommendationText += "<li>As a caregiver, access support and information to help a loved one with sensory difficulties. See <a href='#caregiver'>Caregiver Resources</a>.</li>";
+                }
+                if (visitorType === 'Therapist') {
+                    recommendationText += "<li>As a therapist, discover resources and tools for sensory integration therapy. See <a href='#therapist'>Therapist Resources</a>.</li>";
+                }
+                if (visitorType === 'Seeking Information on Sensory Integration') {
+                    recommendationText += "<li>If you're seeking information on sensory integration, learn about its impact and techniques. See <a href='#sensory-integration'>Sensory Integration Resources</a>.</li>";
+                }
+            }
+
+            // Learning Style Recommendations
+            if (learningStyle !== '') {
+                if (learningStyle === 'Visual') {
+                    recommendationText += "<li>Visual learner? Check out resources rich in imagery and diagrams. See <a href='#visual-learners'>Visual Learners Resources</a>.</li>";
+                }
+                if (learningStyle === 'Auditory') {
+                    recommendationText += "<li>Auditory learner? Explore audio books and podcasts. See <a href='#auditory-learners'>Auditory Learners Resources</a>.</li>";
+                }
+                if (learningStyle === 'Kinesthetic') {
+                    recommendationText += "<li>Kinesthetic learner? Engage with hands-on activities and interactive tools. See <a href='#kinesthetic-learners'>Kinesthetic Learners Resources</a>.</li>";
+                }
+            }
+
+            // Personality Type Recommendations
+            if (personalityType !== '') {
+                if (personalityType === 'Analyst') {
+                    recommendationText += "<li>As an Analyst, you may prefer strategic and logical resources. See <a href='#analysts'>Analysts Resources</a>.</li>";
+                }
+                if (personalityType === 'Diplomat') {
+                    recommendationText += "<li>As a Diplomat, explore empathetic and idealistic materials. See <a href='#diplomats'>Diplomats Resources</a>.</li>";
+                }
+                if (personalityType === 'Sentinel') {
+                    recommendationText += "<li>As a Sentinel, practical and dedicated resources may suit you. See <a href='#sentinels'>Sentinels Resources</a>.</li>";
+                }
+                if (personalityType === 'Explorer') {
+                    recommendationText += "<li>As an Explorer, enjoy spontaneous and flexible content. See <a href='#explorers'>Explorers Resources</a>.</li>";
+                }
+                if (personalityType === 'Firstborn') {
+                    recommendationText += "<li>Firstborn? Find resources on leadership and responsibility. See <a href='#firstborn'>Firstborn Resources</a>.</li>";
+                }
+                if (personalityType === 'Middle Child') {
+                    recommendationText += "<li>Middle child? Explore materials on self-identity and relationships. See <a href='#middle-child'>Middle Child Resources</a>.</li>";
+                }
+                if (personalityType === 'Youngest Child') {
+                    recommendationText += "<li>Youngest child? Look into fostering independence and understanding boundaries. See <a href='#youngest-child'>Youngest Child Resources</a>.</li>";
+                }
+                if (personalityType === 'Only Child') {
+                    recommendationText += "<li>Only child? Access resources on independence and social skills. See <a href='#only-child'>Only Child Resources</a>.</li>";
+                }
+            }
+
+            // Age Group Recommendations
+            if (ageGroup !== '') {
+                if (ageGroup === '0-3') {
+                    recommendationText += "<li>For ages 0-3, find early development resources. See <a href='#age0-3'>Books for Ages 0-3</a>.</li>";
+                }
+                if (ageGroup === '3-7') {
+                    recommendationText += "<li>For ages 3-7, explore interactive books and activities. See <a href='#age3-7'>Books for Ages 3-7</a>.</li>";
+                }
+                if (ageGroup === '8-12') {
+                    recommendationText += "<li>For ages 8-12, discover skill-building guides. See <a href='#age8-12'>Books for Ages 8-12</a>.</li>";
+                }
+                if (ageGroup === '13-18') {
+                    recommendationText += "<li>For ages 13-18, access adolescent development resources. See <a href='#age13-18'>Books for Ages 13-18</a>.</li>";
+                }
+                if (ageGroup === '19+') {
+                    recommendationText += "<li>For ages 19+, find personal development materials. See <a href='#age19'>Books for Young Adults</a>.</li>";
+                }
+            }
+
+            recommendationText += "</ul>";
+
+            // Display the recommendations in a modal popup
+            document.getElementById('modal-content').innerHTML = recommendationText + '<span class="close-btn" onclick="closeModal()">&times;</span>';
+            document.getElementById('recommendation-modal').style.display = 'block';
+        }
+
+        function closeModal() {
+            document.getElementById('recommendation-modal').style.display = 'none';
+        }
+
+        // Close the modal when clicking outside of it
+        window.onclick = function(event) {
+            if (event.target == document.getElementById('recommendation-modal')) {
+                document.getElementById('recommendation-modal').style.display = 'none';
+            }
+        }
+    </script>
+</head>
+<body>
+    <header>
+        <h1>Asksibot OT Hub Bookstore</h1>
+        <p>Curated books and resources for enhancing relationships and personal development</p>
+    </header>
+
+    <!-- Navigation Menu -->
+    <nav>
+        <a href="#survey">Survey</a>
+        <a href="#individual">Resources</a>
+        <a href="#games-activities">Games & Activities</a>
+        <a href="#contact">Contact Us</a>
+    </nav>
+
+    <div class="container">
+        <p class="affiliate-note">Note: This page contains affiliate links. We may earn a commission if you make a purchase through these links, at no additional cost to you.</p>
+
+        <!-- Survey Section -->
+        <div class="survey-section" id="survey">
+            <h2>Find the Right Resources for Your Needs</h2>
+            <form>
+                <!-- Visitor Types with Needs -->
+                <label for="visitor-type">Which of the following best describes you?</label>
+                <select id="visitor-type">
+                    <option value="">-- Select an option --</option>
+                    <option value="Individual">Individual - Seeking information on sensory integration challenges.</option>
+                    <option value="Neurodivergent Individual">Neurodivergent Individual - Managing sensory processing issues.</option>
+                    <option value="Caregiver">Caregiver - Supporting a loved one with sensory difficulties.</option>
+                    <option value="Therapist">Therapist - Looking for resources and tools for therapy.</option>
+                    <option value="Seeking Information on Sensory Integration">Seeking Information on Sensory Integration - Understanding impact and techniques.</option>
+                </select>
+
+                <!-- Learning Styles -->
+                <label for="learning-style">Select Your Learning Style: (Optional)</label>
+                <select id="learning-style">
+                    <option value="">-- Select an option --</option>
+                    <option value="Visual">Visual - Prefer visual aids and illustrations.</option>
+                    <option value="Auditory">Auditory - Learn best through listening.</option>
+                    <option value="Kinesthetic">Kinesthetic - Hands-on learning approach.</option>
+                </select>
+
+                <!-- Personality Types -->
+                <label for="personality-type">Choose Your Personality Type: (Optional)</label>
+                <select id="personality-type">
+                    <option value="">-- Select an option --</option>
+                    <!-- General Personality Types -->
+                    <optgroup label="General Personality Types">
+                        <option value="Analyst">Analyst - Strategic and logical thinkers.</option>
+                        <option value="Diplomat">Diplomat - Empathetic and idealistic individuals.</option>
+                        <option value="Sentinel">Sentinel - Practical and dedicated people.</option>
+                        <option value="Explorer">Explorer - Spontaneous and flexible adventurers.</option>
+                    </optgroup>
+                    <!-- Birth Order Personality Types -->
+                    <optgroup label="Birth Order Personality Types">
+                        <option value="Firstborn">Firstborn - Responsible and organized leaders.</option>
+                        <option value="Middle Child">Middle Child - Diplomatic and flexible peacemakers.</option>
+                        <option value="Youngest Child">Youngest Child - Outgoing and adventurous individuals.</option>
+                        <option value="Only Child">Only Child - Mature and diligent perfectionists.</option>
+                    </optgroup>
+                </select>
+
+                <!-- Age Groups -->
+                <label for="age-group">Select Your Age Group: (Optional)</label>
+                <select id="age-group">
+                    <option value="">-- Select an option --</option>
+                    <option value="0-3">0-3 years old</option>
+                    <option value="3-7">3-7 years old</option>
+                    <option value="8-12">8-12 years old</option>
+                    <option value="13-18">13-18 years old</option>
+                    <option value="19+">19 years and above</option>
+                </select>
+
+                <button type="submit" onclick="showRecommendation(event)">Get Recommendations</button>
+            </form>
+        </div>
+
+        <!-- Modal Popup for Recommendations -->
+        <div id="recommendation-modal" class="modal">
+            <div class="modal-content" id="modal-content">
+                <!-- Recommendations will be injected here -->
+            </div>
+        </div>
+
+        <!-- Resources Sections -->
+        <!-- Individual Resources -->
+        <div class="book-section" id="individual">
+            <h2>Resources for Individuals</h2>
+            <p><strong>Who is this for?</strong> Individuals experiencing sensory integration challenges and seeking to understand how it affects their daily life.</p>
+            <p><strong>What will you find here?</strong> Practical information, techniques, and tools to help you navigate sensory processing issues and improve your quality of life.</p>
+            <ul class="book-list">
+                <!-- Books and resources -->
+                <li><strong>The Sensory Connection: An OT and SLP Team Approach</strong> by Nancy Kashman and Janet Mora – <a href="https://www.amazon.com/Sensory-Connection-Self-Regulation-Interventions-Individuals/dp/0964307187" target="_blank">Buy Now</a></li>
+                <li><strong>Oh Behave!: Sensory Processing and Behavioral Strategies</strong> by Maryann Colby Trott – <a href="https://www.amazon.com/Behave-Sensory-Processing-Behavioral-Strategies/dp/0884509619" target="_blank">Buy Now</a></li>
+                <!-- Add more resources as needed -->
+            </ul>
+        </div>
+
+        <!-- Neurodivergent Resources -->
+        <div class="book-section" id="neurodivergent">
+            <h2>Resources for Neurodivergent Individuals</h2>
+            <p><strong>Who is this for?</strong> Individuals who identify as neurodivergent and are looking for strategies to manage sensory processing issues.</p>
+            <p><strong>What will you find here?</strong> Resources to better understand your sensory needs, social stories, and activities to help process sensory information.</p>
+            <ul class="book-list">
+                <!-- Books and resources -->
+                <li><strong>The Autistic Brain: Thinking Across the Spectrum</strong> by Temple Grandin – <a href="https://www.amazon.com/Autistic-Brain-Thinking-Across-Spectrum/dp/0544227735" target="_blank">Buy Now</a></li>
+                <li><strong>Uniquely Human: A Different Way of Seeing Autism</strong> by Barry M. Prizant – <a href="https://www.amazon.com/Uniquely-Human-Different-Seeing-Autism/dp/1476776245" target="_blank">Buy Now</a></li>
+                <!-- Add more resources as needed -->
+            </ul>
+        </div>
+
+        <!-- Caregiver Resources -->
+        <div class="book-section" id="caregiver">
+            <h2>Resources for Caregivers</h2>
+            <p><strong>Who is this for?</strong> Parents, family members, and caregivers supporting someone with sensory integration difficulties.</p>
+            <p><strong>What will you find here?</strong> Supportive guides, tools to aid communication, and strategies for creating sensory-friendly environments at home and school.</p>
+            <ul class="book-list">
+                <!-- Books and resources -->
+                <li><strong>The Out-of-Sync Child</strong> by Carol Stock Kranowitz – <a href="https://www.amazon.com/Out-Sync-Child-Recognizing-Processing-Disorder/dp/0399531653" target="_blank">Buy Now</a></li>
+                <li><strong>Parenting a Child with Sensory Processing Disorder</strong> by Christopher R. Auer and Susan L. Blumberg – <a href="https://www.amazon.com/Parenting-Sensory-Processing-Disorder-Strategies/dp/1572244631" target="_blank">Buy Now</a></li>
+                <!-- Add more resources as needed -->
+            </ul>
+        </div>
+
+        <!-- Therapist Resources -->
+        <div class="book-section" id="therapist">
+            <h2>Resources for Therapists</h2>
+            <p><strong>Who is this for?</strong> Occupational therapists and professionals seeking resources and tools for sensory integration therapy.</p>
+            <p><strong>What will you find here?</strong> Advanced techniques, professional methods for behavior management, and specialized tools for therapy sessions.</p>
+            <ul class="book-list">
+                <!-- Books and resources -->
+                <li><strong>Sensory Integration and the Child</strong> by A. Jean Ayres – <a href="https://www.amazon.com/Sensory-Integration-Child-Joy-Developing/dp/0874244371" target="_blank">Buy Now</a></li>
+                <li><strong>Building Bridges through Sensory Integration</strong> by Ellen Yack, Shirley Sutton, and Paula Aquilla – <a href="https://www.amazon.com/Building-Bridges-Sensory-Integration-Individuals/dp/1932565450" target="_blank">Buy Now</a></li>
+                <!-- Add more resources as needed -->
+            </ul>
+        </div>
+
+        <!-- Sensory Integration Information Resources -->
+        <div class="book-section" id="sensory-integration">
+            <h2>Resources on Sensory Integration</h2>
+            <p><strong>Who is this for?</strong> Anyone interested in learning about sensory integration and its impact on behavior and learning.</p>
+            <p><strong>What will you find here?</strong> Educational materials, techniques, and interventions to understand and apply sensory integration concepts.</p>
+            <ul class="book-list">
+                <!-- Books and resources -->
+                <li><strong>Too Loud, Too Bright, Too Fast, Too Tight</strong> by Sharon Heller – <a href="https://www.amazon.com/Loud-Bright-Fast-Tight-Overstimulating/dp/0060932929" target="_blank">Buy Now</a></li>
+                <li><strong>Sensational Kids: Hope and Help for Children with Sensory Processing Disorder</strong> by Lucy Jane Miller – <a href="https://www.amazon.com/Sensational-Kids-Children-Sensory-Processing/dp/0399533079" target="_blank">Buy Now</a></li>
+                <!-- Add more resources as needed -->
+            </ul>
+        </div>
+
+        <!-- Games and Activity Ideas Section -->
+        <div class="book-section" id="games-activities">
+            <h2>Games and Activity Ideas</h2>
+            <p>Engaging activities designed to improve sensory integration and motor skills.</p>
+            <ul class="book-list">
+                <!-- List of games and how to play them -->
+                <li><strong>Sensory Bins</strong>
+                    <p><strong>Description:</strong> Create bins filled with different textures like rice, beans, or sand for tactile exploration.</p>
+                    <p><strong>How to Use:</strong> Allow the individual to explore the textures with their hands or tools, promoting sensory processing.</p>
+                </li>
+                <li><strong>Obstacle Courses</strong>
+                    <p><strong>Description:</strong> Set up a simple obstacle course to encourage movement and coordination.</p>
+                    <p><strong>How to Use:</strong> Include activities like jumping, crawling, and balancing to enhance motor skills.</p>
+                </li>
+                <!-- Add more games and activities as needed -->
+            </ul>
+        </div>
+
+        <!-- Tools and Accessories Section -->
+        <div class="book-section" id="tools-accessories">
+            <h2>Tools and Accessories</h2>
+            <p>Products designed to support sensory integration and enhance daily functioning.</p>
+            <ul class="book-list">
+                <li><strong>Weighted Blankets</strong> – <a href="https://www.amazon.com/YnM-Weighted-Blanket-Cotton-Material/dp/B073429DV2" target="_blank">Buy Now</a>
+                    <p><strong>Description:</strong> Provides deep pressure stimulation to promote relaxation and reduce anxiety.</p>
+                </li>
+                <li><strong>Fidget Tools</strong> – <a href="https://www.amazon.com/Fidget-Child-Adults-Kids-Pack/dp/B07K2M2L98" target="_blank">Buy Now</a>
+                    <p><strong>Description:</strong> Helps improve focus and reduce stress through tactile engagement.</p>
+                </li>
+                <!-- Add more tools and accessories as needed -->
+            </ul>
+        </div>
+
+        <!-- Additional Sections with Detailed Descriptions -->
+        <!-- Similar to the above, add detailed descriptions for learning styles, personality types, and age groups -->
+        <!-- Ensure each section describes the type of person, their needs, and the resources available -->
+
+    </div>
+
+    <footer>
+        <p>&copy; 2024 Asksibot OT Hub Bookstore. All rights reserved.</p>
+    </footer>
+</body>
+</html>
